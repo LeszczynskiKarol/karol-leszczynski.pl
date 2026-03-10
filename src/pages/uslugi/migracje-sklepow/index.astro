@@ -1,0 +1,391 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "Service",
+  "serviceType": "Data Migration Service",
+  "name": "Migracja sklepów internetowych",
+  "description": "Bezpieczna migracja sklepu z WooCommerce, PrestaShop na nowoczesną platformę.",
+  "provider": { "@type": "Person", "name": "Karol Leszczyński" },
+  "offers": { "@type": "Offer", "price": "4990", "priceCurrency": "PLN", "availability": "https://schema.org/InStock" },
+  "benefits": ["0% utraty danych", "Zachowanie SEO i pozycji", "+40% wzrost wydajności", "Pełne wsparcie podczas migracji"],
+  "duration": "P7D",
+};
+
+const problems = [
+  { problem: "Sklep ładuje się 5+ sekund", platform: "WooCommerce", icon: "⏱️", desc: "WordPress + 30 wtyczek = katastrofa wydajności", solution: "Next.js ładuje się w 1-2 sekundy" },
+  { problem: "Miesięczne koszty rosną", platform: "Shopify", icon: "💰", desc: "Plan $299 + aplikacje $500 = $800/mies", solution: "Własny sklep = tylko hosting $50/mies" },
+  { problem: "Limity i ograniczenia", platform: "Platformy SaaS", icon: "🔒", desc: "Nie możesz dodać funkcji której potrzebujesz", solution: "Dedykowany sklep = nieograniczone możliwości" },
+  { problem: "SEO nie działa", platform: "PrestaShop", icon: "📈", desc: "Duplikaty, wolne ładowanie, brak kontroli", solution: "Pełna kontrola nad SEO i wydajnością" },
+  { problem: "Wtyczki się konfliktują", platform: "WooCommerce", icon: "⚠️", desc: "Aktualizacja = wszystko się sypie", solution: "Kod na miarę = zero konfliktów" },
+  { problem: "Checkout porzucany", platform: "Wszystkie", icon: "🛒", desc: "Skomplikowany proces, wolne ładowanie", solution: "Checkout w 2 krokach, konwersja +30%" },
+];
+
+const beforeItems = [
+  { label: "PageSpeed: 45", desc: "Sklep ładował się 6-8 sekund" },
+  { label: "30+ wtyczek", desc: "Konflikty, problemy z aktualizacjami" },
+  { label: "Brak integracji", desc: "Ręczne wprowadzanie na Allegro" },
+  { label: "Wysokie koszty", desc: "Hosting + wtyczki premium = 500 zł/mies" },
+];
+
+const afterItems = [
+  { label: "PageSpeed: 92", desc: "Sklep ładuje się w 2 sekundy" },
+  { label: "Kod na miarę", desc: "Zero konfliktów, pełna kontrola" },
+  { label: "Allegro API", desc: "Automatyczna synchronizacja" },
+  { label: "Niskie koszty", desc: "Tylko hosting AWS = 100 zł/mies" },
+];
+
+const wooMigrate = ["Wszystkie produkty z wariantami", "Klienci i historia zamówień", "Kategorie i tagi", "Obrazki i media", "Kupony i promocje", "Recenzje produktów"];
+const wooGains = ["3-5x szybszy sklep", "Koniec z wtyczkami", "Niższe koszty hostingu", "Lepsze SEO", "Stabilność i bezpieczeństwo", "Własność kodu"];
+
+const migrationSteps = [
+  { day: "Dzień 1-2", title: "Audyt i backup", desc: "Analizuję obecny sklep, robię pełny backup danych", status: "Sklep działa normalnie" },
+  { day: "Dzień 3-7", title: "Budowa nowego sklepu", desc: "Tworzę nową platformę na środowisku testowym", status: "Sklep działa normalnie" },
+  { day: "Dzień 8-12", title: "Migracja danych", desc: "Przenoszę produkty, klientów, zamówienia", status: "Sklep działa normalnie" },
+  { day: "Dzień 13-14", title: "Testy i optymalizacja", desc: "Testuję każdą funkcję, optymalizuję wydajność", status: "Sklep działa normalnie" },
+  { day: "Dzień 15", title: "Przełączenie DNS", desc: "Przekierowuję domenę na nowy sklep", status: "15 minut przerwy technicznej" },
+  { day: "Dzień 16-20", title: "Monitoring i wsparcie", desc: "Monitoruję działanie, rozwiązuję ewentualne problemy", status: "Nowy sklep działa!" },
+];
+
+const postMigrationFeatures = [
+  { icon: "⚡", title: "Błyskawiczna szybkość", desc: "PageSpeed 90+, ładowanie < 2s, CDN globalny" },
+  { icon: "💻", title: "Kod na własność", desc: "100% własności kodu, możliwość modyfikacji, brak vendor lock-in" },
+  { icon: "🛡️", title: "Bezpieczeństwo", desc: "Szyfrowanie, backupy, ochrona przed atakami, GDPR ready" },
+  { icon: "🎯", title: "SEO na sterydach", desc: "Zachowanie pozycji, redirecty 301, sitemapy, schema.org" },
+  { icon: "🔄", title: "Automatyzacje", desc: "Integracje z Allegro, InPost, fakturowanie, maile" },
+  { icon: "📊", title: "Analityka", desc: "Google Analytics 4, Facebook Pixel, heatmapy, A/B testy" },
+];
+
+const plans = [
+  { name: "Essential", price: "7 990", time: "2 tygodnie", desc: "Dla małych sklepów do 500 produktów", best: false, features: ["Migracja produktów i klientów", "Podstawowy design responsywny", "Płatności i dostawa", "SEO - zachowanie pozycji", "Panel administracyjny", "Szkolenie z obsługi", "1 miesiąc wsparcia"] },
+  { name: "Professional", price: "14 990", time: "3-4 tygodnie", desc: "Dla średnich sklepów z integracjami", best: true, features: ["Do 5000 produktów", "Custom design UX/UI", "Integracje (Allegro, InPost)", "Automatyzacje procesów", "Migracja historii zamówień", "Optymalizacja wydajności", "Multi-język / Multi-waluta", "3 miesiące wsparcia"] },
+  { name: "Enterprise", price: "od 24 990", time: "4-8 tygodni", desc: "Dla dużych sklepów i marketplace", best: false, features: ["Nieograniczona ilość produktów", "Architektura mikroserwisowa", "Zaawansowane integracje B2B", "System multi-vendor", "Dedykowane API", "Load balancing", "DevOps i CI/CD", "SLA 99.9%", "6 miesięcy wsparcia"] },
+];
+
+const faqs = [
+  { q: "Czy stracę pozycje w Google po migracji?", a: "Nie! Zachowuję wszystkie URL lub ustawiam redirecty 301. Dbam o meta tagi, sitemapy, schema.org. W 95% przypadków pozycje się poprawiają dzięki lepszej wydajności." },
+  { q: "Co z moimi klientami i ich kontami?", a: "Migruję wszystkich klientów z historią zamówień. Muszą tylko zresetować hasło przy pierwszym logowaniu. Informuję ich mailem o zmianach." },
+  { q: "Ile czasu sklep będzie niedostępny?", a: "Maksymalnie 15-30 minut podczas przełączania DNS. Całą migrację robię na środowisku testowym, więc Twój sklep działa normalnie przez 99% czasu migracji." },
+  { q: "Co jeśli coś pójdzie nie tak?", a: "Mam pełny backup starego sklepu. W razie problemów mogę cofnąć zmiany w 15 minut. Ale w 11 latach nie miałem ani jednej nieudanej migracji." },
+  { q: "Czy będę mógł sam zarządzać nowym sklepem?", a: "Oczywiście! Tworzę intuicyjny panel admina, przeprowadzam szkolenie, dostarczam dokumentację. Jest prostszy niż WooCommerce czy PrestaShop." },
+  { q: "Jakie technologie wykorzystujesz?", a: "Next.js 14 (frontend), Node.js (backend), PostgreSQL (baza), AWS/Vercel (hosting). To stack używany przez największe sklepy na świecie." },
+];
+---
+
+<Service title="Migracje sklepów internetowych" description="Bezpieczna migracja sklepu z WooCommerce, PrestaShop, Shopify. +40% sprzedaży, 100% zachowanie SEO, 3x szybszy sklep. Od 7990 zł." breadcrumbLabel="Migracje sklepów" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">🔄 WooCommerce → Next.js · PrestaShop → Custom · Shopify → React</p>
+        <h1 class="animate-in animate-delay-1">Migracje <span class="text-gradient">sklepów internetowych</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Twój sklep działa wolno? Płacisz fortunę za wtyczki?</strong> Migruję sklepy z WooCommerce, PrestaShop, Shopify na szybkie, dedykowane rozwiązania. Zachowuję SEO, zwiększam sprzedaż.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ +40% wzrost sprzedaży (case Stojan)</span><span>✅ 100% zachowanie SEO</span><span>✅ 3x szybszy sklep</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Darmowy audyt sklepu →</a>
+          <a href="#kalkulator" class="btn btn-outline">Kalkulator oszczędności</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problemy -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Problemy, które <span class="text-gradient">Cię frustrują</span></h2>
+        <p>Poznajemy? To znak, że czas na migrację</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {problems.map(item => (
+          <div class="skill-group" style="border-color: rgba(239,68,68,0.3);">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-md);">
+              <div style="font-size: 1.5rem;">{item.icon}</div>
+              <span style="font-size: var(--f-size-xs); color: #ef4444;">{item.platform}</span>
+            </div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{item.problem}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{item.desc}</p>
+            <div style="padding-top: var(--s-md); border-top: 1px solid var(--c-border);">
+              <p style="font-size: var(--f-size-sm); color: var(--c-accent); display: flex; align-items: center; gap: 6px;">✅ {item.solution}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Study Stojan -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <p style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-md);">🏆 Case Study</p>
+        <h2>Stojan Shop: <span class="text-gradient">+40% sprzedaży po migracji</span></h2>
+      </div>
+      <div class="cta-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl);">
+          <!-- Przed -->
+          <div>
+            <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--s-lg);">❌ Przed migracją (WooCommerce)</h3>
+            {beforeItems.map(b => (
+              <div style="display: flex; align-items: flex-start; gap: var(--s-sm); margin-bottom: var(--s-md);">
+                <span style="color: #ef4444; flex-shrink: 0; margin-top: 2px;">✗</span>
+                <div><p style="font-weight: 600;">{b.label}</p><p class="text-muted" style="font-size: var(--f-size-sm);">{b.desc}</p></div>
+              </div>
+            ))}
+            <div style="background: rgba(239,68,68,0.1); border-radius: var(--radius); padding: var(--s-md); margin-top: var(--s-md);">
+              <p style="font-size: var(--f-size-sm); font-weight: 600; color: #ef4444;">Bounce rate: 68% · Konwersja: 1.2%</p>
+            </div>
+          </div>
+          <!-- Po -->
+          <div>
+            <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--s-lg);">✅ Po migracji (Next.js + Node.js)</h3>
+            {afterItems.map(a => (
+              <div style="display: flex; align-items: flex-start; gap: var(--s-sm); margin-bottom: var(--s-md);">
+                <span style="color: var(--c-accent); flex-shrink: 0; margin-top: 2px;">✓</span>
+                <div><p style="font-weight: 600;">{a.label}</p><p class="text-muted" style="font-size: var(--f-size-sm);">{a.desc}</p></div>
+              </div>
+            ))}
+            <div style="background: rgba(34,197,94,0.1); border-radius: var(--radius); padding: var(--s-md); margin-top: var(--s-md);">
+              <p style="font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent);">Bounce rate: 42% · Konwersja: 3.2% · Sprzedaż: +40%</p>
+            </div>
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: var(--s-2xl);">
+          <blockquote class="text-muted" style="font-style: italic; font-size: var(--f-size-lg); margin-bottom: var(--s-md);">&ldquo;Migracja to najlepsza decyzja biznesowa. Sklep działa błyskawicznie, klienci są zadowoleni, a ja oszczędzam 2 godz. dziennie na automatyzacji.&rdquo;</blockquote>
+          <p style="font-size: var(--f-size-sm);"><strong>Krzysztof L.</strong>, właściciel sklepu Stojan</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Z czego migrujemy - WooCommerce -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Migruję z <span class="text-gradient">każdej platformy</span></h2>
+        <p>WooCommerce · PrestaShop · Shopify · Shoper · Magento</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        <!-- WooCommerce -->
+        <div class="skill-group" style="padding: var(--s-xl); margin-bottom: var(--s-xl);">
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-lg);">🛒 Migracja z WooCommerce</h3>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl);">
+            <div>
+              <h4 style="font-weight: 600; margin-bottom: var(--s-md);">Co migruję:</h4>
+              {wooMigrate.map(item => (
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+              ))}
+            </div>
+            <div>
+              <h4 style="font-weight: 600; margin-bottom: var(--s-md);">Co zyskujesz:</h4>
+              {wooGains.map(item => (
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-primary);">↗</span><span>{item}</span></div>
+              ))}
+            </div>
+          </div>
+          <div style="margin-top: var(--s-lg); padding: var(--s-md); background: var(--c-primary-soft); border-radius: var(--radius);">
+            <p style="font-size: var(--f-size-sm);"><strong>Najpopularniejsza migracja:</strong> 70% moich klientów migruje z WooCommerce. Średni wzrost wydajności: 300%. Czas migracji: 2-3 tygodnie.</p>
+          </div>
+        </div>
+
+        <!-- PrestaShop -->
+        <div class="skill-group" style="padding: var(--s-xl); margin-bottom: var(--s-xl);">
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-md);">🛒 Migracja z PrestaShop</h3>
+          <p class="text-muted" style="margin-bottom: var(--s-lg);">PrestaShop to potężna platforma, ale często przytłaczająca dla średnich sklepów. Migruję zachowując wszystkie funkcje, ale w prostszej, szybszej formie.</p>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md);">
+            <div style="background: var(--c-bg-alt); border-radius: var(--radius); padding: var(--s-md);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Problemy PrestaShop</h4><p class="text-muted" style="font-size: var(--f-size-sm);">• Skomplikowany panel<br/>• Wolne ładowanie<br/>• Drogie moduły</p></div>
+            <div style="background: var(--c-bg-alt); border-radius: var(--radius); padding: var(--s-md);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Moje rozwiązanie</h4><p class="text-muted" style="font-size: var(--f-size-sm);">• Intuicyjny CMS<br/>• Optymalizacja kodu<br/>• Funkcje wbudowane</p></div>
+            <div style="background: var(--c-bg-alt); border-radius: var(--radius); padding: var(--s-md);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Efekty</h4><p class="text-muted" style="font-size: var(--f-size-sm);">• -80% czasu obsługi<br/>• +200% wydajności<br/>• -70% kosztów</p></div>
+          </div>
+        </div>
+
+        <!-- Shopify -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-md);">🛒 Migracja z Shopify</h3>
+          <div style="padding: var(--s-md); background: rgba(234,179,8,0.1); border: 1px solid rgba(234,179,8,0.3); border-radius: var(--radius); margin-bottom: var(--s-lg);">
+            <p style="font-size: var(--f-size-sm);"><strong>Uwaga:</strong> Shopify to zamknięty ekosystem. Migracja wymaga eksportu danych i odtworzenia funkcjonalności, ale daje pełną wolność.</p>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl);">
+            <div>
+              <h4 style="font-weight: 600; margin-bottom: var(--s-sm);">Koszty Shopify (miesięcznie):</h4>
+              <div style="font-size: var(--f-size-sm);">
+                {[{l:"Plan Shopify",v:"$299"},{l:"Aplikacje (średnio 10)",v:"$200-500"},{l:"Szablon premium",v:"$180 (jednorazowo)"},{l:"Prowizje transakcyjne",v:"2.4-2.9%"}].map(r => (
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>{r.l}</span><span style="color: #ef4444;">{r.v}</span></div>
+                ))}
+                <div style="display: flex; justify-content: space-between; padding-top: var(--s-xs); border-top: 1px solid var(--c-border); font-weight: 600;"><span>Suma</span><span style="color: #ef4444;">$500-800/mies</span></div>
+              </div>
+            </div>
+            <div>
+              <h4 style="font-weight: 600; margin-bottom: var(--s-sm);">Koszty po migracji:</h4>
+              <div style="font-size: var(--f-size-sm);">
+                {[{l:"Hosting AWS/Vercel",v:"$50-100"},{l:"Funkcje wbudowane",v:"$0"},{l:"Własny design",v:"$0"},{l:"Stripe (prowizja)",v:"1.4%+€0.25"}].map(r => (
+                  <div style="display: flex; justify-content: space-between; margin-bottom: 4px;"><span>{r.l}</span><span style="color: var(--c-accent);">{r.v}</span></div>
+                ))}
+                <div style="display: flex; justify-content: space-between; padding-top: var(--s-xs); border-top: 1px solid var(--c-border); font-weight: 600;"><span>Suma</span><span style="color: var(--c-accent);">$50-100/mies</span></div>
+              </div>
+            </div>
+          </div>
+          <div style="text-align: center; padding: var(--s-md); background: rgba(34,197,94,0.1); border-radius: var(--radius); margin-top: var(--s-lg);">
+            <p style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-accent);">Oszczędzasz $450-700 miesięcznie!</p>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-top: var(--s-xs);">To $5400-8400 rocznie</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces migracji -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Migracja <span class="text-gradient">bez przestoju</span></h2>
+        <p>Twój sklep działa normalnie podczas całego procesu</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {migrationSteps.map(phase => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-lg);">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: var(--c-bg-card); border: 2px solid var(--c-border-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔧</div>
+            <div class="skill-group" style="flex: 1; padding: var(--s-lg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-xs);">
+                <h3 style="font-size: var(--f-size-lg);">{phase.title}</h3>
+                <span class="text-primary" style="font-size: var(--f-size-sm);">{phase.day}</span>
+              </div>
+              <p class="text-muted" style="margin-bottom: var(--s-sm);">{phase.desc}</p>
+              <span style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 12px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-xs); color: var(--c-accent);">🟢 {phase.status}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Kalkulator oszczędności -->
+  <section class="section" id="kalkulator" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header">
+        <h2>Kalkulator <span class="text-gradient">oszczędności</span></h2>
+        <p>Zobacz ile zaoszczędzisz po migracji</p>
+      </div>
+      <div class="cta-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); margin-bottom: var(--s-xl);">
+          <div>
+            <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Obecne koszty (miesięcznie):</h3>
+            {[{l:"Hosting/Plan",v:"500 zł"},{l:"Wtyczki/Aplikacje",v:"300 zł"},{l:"Obsługa techniczna",v:"200 zł"}].map(c => (
+              <div class="skill-group" style="padding: var(--s-sm) var(--s-md); margin-bottom: var(--s-xs);"><span class="text-muted" style="font-size: var(--f-size-sm);">{c.l}</span><div style="font-size: var(--f-size-2xl); font-weight: 800;">{c.v}</div></div>
+            ))}
+          </div>
+          <div>
+            <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Po migracji:</h3>
+            {[{l:"Hosting AWS/Vercel",v:"150 zł"},{l:"Funkcje wbudowane",v:"0 zł"},{l:"Wsparcie (opcjonalne)",v:"100 zł"}].map(c => (
+              <div class="skill-group" style="padding: var(--s-sm) var(--s-md); margin-bottom: var(--s-xs);"><span class="text-muted" style="font-size: var(--f-size-sm);">{c.l}</span><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-accent);">{c.v}</div></div>
+            ))}
+          </div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); padding: var(--s-lg); background: rgba(34,197,94,0.1); border-radius: var(--radius-lg);">
+          <div style="text-align: center;"><p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: 2px;">Oszczędność miesięczna</p><p style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-accent);">750 zł</p></div>
+          <div style="text-align: center;"><p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: 2px;">Oszczędność roczna</p><p style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-accent);">9 000 zł</p></div>
+          <div style="text-align: center;"><p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: 2px;">ROI migracji</p><p style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-accent);">4 miesiące</p></div>
+        </div>
+        <div style="text-align: center; margin-top: var(--s-xl);">
+          <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">* Kalkulacja dla średniego sklepu. Dodatkowo zyskujesz na wzroście konwersji (+30% średnio)</p>
+          <a href="/kontakt" class="btn btn-primary">Otrzymaj dokładną wycenę →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Co otrzymujesz po migracji -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Co otrzymujesz <span class="text-gradient">po migracji</span>?</h2>
+        <p>Nowoczesny sklep z pełną kontrolą</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {postMigrationFeatures.map(f => (
+          <div class="skill-group">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{f.icon}</div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{f.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{f.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pakiety -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pakiety <span class="text-gradient">migracyjne</span></h2>
+        <p>Od prostego sklepu po zaawansowane marketplace</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.best ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.best && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Najpopularniejszy</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">Czas: {plan.time}</div>
+              <div style="margin-bottom: var(--s-sm);">{plan.price.includes('od') ? <span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span> : <><span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span></>}</div>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <a href="/kontakt" class:list={['btn', plan.best ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Wybierz pakiet</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania o <span class="text-gradient">migrację</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(239,68,68,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: #ef4444; margin-bottom: var(--s-lg);">⚠️ Każdy dzień na wolnym sklepie = straceni klienci</p>
+      <h2>Przestań płacić <span class="text-gradient">500 zł miesięcznie za wtyczki</span></h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Twoja konkurencja już migruje na szybsze rozwiązania. 53% klientów opuszcza sklep który ładuje się dłużej niż 3 sekundy. <strong>Darmowy audyt pokaże Ci dokładnie co tracisz.</strong>
+      </p>
+      <div class="skill-group" style="max-width: 450px; margin: 0 auto var(--s-xl); padding: var(--s-lg);">
+        <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Darmowy audyt zawiera:</h3>
+        <div style="text-align: left;">
+          {["Test wydajności PageSpeed", "Analiza kosztów vs oszczędności", "Plan migracji z timeline", "Wycena i gwarancja zachowania SEO"].map(item => (
+            <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+          ))}
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń</span><span class="contact-value"> +48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz </span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+    </div>
+  </section>
+
+</Service>

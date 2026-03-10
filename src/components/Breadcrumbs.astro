@@ -1,0 +1,41 @@
+---
+interface Crumb {
+  label: string;
+  href?: string;
+}
+
+interface Props {
+  items: Crumb[];
+}
+
+const { items } = Astro.props;
+const siteUrl = 'https://www.karol-leszczynski.pl';
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": siteUrl },
+    ...items.map((item, i) => ({
+      "@type": "ListItem",
+      "position": i + 2,
+      "name": item.label,
+      ...(item.href ? { "item": `${siteUrl}${item.href}` } : {}),
+    })),
+  ],
+};
+---
+
+<nav class="breadcrumbs" aria-label="Breadcrumb">
+  <div class="container">
+    <a href="/">Strona główna</a>
+    {items.map(item => (
+      <>
+        <span aria-hidden="true">/</span>
+        {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
+      </>
+    ))}
+  </div>
+</nav>
+
+<script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

@@ -1,0 +1,404 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+// ⚠️ UZUPEŁNIJ po uruchomieniu setup-aws.sh
+const API_URL = 'https://5dmfzgvzll.execute-api.eu-central-1.amazonaws.com';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ContactPage",
+  "name": "Kontakt — Karol Leszczyński",
+  "description": "Formularz kontaktowy. Full-Stack Developer z Torunia.",
+  "mainEntity": {
+    "@type": "Person",
+    "name": "Karol Leszczyński",
+    "telephone": "+48509370772",
+    "email": "kontakt@karol-leszczynski.pl",
+    "address": { "@type": "PostalAddress", "addressLocality": "Toruń", "addressRegion": "Kujawsko-Pomorskie", "addressCountry": "PL" },
+  },
+};
+---
+
+<Base title="Kontakt — Karol Leszczyński" description="Skontaktuj się ze mną. Full-Stack Developer z Torunia. Strony, sklepy, aplikacje SaaS z AI. Formularz kontaktowy, telefon, email. Odpowiadam w 24h.">
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" style="min-height: 40vh;">
+      <div class="hero-bg"><div class="hero-grid"></div></div>
+      <div class="container">
+        <div class="hero-content" style="max-width: 600px;">
+          <Breadcrumbs items={[{ label: "Kontakt" }]} />
+          <h1 class="animate-in animate-delay-1">Porozmawiajmy o <span class="text-gradient">Twoim projekcie</span></h1>
+          <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin-top: var(--s-lg);">
+            Opisz czego potrzebujesz — wrócę z wyceną i propozycją w ciągu 24 godzin. Bez zobowiązań.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section class="section">
+      <div class="container">
+        <div class="contact-layout">
+
+          <!-- LEFT: Info -->
+          <div class="contact-sidebar">
+            <a href="tel:+48509370772" class="contact-info-card">
+              <div class="contact-info-icon">📞</div>
+              <div>
+                <div class="contact-info-label">Telefon</div>
+                <div class="contact-info-value">+48 509 370 772</div>
+              </div>
+            </a>
+            <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-info-card">
+              <div class="contact-info-icon">✉️</div>
+              <div>
+                <div class="contact-info-label">Email</div>
+                <div class="contact-info-value">kontakt@karol-leszczynski.pl</div>
+              </div>
+            </a>
+            <div class="contact-info-card">
+              <div class="contact-info-icon">📍</div>
+              <div>
+                <div class="contact-info-label">Lokalizacja</div>
+                <div class="contact-info-value">Toruń, Kujawsko-Pomorskie</div>
+              </div>
+            </div>
+            <div class="contact-info-card">
+              <div class="contact-info-icon">⏱️</div>
+              <div>
+                <div class="contact-info-label">Czas odpowiedzi</div>
+                <div class="contact-info-value">Do 24 godzin w dni robocze</div>
+              </div>
+            </div>
+
+            <div class="contact-services-box">
+              <h3>Szybkie linki do usług</h3>
+              <a href="/uslugi/strony-www-torun">🌐 Strony WWW — od 2 900 zł</a>
+              <a href="/uslugi/sklepy-internetowe-torun">🛒 Sklepy — od 4 900 zł</a>
+              <a href="/uslugi/platformy-saas-ai">🚀 Platformy SaaS z AI — od 15 000 zł</a>
+              <a href="/uslugi/integracje-ai">🧠 Integracje AI — od 2 990 zł</a>
+              <a href="/uslugi/automatyzacja-procesow">⚡ Automatyzacja — od 990 zł</a>
+              <a href="/uslugi/migracje-sklepow">🔄 Migracje sklepów — od 7 990 zł</a>
+              <a href="/uslugi/publikacje-latex">📚 Publikacje LaTeX — od 1 990 zł</a>
+            </div>
+          </div>
+
+          <!-- RIGHT: Form -->
+          <div class="contact-form-wrapper">
+
+            <!-- Success -->
+            <div id="form-success" class="cf-msg cf-msg--ok" style="display:none;">
+              <div class="cf-msg-icon">✓</div>
+              <h3>Wiadomość wysłana!</h3>
+              <p class="text-muted">Odpowiem w ciągu 24 godzin w dni robocze.</p>
+            </div>
+
+            <!-- Error -->
+            <div id="form-error" class="cf-msg cf-msg--err" style="display:none;">
+              <span id="form-error-text"></span>
+            </div>
+
+            <form id="contact-form" class="cf">
+              <div class="cf-row">
+                <div class="cf-group">
+                  <label for="name">Imię i nazwisko <span class="cf-req">*</span></label>
+                  <input type="text" id="name" name="name" required placeholder="Jan Kowalski" />
+                </div>
+              </div>
+
+              <div class="cf-row cf-row--2">
+                <div class="cf-group">
+                  <label for="email">Email <span class="cf-req">*</span></label>
+                  <input type="email" id="email" name="email" required placeholder="jan@firma.pl" />
+                </div>
+                <div class="cf-group">
+                  <label for="phone">Telefon</label>
+                  <input type="tel" id="phone" name="phone" placeholder="+48 000 000 000" />
+                </div>
+              </div>
+
+              <div class="cf-row cf-row--2">
+                <div class="cf-group">
+                  <label for="serviceType">Rodzaj projektu</label>
+                  <select id="serviceType" name="serviceType">
+                    <option value="">Wybierz (opcjonalnie)</option>
+                    <option value="Strona internetowa">Strona internetowa</option>
+                    <option value="Sklep internetowy">Sklep internetowy</option>
+                    <option value="Platforma SaaS z AI">Platforma SaaS z AI</option>
+                    <option value="Integracja AI">Integracja AI</option>
+                    <option value="Automatyzacja procesów">Automatyzacja procesów</option>
+                    <option value="Migracja sklepu">Migracja sklepu</option>
+                    <option value="Publikacja LaTeX/Quarto">Publikacja LaTeX/Quarto</option>
+                    <option value="Inne">Inne</option>
+                  </select>
+                </div>
+                <div class="cf-group">
+                  <label for="budget">Orientacyjny budżet</label>
+                  <select id="budget" name="budget">
+                    <option value="">Wybierz (opcjonalnie)</option>
+                    <option value="do 5 000 zł">do 5 000 zł</option>
+                    <option value="5 000–10 000 zł">5 000–10 000 zł</option>
+                    <option value="10 000–20 000 zł">10 000–20 000 zł</option>
+                    <option value="20 000–50 000 zł">20 000–50 000 zł</option>
+                    <option value="powyżej 50 000 zł">powyżej 50 000 zł</option>
+                    <option value="stała współpraca">Stała współpraca miesięczna</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-group">
+                  <label for="website">Adres strony www <span class="cf-opt">(opcjonalnie)</span></label>
+                  <input type="url" id="website" name="website" placeholder="https://twojafirma.pl" />
+                </div>
+              </div>
+
+              <div class="cf-row">
+                <div class="cf-group">
+                  <label for="message">Wiadomość <span class="cf-req">*</span></label>
+                  <textarea id="message" name="message" rows="5" required
+                    placeholder="Opisz swój projekt: czym się zajmujesz, jakie rozwiązanie potrzebujesz, w jakim terminie, ewentualne integracje..."></textarea>
+                </div>
+              </div>
+
+              <!-- File upload -->
+              <div class="cf-row">
+                <div class="cf-group">
+                  <label>Załączniki <span class="cf-opt">(opcjonalnie, maks. 10 MB/plik)</span></label>
+                  <div id="dropzone" class="cf-dropzone">
+                    <input type="file" id="file-input" multiple
+                      accept=".pdf,.doc,.docx,.txt,.jpg,.jpeg,.png,.gif,.webp,.svg,.pptx,.xlsx,.xls,.csv,.zip,.rar,.7z,.md,.html" />
+                    <div class="cf-dropzone-content">
+                      <div style="font-size: 1.5rem; margin-bottom: var(--s-xs);">📎</div>
+                      <p>Przeciągnij pliki lub <span style="color: var(--c-primary); font-weight: 600;">kliknij aby wybrać</span></p>
+                      <p class="text-muted" style="font-size: var(--f-size-xs);">PDF, obrazy, dokumenty, archiwa · maks. 5 plików</p>
+                    </div>
+                  </div>
+                  <div id="file-list" class="cf-file-list"></div>
+                </div>
+              </div>
+
+              <!-- Upload progress -->
+              <div id="upload-progress" class="cf-upload-progress" style="display:none;">
+                <div class="cf-spinner"></div>
+                <span id="upload-status">Przesyłanie plików...</span>
+              </div>
+
+              <button type="submit" id="submit-btn" class="btn btn-primary cf-submit">
+                <span id="submit-text">Wyślij zapytanie</span>
+                <span id="submit-spinner" class="cf-spinner" style="display:none;"></span>
+              </button>
+
+              <p class="text-muted" style="font-size: var(--f-size-xs); text-align: center; margin-top: var(--s-md);">
+                Wysyłając formularz, wyrażasz zgodę na kontakt w sprawie wyceny.
+              </p>
+            </form>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .contact-layout {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: var(--s-3xl);
+      align-items: start;
+    }
+    @media (max-width: 900px) {
+      .contact-layout { grid-template-columns: 1fr; gap: var(--s-2xl); }
+    }
+
+    /* Sidebar */
+    .contact-sidebar { display: flex; flex-direction: column; gap: var(--s-md); }
+    .contact-info-card {
+      display: flex; align-items: center; gap: var(--s-md);
+      padding: var(--s-md) var(--s-lg);
+      background: var(--c-bg-card); border: 1px solid var(--c-border); border-radius: var(--radius);
+      text-decoration: none; color: inherit; transition: var(--transition);
+    }
+    a.contact-info-card:hover { border-color: var(--c-border-hover); }
+    .contact-info-icon { font-size: 1.3rem; flex-shrink: 0; }
+    .contact-info-label { font-size: var(--f-size-xs); font-weight: 600; color: var(--c-text-muted); text-transform: uppercase; letter-spacing: 0.04em; margin-bottom: 2px; }
+    .contact-info-value { font-size: var(--f-size-sm); font-weight: 600; }
+
+    .contact-services-box {
+      margin-top: var(--s-md); padding: var(--s-lg);
+      background: var(--c-bg-card); border: 1px solid var(--c-border); border-radius: var(--radius);
+    }
+    .contact-services-box h3 { font-size: var(--f-size-sm); font-weight: 700; margin-bottom: var(--s-md); }
+    .contact-services-box a {
+      display: block; font-size: var(--f-size-sm); color: var(--c-text-muted);
+      padding: var(--s-xs) 0; border-bottom: 1px solid var(--c-border);
+      text-decoration: none; transition: color 0.15s;
+    }
+    .contact-services-box a:last-child { border-bottom: none; }
+    .contact-services-box a:hover { color: var(--c-primary); }
+
+    /* Form wrapper */
+    .contact-form-wrapper {
+      padding: var(--s-xl);
+      background: var(--c-bg-card); border: 1px solid var(--c-border); border-radius: var(--radius-lg);
+    }
+
+    /* Form */
+    .cf { display: flex; flex-direction: column; gap: var(--s-md); }
+    .cf-row { display: flex; gap: var(--s-md); }
+    .cf-row--2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md); }
+    @media (max-width: 600px) { .cf-row--2 { grid-template-columns: 1fr; } }
+
+    .cf-group { flex: 1; display: flex; flex-direction: column; gap: var(--s-xs); }
+    .cf-group label { font-size: var(--f-size-sm); font-weight: 600; }
+    .cf-req { color: #ef4444; }
+    .cf-opt { font-weight: 400; color: var(--c-text-muted); font-size: var(--f-size-xs); }
+
+    .cf-group input,
+    .cf-group select,
+    .cf-group textarea {
+      padding: 10px 14px; font-size: var(--f-size-sm); font-family: var(--f-body);
+      color: var(--c-text); background: var(--c-bg-alt); border: 1px solid var(--c-border);
+      border-radius: var(--radius); outline: none; width: 100%; box-sizing: border-box;
+      transition: border-color 0.15s, box-shadow 0.15s;
+    }
+    .cf-group input:focus,
+    .cf-group select:focus,
+    .cf-group textarea:focus {
+      border-color: var(--c-primary);
+      box-shadow: 0 0 0 3px rgba(59,130,246,0.12);
+    }
+    .cf-group textarea { resize: vertical; min-height: 120px; }
+    .cf-group input::placeholder,
+    .cf-group textarea::placeholder { color: var(--c-text-muted); }
+    .cf-group select { cursor: pointer; }
+
+    /* Dropzone */
+    .cf-dropzone {
+      position: relative; padding: var(--s-lg); border: 2px dashed var(--c-border);
+      border-radius: var(--radius); background: var(--c-bg-alt); text-align: center;
+      cursor: pointer; transition: all 0.15s;
+    }
+    .cf-dropzone:hover, .cf-dropzone.active { border-color: var(--c-primary); background: var(--c-primary-soft); }
+    .cf-dropzone input[type="file"] { position: absolute; inset: 0; width: 100%; height: 100%; opacity: 0; cursor: pointer; }
+    .cf-dropzone-content p { font-size: var(--f-size-sm); color: var(--c-text-muted); margin: 0; }
+
+    /* File list */
+    .cf-file-list { display: flex; flex-direction: column; gap: var(--s-xs); margin-top: var(--s-xs); }
+    .cf-file-item {
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 6px 12px; background: var(--c-bg-alt); border: 1px solid var(--c-border);
+      border-radius: var(--radius); font-size: var(--f-size-sm);
+    }
+    .cf-file-info { display: flex; align-items: center; gap: var(--s-sm); min-width: 0; }
+    .cf-file-name { font-weight: 500; white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+    .cf-file-size { color: var(--c-text-muted); font-size: var(--f-size-xs); flex-shrink: 0; }
+    .cf-file-remove { background: none; border: none; color: var(--c-text-muted); font-size: 1.2rem; cursor: pointer; padding: 0 4px; }
+    .cf-file-remove:hover { color: #ef4444; }
+
+    /* Progress & submit */
+    .cf-upload-progress { display: flex; align-items: center; gap: var(--s-sm); font-size: var(--f-size-sm); color: var(--c-text-muted); }
+    .cf-spinner { width: 16px; height: 16px; border: 2px solid var(--c-border); border-top-color: var(--c-primary); border-radius: 50%; animation: cfspin 0.6s linear infinite; }
+    @keyframes cfspin { to { transform: rotate(360deg); } }
+    .cf-submit { width: 100%; margin-top: var(--s-sm); display: flex; align-items: center; justify-content: center; gap: var(--s-sm); font-size: var(--f-size-lg); padding: 14px; }
+
+    /* Messages */
+    .cf-msg { padding: var(--s-xl); border-radius: var(--radius); text-align: center; }
+    .cf-msg--ok { background: rgba(6,214,160,0.06); border: 1px solid rgba(6,214,160,0.2); }
+    .cf-msg-icon { display: inline-flex; align-items: center; justify-content: center; width: 48px; height: 48px; background: var(--c-accent); color: #fff; border-radius: 50%; font-size: 1.3rem; font-weight: 700; margin-bottom: var(--s-md); }
+    .cf-msg--ok h3 { font-size: var(--f-size-xl); margin-bottom: var(--s-xs); }
+    .cf-msg--err { background: rgba(239,68,68,0.06); border: 1px solid rgba(239,68,68,0.2); color: #ef4444; font-size: var(--f-size-sm); padding: 10px 14px; text-align: left; border-radius: var(--radius); }
+  </style>
+
+  <script is:inline define:vars={{ API_URL }}>
+  (function() {
+    var MAX_SIZE = 10*1024*1024, MAX_FILES = 5, files = [];
+    var form = document.getElementById('contact-form');
+    var fileInput = document.getElementById('file-input');
+    var fileList = document.getElementById('file-list');
+    var dropzone = document.getElementById('dropzone');
+    var submitBtn = document.getElementById('submit-btn');
+    var submitText = document.getElementById('submit-text');
+    var submitSpinner = document.getElementById('submit-spinner');
+    var uploadProgress = document.getElementById('upload-progress');
+    var uploadStatus = document.getElementById('upload-status');
+    var formSuccess = document.getElementById('form-success');
+    var formError = document.getElementById('form-error');
+    var formErrorText = document.getElementById('form-error-text');
+
+    dropzone.addEventListener('dragover', function(e) { e.preventDefault(); dropzone.classList.add('active'); });
+    dropzone.addEventListener('dragleave', function() { dropzone.classList.remove('active'); });
+    dropzone.addEventListener('drop', function(e) { e.preventDefault(); dropzone.classList.remove('active'); addFiles(e.dataTransfer.files); });
+    fileInput.addEventListener('change', function(e) { addFiles(e.target.files); fileInput.value = ''; });
+
+    function addFiles(fl) {
+      for (var i = 0; i < fl.length; i++) {
+        if (files.length >= MAX_FILES) { showErr('Maksymalnie ' + MAX_FILES + ' plików.'); break; }
+        if (fl[i].size > MAX_SIZE) { showErr(fl[i].name + ' jest za duży (maks. 10 MB).'); continue; }
+        var dup = false;
+        for (var j = 0; j < files.length; j++) { if (files[j].name === fl[i].name && files[j].size === fl[i].size) { dup = true; break; } }
+        if (!dup) files.push(fl[i]);
+      }
+      renderFiles();
+    }
+
+    function renderFiles() {
+      fileList.innerHTML = '';
+      for (var i = 0; i < files.length; i++) {
+        var d = document.createElement('div'); d.className = 'cf-file-item';
+        d.innerHTML = '<div class="cf-file-info"><span class="cf-file-name">' + files[i].name + '</span><span class="cf-file-size">(' + fmtSize(files[i].size) + ')</span></div><button type="button" data-idx="' + i + '" class="cf-file-remove" title="Usuń">×</button>';
+        fileList.appendChild(d);
+      }
+      fileList.querySelectorAll('.cf-file-remove').forEach(function(b) { b.onclick = function() { files.splice(+this.dataset.idx, 1); renderFiles(); }; });
+    }
+
+    function fmtSize(b) { if (b < 1024) return b + ' B'; if (b < 1048576) return (b/1024).toFixed(1) + ' KB'; return (b/1048576).toFixed(1) + ' MB'; }
+
+    function uploadFile(file) {
+      return fetch(API_URL + '/presign', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ filename: file.name, contentType: file.type || 'application/octet-stream', size: file.size })
+      }).then(function(r) { if (!r.ok) return r.json().then(function(e) { throw new Error(e.error || 'Błąd presign'); }); return r.json(); })
+      .then(function(d) {
+        return fetch(d.uploadUrl, { method: 'PUT', headers: { 'Content-Type': file.type || 'application/octet-stream' }, body: file })
+        .then(function(u) { if (!u.ok) throw new Error('Błąd przesyłania: ' + file.name); return { key: d.key, name: file.name, size: file.size }; });
+      });
+    }
+
+    form.addEventListener('submit', function(e) {
+      e.preventDefault(); hideErr();
+      var n = form.querySelector('#name').value.trim();
+      var em = form.querySelector('#email').value.trim();
+      var ph = form.querySelector('#phone').value.trim();
+      var st = form.querySelector('#serviceType').value;
+      var bu = form.querySelector('#budget').value;
+      var ws = form.querySelector('#website').value.trim();
+      var ms = form.querySelector('#message').value.trim();
+      if (!n || !em || !ms) { showErr('Uzupełnij wymagane pola (imię, email, wiadomość).'); return; }
+
+      setLoading(true);
+      var atts = [], chain = Promise.resolve();
+      if (files.length > 0) {
+        uploadProgress.style.display = 'flex';
+        files.forEach(function(f, idx) {
+          chain = chain.then(function() { uploadStatus.textContent = 'Przesyłanie pliku ' + (idx+1) + ' z ' + files.length + '...'; return uploadFile(f).then(function(r) { atts.push(r); }); });
+        });
+      }
+      chain.then(function() {
+        uploadProgress.style.display = 'none';
+        return fetch(API_URL + '/contact', { method: 'POST', headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({ name: n, email: em, phone: ph||undefined, serviceType: st||undefined, budget: bu||undefined, website: ws||undefined, message: ms, attachments: atts.length ? atts : undefined })
+        });
+      }).then(function(r) { if (!r.ok) return r.json().then(function(e) { throw new Error(e.error || 'Błąd wysyłania'); }); return r.json(); })
+      .then(function() { form.style.display = 'none'; formSuccess.style.display = 'block'; files = []; renderFiles(); })
+      .catch(function(err) { showErr(err.message || 'Wystąpił błąd. Spróbuj ponownie lub napisz na kontakt@karol-leszczynski.pl'); uploadProgress.style.display = 'none'; })
+      .then(function() { setLoading(false); });
+    });
+
+    function setLoading(l) { submitBtn.disabled = l; submitText.textContent = l ? 'Wysyłanie...' : 'Wyślij zapytanie'; submitSpinner.style.display = l ? 'inline-block' : 'none'; submitBtn.style.opacity = l ? '0.7' : '1'; }
+    function showErr(m) { formErrorText.textContent = m; formError.style.display = 'block'; }
+    function hideErr() { formError.style.display = 'none'; }
+  })();
+  </script>
+</Base>

@@ -1,0 +1,306 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Programista, usługi programistyczne Bydgoszcz",
+  "description": "Profesjonalny programista w Bydgoszczy. Tworzenie aplikacji webowych, systemów dla firm, integracje API. 15 lat doświadczenia.",
+  "provider": { "@type": "Person", "name": "Karol Leszczyński", "jobTitle": "Senior Full-Stack Developer", "telephone": "+48509370772", "email": "kontakt@karol-leszczynski.pl" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Bydgoszcz", "addressRegion": "Kujawsko-Pomorskie", "addressCountry": "PL" },
+  "geo": { "@type": "GeoCoordinates", "latitude": "53.1235", "longitude": "18.0084" },
+  "areaServed": [{ "@type": "City", "name": "Bydgoszcz" }],
+  "priceRange": "150-600 PLN/h",
+  "openingHours": "Mo-Fr 08:00-18:00",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "47" },
+};
+
+const aboutCards = [
+  { icon: "💼", title: "Biznesowe myślenie", desc: "ROI, konwersja, KPI - znam język biznesu" },
+  { icon: "💻", title: "Czysty kod", desc: "TypeScript, testy, dokumentacja, best practices" },
+  { icon: "☕", title: "Lokalna współpraca", desc: "Spotkania w Bydgoszczy, szybki kontakt" },
+  { icon: "🎓", title: "Ciągły rozwój", desc: "Najnowsze technologie, kursy, certyfikaty" },
+];
+
+const specializations = [
+  { title: "Systemy dla firm", icon: "🖥️", desc: "Nowoczesne rozwiązania usprawniające procesy biznesowe", features: ["Systemy CRM na miarę", "Platformy B2B/B2C", "Panele administracyjne", "Systemy rezerwacji", "Automatyzacja workflow"] },
+  { title: "Aplikacje webowe", icon: "🌐", desc: "Nowoczesne aplikacje działające w przeglądarce", features: ["Progressive Web Apps", "Single Page Applications", "Real-time dashboards", "Portale społecznościowe", "Platformy e-learningowe"] },
+  { title: "E-commerce & SaaS", icon: "📈", desc: "Sklepy internetowe i aplikacje subskrypcyjne", features: ["Sklepy headless commerce", "Platformy marketplace", "Systemy subskrypcji", "Integracje płatności", "Multi-tenant SaaS"] },
+  { title: "Integracje systemów", icon: "🔀", desc: "Łączę różne systemy w spójną całość", features: ["REST API & GraphQL", "Integracje ERP", "Synchronizacja danych", "Webhook automation", "Legacy system migration"] },
+  { title: "DevOps & Cloud", icon: "☁️", desc: "Wdrożenia, hosting, monitoring aplikacji", features: ["AWS & Azure deployment", "CI/CD pipelines", "Docker & Kubernetes", "Monitoring & logging", "Optymalizacja kosztów"] },
+  { title: "Wsparcie & rozwój", icon: "🐛", desc: "Utrzymanie i rozwój istniejących systemów", features: ["Code review & refactoring", "Debugowanie błędów", "Optymalizacja wydajności", "Migracje technologiczne", "Dokumentacja techniczna"] },
+];
+
+const techStacks = [
+  { category: "Frontend Excellence", icon: "📱", techs: ["React 18", "Next.js 14", "TypeScript", "Tailwind CSS", "Redux Toolkit"] },
+  { category: "Backend Power", icon: "⚙️", techs: ["Node.js", "Express/Fastify", "Python/FastAPI", "PHP/Laravel", "GraphQL"] },
+  { category: "Database & Storage", icon: "💾", techs: ["PostgreSQL", "MongoDB", "Redis", "Prisma ORM", "AWS S3"] },
+  { category: "DevOps & Tools", icon: "🧩", techs: ["Docker", "AWS/Vercel", "GitHub Actions", "Jest/Cypress", "Nginx"] },
+];
+
+const processPhases = [
+  { phase: "Discovery & Planning", icon: "🧩", time: "1 tydzień", desc: "Analiza wymagań, architektura systemu, stack technologiczny, harmonogram", deliverables: ["Specyfikacja techniczna", "Mockupy", "Estymacja czasu"] },
+  { phase: "Development Sprint", icon: "💻", time: "2-4 tygodnie", desc: "Iteracyjne programowanie, code review, testy jednostkowe, daily updates", deliverables: ["Working software", "Dokumentacja API", "Test coverage"] },
+  { phase: "Testing & QA", icon: "🐛", time: "3-5 dni", desc: "Testy integracyjne, UAT, optymalizacja wydajności, security audit", deliverables: ["Bug-free code", "Performance report", "Security check"] },
+  { phase: "Deployment & Support", icon: "☁️", time: "2-3 dni", desc: "Wdrożenie produkcyjne, monitoring, szkolenie, dokumentacja użytkownika", deliverables: ["Live application", "User manual", "Support plan"] },
+];
+
+const whyBydgoszcz = [
+  { icon: "📍", title: "Lokalność ma znaczenie", desc: "Spotkajmy się w Bydgoszczy - Stary Rynek, Wyspa Młyńska, Focus Mall. Omówimy projekt przy kawie." },
+  { icon: "⏰", title: "Dostępność 24/7", desc: "Mieszkam i pracuję w okolicach Bydgoszczy. W nagłych sytuacjach mogę być u Ciebie w 60 minut." },
+  { icon: "👥", title: "Wsparcie lokalne biznesu", desc: "Znam bydgoskie firmy i ich potrzeby. Współpracuję z lokalnymi przedsiębiorcami od lat." },
+  { icon: "🏆", title: "Szerokie umiejętności", desc: "Łączę usługi programowania z kompetencjami marketingowymi i content marketingowymi." },
+  { icon: "🔒", title: "Bezpieczeństwo prawne", desc: "Polska umowa, faktura VAT, możliwość NDA. Pełna transparentność współpracy." },
+  { icon: "⚡", title: "Elastyczność", desc: "Dopasowuję się do Twoich potrzeb - godziny pracy, forma współpracy, zakres projektu." },
+];
+
+const faqs = [
+  { q: "Jakie są Twoje stawki godzinowe?", a: "Moje stawki zaczynają się od 150 zł/h netto w zależności od złożoności projektu. Dla długoterminowej współpracy oferuję korzystniejsze stawki. Możliwa też wycena ryczałtowa całego projektu." },
+  { q: "Czy pracujesz tylko dla firm z Bydgoszczy?", a: "Nie, ale firmy z Bydgoszczy i regionu kujawsko-pomorskiego mają u mnie priorytet. Cenię sobie możliwość osobistych spotkań i budowania długoterminowych relacji biznesowych." },
+  { q: "W jakim modelu preferujesz pracować?", a: "Najchętniej w modelu B2B (faktura) lub umowa zlecenie. Dla stałej współpracy możliwy kontrakt. Pracuję zarówno zdalnie jak i u klienta w Bydgoszczy." },
+  { q: "Czy możesz przejąć i rozwinąć istniejący projekt?", a: "Tak, regularnie przejmuję projekty po innych developerach. Zaczynam od code review, identyfikuję problemy i proponuję plan modernizacji. Mam doświadczenie z legacy code." },
+  { q: "Jak szybko możesz rozpocząć projekt?", a: "Zazwyczaj w ciągu 3-5 dni roboczych. Dla pilnych przypadków z Bydgoszczy mogę zacząć nawet następnego dnia. Zawsze dotrzymuję ustalonych terminów." },
+  { q: "Czy oferujesz gwarancję na swoje prace?", a: "Tak, daję 3-miesięczną gwarancję na napisany kod. W tym czasie bezpłatnie usuwam ewentualne błędy. Oferuję też pakiety maintenance dla długoterminowego wsparcia." },
+];
+---
+
+<Service title="Programista Bydgoszcz — Full-Stack Developer" description="Profesjonalny programista w Bydgoszczy. Tworzenie aplikacji webowych, systemów dla firm, integracje API. 15 lat doświadczenia. React, Next.js, Node.js, AWS." breadcrumbLabel="Programista Bydgoszcz" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">📍 Bydgoszcz · Fordon · Błonie · Centrum</p>
+        <h1 class="animate-in animate-delay-1">Programista <span class="text-gradient">Bydgoszcz</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Full-Stack Developer z Bydgoszczy do Twojej dyspozycji.</strong> Przekształcam pomysły biznesowe w działające aplikacje. Od prostych stron po złożone systemy enterprise - programuję rozwiązania, które napędzają biznes w erze cyfrowej.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ Senior Developer 15+ lat</span><span>✅ Bydgoszcz i okolice</span><span>✅ Umowa B2B / zlecenie</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Omów projekt →</a>
+          <a href="#portfolio" class="btn btn-outline">💻 Zobacz realizacje</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Developer z Bydgoszczy -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Developer, który <span class="text-gradient">rozumie Twój biznes</span></h2>
+        <p>Nie jestem tylko programistą - jestem partnerem technologicznym, który pomoże Ci wykorzystać potencjał cyfryzacji</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); max-width: 960px; margin: 0 auto;">
+        <div>
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-md);">Od copywritera do Full-Stack Developera</h3>
+          <p class="text-muted" style="margin-bottom: var(--s-md);">Moja droga zawodowa jest nietypowa. Przez 10 lat pracowałem jako copywriter i specjalista SEO. Napisałem ponad 5000 tekstów sprzedażowych, wypozycjonowałem setki stron w Google.</p>
+          <p class="text-muted" style="margin-bottom: var(--s-md);">W 2021 roku postanowiłem zostać programistą. Intensywna nauka, setki godzin kodowania, dziesiątki projektów. Dziś łączę wiedzę marketingową z umiejętnościami technicznymi.</p>
+          <p class="text-muted"><strong>Rezultat?</strong> Tworzę aplikacje, które działają sprawnie technicznie, a jednocześnie skutecznie realizują Twoje cele biznesowe.</p>
+        </div>
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md);">
+          {aboutCards.map(c => (
+            <div style="background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); border-radius: var(--radius-lg); padding: var(--s-lg);">
+              <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{c.icon}</div>
+              <h4 style="font-weight: 700; margin-bottom: var(--s-xs);">{c.title}</h4>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{c.desc}</p>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Specjalizacje -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>W czym się <span class="text-gradient">specjalizuję</span>?</h2>
+        <p>Kompleksowe usługi programistyczne dla firm z Bydgoszczy</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {specializations.map(svc => (
+          <div class="skill-group">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{svc.icon}</div>
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-xs);">{svc.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{svc.desc}</p>
+            {svc.features.map(f => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                <div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                <span class="text-muted">{f}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Stack technologiczny -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Mój stack <span class="text-gradient">technologiczny</span></h2>
+        <p>Pracuję z sprawdzonymi, nowoczesnymi technologiami</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {techStacks.map(stack => (
+          <div class="skill-group">
+            <div style="display: flex; align-items: center; gap: var(--s-sm); margin-bottom: var(--s-md);">
+              <div style="font-size: 1.3rem;">{stack.icon}</div>
+              <h3 style="font-weight: 700;">{stack.category}</h3>
+            </div>
+            {stack.techs.map(tech => (
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 6px;">
+                <span style="font-size: var(--f-size-sm);">{tech}</span>
+                <span style="font-size: var(--f-size-xs); padding: 2px 8px; background: var(--c-primary-soft); border-radius: var(--radius); color: var(--c-primary);">✅</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio -->
+  <section class="section" id="portfolio" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Wybrane <span class="text-gradient">realizacje</span></h2>
+        <p>Projekty, które zwiększyły efektywność i przychody moich klientów</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        <!-- Case 1 -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <div style="display: flex; align-items: center; gap: var(--s-sm); margin-bottom: var(--s-md);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">⚡</div>
+            <div>
+              <h3 style="font-size: var(--f-size-xl);">Smart-Edu.AI</h3>
+              <p class="text-primary" style="font-size: var(--f-size-sm);">Platforma SaaS</p>
+            </div>
+          </div>
+          <p class="text-muted" style="margin-bottom: var(--s-md);">Zaawansowana platforma edukacyjna z AI generującą prace naukowe. System obsługujący 2000+ użytkowników z 8 językami.</p>
+          <div style="margin-bottom: var(--s-lg);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: var(--f-size-sm);"><span class="text-muted">Stack:</span><span class="font-mono">Next.js, MongoDB, Stripe, AI</span></div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: var(--f-size-sm);"><span class="text-muted">Czas realizacji:</span><span>8 tygodni</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: var(--f-size-sm);"><span class="text-muted">Efekt:</span><span style="color: var(--c-accent);">10k+ wygenerowanych prac</span></div>
+          </div>
+          <a href="https://smart-edu.ai" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz projekt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+        <!-- Case 2 -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <div style="display: flex; align-items: center; gap: var(--s-sm); margin-bottom: var(--s-md);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">📈</div>
+            <div>
+              <h3 style="font-size: var(--f-size-xl);">Stojan Shop</h3>
+              <p class="text-primary" style="font-size: var(--f-size-sm);">E-commerce</p>
+            </div>
+          </div>
+          <p class="text-muted" style="margin-bottom: var(--s-md);">Migracja z WooCommerce do własnego rozwiązania. Integracja z Allegro, AI do opisów, wzrost sprzedaży o 40%.</p>
+          <div style="margin-bottom: var(--s-lg);">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: var(--f-size-sm);"><span class="text-muted">Stack:</span><span class="font-mono">TypeScript, PostgreSQL, AWS</span></div>
+            <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: var(--f-size-sm);"><span class="text-muted">Czas realizacji:</span><span>6 tygodni</span></div>
+            <div style="display: flex; justify-content: space-between; font-size: var(--f-size-sm);"><span class="text-muted">Efekt:</span><span style="color: var(--c-accent);">+40% sprzedaży</span></div>
+          </div>
+          <a href="https://silniki-elektryczne.com.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz projekt <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <a href="/projekty" class="projects-page-link">Zobacz więcej projektów <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces współpracy -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jak pracuję nad <span class="text-gradient">projektami</span>?</h2>
+        <p>Sprawdzona metodologia Agile dostosowana do potrzeb klienta</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {processPhases.map(phase => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-xl);">
+            <div style="flex-shrink: 0; width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.3rem;">{phase.icon}</div>
+            <div class="skill-group" style="flex: 1; padding: var(--s-lg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-sm);">
+                <h3 style="font-size: var(--f-size-xl);">{phase.phase}</h3>
+                <span class="text-primary" style="font-size: var(--f-size-sm);">{phase.time}</span>
+              </div>
+              <p class="text-muted" style="margin-bottom: var(--s-md);">{phase.desc}</p>
+              <div style="display: flex; flex-wrap: wrap; gap: var(--s-xs);">
+                {phase.deliverables.map(d => (
+                  <span style="font-size: var(--f-size-xs); padding: 4px 12px; background: var(--c-primary-soft); border-radius: 999px;">{d}</span>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dlaczego Bydgoszcz -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Programista z <span class="text-gradient">Bydgoszczy do usług</span></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {whyBydgoszcz.map(item => (
+          <div class="skill-group" style="text-align: center;">
+            <div style="width: 64px; height: 64px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--s-md); font-size: 1.5rem;">{item.icon}</div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{item.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania które często <span class="text-gradient">zadają klienci</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p class="font-mono" style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-lg);">💻 console.log("Ready to code!");</p>
+      <h2>Szukasz <span class="text-gradient">programisty w Bydgoszczy</span>?</h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Porozmawiajmy o Twoim projekcie. Pierwsza konsultacja jest bezpłatna - omówimy wymagania, technologie i możliwości realizacji. <strong>Spotkajmy się w Bydgoszczy lub online.</strong>
+      </p>
+
+      <div class="skill-group" style="max-width: 550px; margin: 0 auto var(--s-xl); padding: var(--s-xl);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-lg);">
+          <a href="tel:+48509370772" style="display: flex; flex-direction: column; align-items: center; gap: var(--s-sm); padding: var(--s-md); background: var(--c-bg-alt); border-radius: var(--radius); transition: var(--transition);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center;">📞</div>
+            <span class="text-muted" style="font-size: var(--f-size-sm);">Telefon</span>
+            <span style="font-weight: 600; font-size: var(--f-size-lg);">+48 509 370 772</span>
+          </a>
+          <a href="mailto:kontakt@karol-leszczynski.pl" style="display: flex; flex-direction: column; align-items: center; gap: var(--s-sm); padding: var(--s-md); background: var(--c-bg-alt); border-radius: var(--radius); transition: var(--transition);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✉️</div>
+            <span class="text-muted" style="font-size: var(--f-size-sm);">E-mail</span>
+            <span style="font-weight: 600; font-size: var(--f-size-lg);">kontakt@karol-leszczynski.pl</span>
+          </a>
+        </div>
+        <p class="text-muted" style="text-align: center; margin-top: var(--s-md); font-size: var(--f-size-sm);">📍 Bydgoszcz, Fordon, Błonie, Centrum</p>
+      </div>
+
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Rozpocznij projekt →</a>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-lg); margin-top: var(--s-xl); font-size: var(--f-size-sm);" class="text-muted">
+        <span>✅ Darmowa konsultacja</span><span>✅ Umowa B2B</span><span>✅ 15+ lat doświadczenia</span>
+      </div>
+    </div>
+  </section>
+
+</Service>

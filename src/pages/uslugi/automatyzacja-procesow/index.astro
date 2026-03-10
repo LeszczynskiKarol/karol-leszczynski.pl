@@ -1,0 +1,388 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Automatyzacja procesów biznesowych - Make.com, Zapier",
+  "description": "Automatyzuję procesy biznesowe łącząc aplikacje bez kodowania. 10h pracy tygodniowo zaoszczędzone.",
+  "provider": { "@type": "Person", "name": "Karol Leszczyński", "telephone": "+48509370772" },
+  "areaServed": "PL",
+  "priceRange": "990-5990 PLN",
+  "offers": { "@type": "AggregateOffer", "priceCurrency": "PLN", "lowPrice": "990", "highPrice": "5990", "offerCount": "3" },
+  "hasOfferCatalog": { "@type": "OfferCatalog", "name": "Pakiety automatyzacji", "itemListElement": [{ "@type": "Offer", "name": "Quick Win", "price": "990" }, { "@type": "Offer", "name": "Business Flow", "price": "2990" }, { "@type": "Offer", "name": "Full Automation", "price": "5990" }] },
+};
+
+const beforeSteps = [
+  { nr: "1", title: "Klient wysyła email", desc: "Czeka w skrzynce..." },
+  { nr: "2", title: "Ręczne kopiowanie do CRM", desc: "15 minut pracy" },
+  { nr: "3", title: "Tworzenie zadania w Asana", desc: "Kolejne 10 minut" },
+  { nr: "4", title: "Informowanie zespołu na Slack", desc: "Często zapominane..." },
+  { nr: "5", title: "Aktualizacja arkusza Excel", desc: "Błędy w formułach" },
+];
+
+const afterAutoItems = ["Lead w CRM (1 sekunda)", "Zadanie w Asana (1 sekunda)", "Notyfikacja na Slack (1 sekunda)", "Wpis w Excel (1 sekunda)", "Email potwierdzenia (1 sekunda)"];
+
+const automations = [
+  { title: "Lead → CRM → Slack", icon: "👥", trigger: "Nowy formularz na stronie", actions: ["Dodaj lead do CRM", "Przypisz do sprzedawcy", "Powiadom na Slack", "Wyślij email powitalny"], time: "Oszczędność: 20 min/lead", tools: ["WordPress", "HubSpot", "Slack", "Gmail"] },
+  { title: "Faktura → Księgowość", icon: "📄", trigger: "Nowa faktura w email", actions: ["Wyciągnij dane z PDF", "Dodaj do systemu księgowego", "Zapisz w Google Drive", "Aktualizuj cashflow"], time: "Oszczędność: 15 min/faktura", tools: ["Gmail", "InFakt", "Google Drive", "Sheets"] },
+  { title: "Zamówienie → Realizacja", icon: "📦", trigger: "Nowe zamówienie w sklepie", actions: ["Generuj etykietę InPost", "Aktualizuj stan magazynu", "Powiadom magazyn", "Email do klienta"], time: "Oszczędność: 25 min/zamówienie", tools: ["WooCommerce", "InPost", "BaseLinker", "SMS API"] },
+  { title: "Social Media → Publikacja", icon: "🌐", trigger: "Nowy post w kalendarzu", actions: ["Publikuj na Facebook", "Publikuj na Instagram", "Publikuj na LinkedIn", "Raport w arkuszu"], time: "Oszczędność: 30 min/dzień", tools: ["Airtable", "Facebook", "Instagram", "LinkedIn"] },
+  { title: "Rekrutacja → HR", icon: "💼", trigger: "Nowe CV w email", actions: ["Parsuj CV", "Dodaj do ATS", "Scoring kandydata", "Email z potwierdzeniem"], time: "Oszczędność: 20 min/CV", tools: ["Gmail", "Workday", "Make.com", "Calendar"] },
+  { title: "Support → Tickety", icon: "🎧", trigger: "Email na support@", actions: ["Utwórz ticket", "Kategoryzuj problem", "Przypisz do agenta", "Auto-odpowiedź"], time: "Oszczędność: 10 min/ticket", tools: ["Gmail", "Zendesk", "Slack", "Knowledge Base"] },
+];
+
+const autoPlatforms = [
+  { name: "Make.com", desc: "Wizualne workflow", users: "500k+", power: "⭐⭐⭐⭐⭐" },
+  { name: "Zapier", desc: "5000+ integracji", users: "2M+", power: "⭐⭐⭐⭐⭐" },
+  { name: "n8n", desc: "Self-hosted", users: "100k+", power: "⭐⭐⭐⭐" },
+  { name: "Airtable", desc: "Baza + automatyzacja", users: "300k+", power: "⭐⭐⭐⭐" },
+];
+
+const appCategories = [
+  { title: "Komunikacja", apps: ["Gmail", "Outlook", "Slack", "Teams", "Discord", "Telegram"] },
+  { title: "CRM & Sprzedaż", apps: ["HubSpot", "Salesforce", "Pipedrive", "Monday", "ClickUp", "Notion"] },
+  { title: "E-commerce", apps: ["Shopify", "WooCommerce", "PrestaShop", "Allegro", "Amazon", "eBay"] },
+];
+
+const processSteps = [
+  { day: "Dzień 1", title: "Audyt procesów", desc: "Analizuję Twoje procesy, identyfikuję bottlenecki i potencjał automatyzacji" },
+  { day: "Dzień 2-3", title: "Projekt workflow", desc: "Projektuję optymalny przepływ danych między aplikacjami" },
+  { day: "Dzień 4-5", title: "Konfiguracja", desc: "Konfiguruję automatyzacje w Make.com/Zapier, łączę API" },
+  { day: "Dzień 6", title: "Testy", desc: "Testuję każdy scenariusz, sprawdzam edge case'y" },
+  { day: "Dzień 7", title: "Wdrożenie", desc: "Uruchamiam automatyzacje na produkcji, szkolę zespół" },
+];
+
+const plans = [
+  { name: "Quick Win", price: "990", time: "2-3 dni", desc: "Jedna konkretna automatyzacja", best: false, examples: "np. Email → CRM, Formularz → Slack", features: ["1 proces do automatyzacji", "Do 5 kroków w workflow", "2 aplikacje do połączenia", "Dokumentacja", "Szkolenie online", "7 dni wsparcia"] },
+  { name: "Business Flow", price: "2 990", time: "1 tydzień", desc: "Automatyzacja działu lub procesu", best: true, examples: "np. Cały proces sprzedaży, Obsługa zamówień", features: ["Do 5 procesów", "Nieograniczone kroki", "Wszystkie potrzebne integracje", "Dashboard w Airtable", "Szkolenie zespołu", "30 dni wsparcia", "Optymalizacja po wdrożeniu"] },
+  { name: "Full Automation", price: "od 5 990", time: "2-3 tygodnie", desc: "Kompleksowa automatyzacja firmy", best: false, examples: "np. Pełna automatyzacja wszystkich działów", features: ["Nieograniczone procesy", "Zaawansowane workflow", "Custom integracje API", "Własne dashboardy", "Automatyczne raporty", "3 miesiące wsparcia", "Miesięczna optymalizacja", "SLA gwarancja"] },
+];
+
+const faqs = [
+  { q: "Czy automatyzacja jest trudna w obsłudze?", a: "Nie! Platformy jak Make.com czy Zapier mają wizualne interfejsy. Po krótkim szkoleniu będziesz mógł sam modyfikować automatyzacje. To jak układanie klocków - przeciągasz i łączysz aplikacje." },
+  { q: "Co jeśli zmienię narzędzia w firmie?", a: "Automatyzacje są elastyczne. Jeśli zmienisz np. CRM, wystarczy podmienić jeden moduł w workflow. Reszta automatyzacji pozostaje bez zmian. Pomogę w migracji." },
+  { q: "Ile kosztuje utrzymanie automatyzacji?", a: "Make.com kosztuje od 9$/mies (1000 operacji), Zapier od 19$/mies. Dla małej firmy to zazwyczaj 50-200 zł/mies. To ułamek tego, co zaoszczędzisz na czasie pracy." },
+  { q: "Czy mogę zacząć od jednej automatyzacji?", a: "Oczywiście! Pakiet Quick Win za 990 zł to idealne rozwiązanie na start. Zobaczysz efekty i zdecydujesz o kolejnych automatyzacjach." },
+  { q: "Jakie procesy najlepiej automatyzować najpierw?", a: "Te najbardziej powtarzalne i czasochłonne: wprowadzanie danych, generowanie raportów, powiadomienia, synchronizacja między systemami. Podczas audytu wskażę najlepsze kandydatów." },
+  { q: "Czy automatyzacja jest bezpieczna?", a: "Tak. Platformy automatyzacji są zgodne z GDPR, używają szyfrowania, mają certyfikaty bezpieczeństwa. Dodatkowo ustawiam limity i zabezpieczenia przed błędami." },
+];
+---
+
+<Service title="Automatyzacja procesów biznesowych — Make.com, Zapier" description="Automatyzuję procesy biznesowe łącząc aplikacje bez kodowania. Make.com, Zapier, n8n, Airtable. 10h tygodniowo zaoszczędzone. Od 990 zł." breadcrumbLabel="Automatyzacja procesów" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">🔄 Make.com · Zapier · Airtable · n8n</p>
+        <h1 class="animate-in animate-delay-1">Automatyzacja <span class="text-gradient">procesów biznesowych</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Połącz wszystkie narzędzia w jeden sprawny system.</strong> Automatyzuję procesy między aplikacjami bez kodowania. Gmail + Slack + CRM + Excel = workflow który działa sam.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ 10h pracy tygodniowo zaoszczędzone</span><span>✅ 0 błędów ludzkich</span><span>✅ Wdrożenie w 3-7 dni</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Darmowa konsultacja →</a>
+          <a href="#przyklady" class="btn btn-outline">Zobacz przykłady automatyzacji</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem wizualizacja -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Czy Twoja firma <span class="text-gradient">tak wygląda</span>?</h2>
+        <p>Większość firm traci 30% produktywności na ręcznym przeklejaniu danych między systemami</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); max-width: 960px; margin: 0 auto;">
+        <!-- Przed -->
+        <div class="skill-group" style="border-color: rgba(239,68,68,0.3);">
+          <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--s-lg);">⚠️ Przed automatyzacją</h3>
+          {beforeSteps.map(s => (
+            <div style="display: flex; align-items: flex-start; gap: var(--s-sm); margin-bottom: var(--s-md);">
+              <div style="width: 32px; height: 32px; background: rgba(239,68,68,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #ef4444; flex-shrink: 0; font-size: var(--f-size-sm);">{s.nr}</div>
+              <div><p style="font-weight: 600;">{s.title}</p><p class="text-muted" style="font-size: var(--f-size-sm);">{s.desc}</p></div>
+            </div>
+          ))}
+          <div style="margin-top: var(--s-md); padding: var(--s-md); background: rgba(239,68,68,0.05); border-radius: var(--radius);">
+            <p style="font-size: var(--f-size-sm); color: #ef4444;">⏱️ <strong>45 minut na jedno zgłoszenie</strong><br/>❌ Wysokie ryzyko błędu<br/>😓 Frustracja zespołu</p>
+          </div>
+        </div>
+        <!-- Po -->
+        <div class="skill-group" style="border-color: rgba(34,197,94,0.3);">
+          <h3 style="display: flex; align-items: center; gap: 8px; margin-bottom: var(--s-lg);">✅ Po automatyzacji</h3>
+          <div style="display: flex; align-items: flex-start; gap: var(--s-sm); margin-bottom: var(--s-md);">
+            <div style="width: 32px; height: 32px; background: rgba(34,197,94,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: var(--c-accent); flex-shrink: 0;">1</div>
+            <div><p style="font-weight: 600;">Klient wysyła email</p><p class="text-muted" style="font-size: var(--f-size-sm);">Automatycznie przetwarzany</p></div>
+          </div>
+          <div style="display: flex; align-items: flex-start; gap: var(--s-sm); margin-bottom: var(--s-md);">
+            <div style="width: 32px; height: 32px; background: rgba(34,197,94,0.1); border-radius: 50%; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">✨</div>
+            <div><p style="font-weight: 600;">Wszystko dzieje się automatycznie:</p>
+              <div class="text-muted" style="font-size: var(--f-size-sm); margin-top: var(--s-xs);">
+                {afterAutoItems.map(item => <p>→ {item}</p>)}
+              </div>
+            </div>
+          </div>
+          <div style="margin-top: var(--s-md); padding: var(--s-md); background: rgba(34,197,94,0.05); border-radius: var(--radius);">
+            <p style="font-size: var(--f-size-sm); color: var(--c-accent);">⚡ <strong>5 sekund całość</strong><br/>✅ 0% błędów<br/>🚀 Zespół zajmuje się ważnymi zadaniami</p>
+          </div>
+          <div style="text-align: center; margin-top: var(--s-md);">
+            <span style="display: inline-flex; align-items: center; gap: 6px; padding: 6px 16px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent);">✨ 540x szybciej!</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Przykłady automatyzacji -->
+  <section class="section" id="przyklady">
+    <div class="container">
+      <div class="section-header">
+        <h2>Popularne <span class="text-gradient">automatyzacje</span></h2>
+        <p>Gotowe scenariusze które możesz wdrożyć w swojej firmie</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {automations.map(a => (
+          <details class="skill-group" style="cursor: pointer;">
+            <summary style="list-style: none;">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-md);">
+                <span style="font-size: 1.3rem;">{a.icon}</span>
+                <span style="font-size: var(--f-size-xs); color: var(--c-accent); font-weight: 600;">{a.time}</span>
+              </div>
+              <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-sm);">{a.title}</h3>
+              <div style="padding: var(--s-sm) var(--s-md); background: var(--c-primary-soft); border-radius: var(--radius);">
+                <p class="text-primary" style="font-size: var(--f-size-sm);">▶ {a.trigger}</p>
+              </div>
+            </summary>
+            <div style="margin-top: var(--s-md);">
+              {a.actions.map(action => (
+                <div style="display: flex; align-items: center; gap: 6px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                  <span class="text-primary">›</span><span class="text-muted">{action}</span>
+                </div>
+              ))}
+              <div style="margin-top: var(--s-sm); padding-top: var(--s-sm); border-top: 1px solid var(--c-border);">
+                <p class="text-muted" style="font-size: var(--f-size-xs); margin-bottom: var(--s-xs);">Integracje:</p>
+                <div style="display: flex; flex-wrap: wrap; gap: 4px;">
+                  {a.tools.map(t => <span style="font-size: var(--f-size-xs); padding: 2px 8px; background: var(--c-bg-alt); border-radius: var(--radius);">{t}</span>)}
+                </div>
+              </div>
+            </div>
+          </details>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <p class="text-muted" style="margin-bottom: var(--s-md);">To tylko przykłady. Mogę zautomatyzować dowolny proces w Twojej firmie.</p>
+        <a href="/kontakt" class="project-card-link">Opisz swój proces do automatyzacji →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Narzędzia -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Łączę <span class="text-gradient">1000+ aplikacji</span></h2>
+        <p>Twoje ulubione narzędzia w jednym zautomatyzowanym ekosystemie</p>
+      </div>
+      <div style="max-width: 900px; margin: 0 auto;">
+        <h3 style="font-size: var(--f-size-xl); font-weight: 700; text-align: center; margin-bottom: var(--s-lg);">Platformy automatyzacji</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-lg); margin-bottom: var(--s-2xl);">
+          {autoPlatforms.map(p => (
+            <div style="background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); border: 1px solid var(--c-border-hover); border-radius: var(--radius); padding: var(--s-md); text-align: center;">
+              <h4 style="font-weight: 700; margin-bottom: 2px;">{p.name}</h4>
+              <p class="text-muted" style="font-size: var(--f-size-xs); margin-bottom: var(--s-xs);">{p.desc}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; font-size: var(--f-size-xs);"><span class="text-muted">{p.users}</span><span>{p.power}</span></div>
+            </div>
+          ))}
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-xl);">
+          {appCategories.map(cat => (
+            <div>
+              <h3 style="font-weight: 600; margin-bottom: var(--s-md);">{cat.title}</h3>
+              {cat.apps.map(app => (
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><div style="width: 8px; height: 8px; background: var(--c-primary); border-radius: 50%;"></div><span class="text-muted">{app}</span></div>
+              ))}
+            </div>
+          ))}
+        </div>
+        <div style="text-align: center; margin-top: var(--s-2xl);">
+          <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">+ setki innych: Google Sheets, Dropbox, Trello, Asana, Jira, GitHub, Stripe, PayPal, Facebook, Instagram, LinkedIn, Twitter, YouTube, Mailchimp, SendGrid, Twilio...</p>
+          <span style="display: inline-flex; align-items: center; gap: 6px; padding: 8px 16px; background: var(--c-primary-soft); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-primary);">🔗 Jeśli ma API, mogę to zautomatyzować</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Kalkulator -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header">
+        <h2>Ile zaoszczędzisz na <span class="text-gradient">automatyzacji</span>?</h2>
+        <p>Prosty kalkulator ROI dla Twojej firmy</p>
+      </div>
+      <div class="cta-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); margin-bottom: var(--s-xl);">
+          <div class="skill-group" style="padding: var(--s-md);"><span class="text-muted" style="font-size: var(--f-size-sm);">Ile procesów powtarzasz dziennie?</span><div style="font-size: var(--f-size-3xl); font-weight: 800;">20</div></div>
+          <div class="skill-group" style="padding: var(--s-md);"><span class="text-muted" style="font-size: var(--f-size-sm);">Średni czas na jeden proces (min)</span><div style="font-size: var(--f-size-3xl); font-weight: 800;">15</div></div>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); padding-top: var(--s-lg); border-top: 1px solid var(--c-border);">
+          <div style="text-align: center;"><div style="font-size: 2.5rem; font-weight: 800; color: var(--c-primary);">5h</div><p class="text-muted" style="font-size: var(--f-size-sm);">dziennie</p></div>
+          <div style="text-align: center;"><div style="font-size: 2.5rem; font-weight: 800; color: var(--c-accent);">100h</div><p class="text-muted" style="font-size: var(--f-size-sm);">miesięcznie</p></div>
+          <div style="text-align: center;"><div style="font-size: 2.5rem; font-weight: 800; color: #eab308;">1200h</div><p class="text-muted" style="font-size: var(--f-size-sm);">rocznie</p></div>
+        </div>
+        <div style="margin-top: var(--s-xl); padding: var(--s-lg); background: rgba(34,197,94,0.1); border-radius: var(--radius-lg); text-align: center;">
+          <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-xs);">Przy stawce 50 zł/h oszczędzasz</p>
+          <div style="font-size: 3rem; font-weight: 800; color: var(--c-accent);">60 000 zł</div>
+          <p style="font-size: var(--f-size-lg); color: var(--c-accent); margin-top: var(--s-xs);">rocznie na automatyzacji</p>
+        </div>
+        <div style="text-align: center; margin-top: var(--s-xl);">
+          <a href="/kontakt" class="btn btn-primary">Otrzymaj spersonalizowaną wycenę →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Firmy które <span class="text-gradient">zautomatyzowałem</span></h2>
+        <p>Realne wdrożenia, mierzalne efekty</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        <!-- Case 1 -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--s-md); margin-bottom: var(--s-lg);">
+            <span style="font-size: 2rem;">📚</span>
+            <div><h3 style="font-size: var(--f-size-xl);">Agencja Ecopywriting</h3><p class="text-muted" style="font-size: var(--f-size-sm);">Agencja copywriterska, 10 osób</p></div>
+          </div>
+          <div style="margin-bottom: var(--s-md);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Problem:</h4><p class="text-muted" style="font-size: var(--f-size-sm);">Chaos w zarządzaniu zleceniami. Klienci pisali na email, Messenger, WhatsApp. Zespół gubił zadania, przekraczał deadline'y.</p></div>
+          <div style="margin-bottom: var(--s-lg);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4><p class="text-muted" style="font-size: var(--f-size-sm);">Automatyzacja Make.com + Airtable + Slack. Wszystkie zgłoszenia trafiają do jednej bazy, automatyczne przypisywanie do copywriterów, przypomnienia o deadline'ach.</p></div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); margin-bottom: var(--s-lg);">
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">0</div><div class="text-muted" style="font-size: var(--f-size-xs);">Zgubione zlecenia</div></div>
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-accent);">-70%</div><div class="text-muted" style="font-size: var(--f-size-xs);">Czas obsługi</div></div>
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">2x</div><div class="text-muted" style="font-size: var(--f-size-xs);">Więcej zleceń</div></div>
+          </div>
+          <blockquote style="font-size: var(--f-size-sm); font-style: italic; border-left: 2px solid var(--c-border-hover); padding-left: var(--s-sm);" class="text-muted">&ldquo;Wreszcie mamy porządek. Automatyzacja pozwoliła nam obsłużyć 2x więcej klientów bez zwiększania zespołu.&rdquo;</blockquote>
+        </div>
+        <!-- Case 2 -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <div style="display: flex; align-items: flex-start; gap: var(--s-md); margin-bottom: var(--s-lg);">
+            <span style="font-size: 2rem;">🛍️</span>
+            <div><h3 style="font-size: var(--f-size-xl);">Stojan Shop</h3><p class="text-muted" style="font-size: var(--f-size-sm);">Sklep e-commerce, 3 osoby</p></div>
+          </div>
+          <div style="margin-bottom: var(--s-md);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Problem:</h4><p class="text-muted" style="font-size: var(--f-size-sm);">Ręczne wprowadzanie zamówień do systemu, generowanie etykiet, aktualizacja stanów magazynowych w 3 miejscach.</p></div>
+          <div style="margin-bottom: var(--s-lg);"><h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4><p class="text-muted" style="font-size: var(--f-size-sm);">Integracja WooCommerce + BaseLinker + InPost API + Allegro. Pełna automatyzacja od zamówienia do wysyłki.</p></div>
+          <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-md); margin-bottom: var(--s-lg);">
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">2 min</div><div class="text-muted" style="font-size: var(--f-size-xs);">Na zamówienie</div></div>
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-accent);">100%</div><div class="text-muted" style="font-size: var(--f-size-xs);">Automatycznie</div></div>
+            <div style="text-align: center;"><div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">4h</div><div class="text-muted" style="font-size: var(--f-size-xs);">Dziennie oszczędzone</div></div>
+          </div>
+          <blockquote style="font-size: var(--f-size-sm); font-style: italic; border-left: 2px solid var(--c-border-hover); padding-left: var(--s-sm);" class="text-muted">&ldquo;Teraz mogę skupić się na pozyskiwaniu klientów zamiast klikać w systemy. Automatyzacja obsługuje 100% zamówień.&rdquo;</blockquote>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces wdrożenia -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Automatyzacja w <span class="text-gradient">7 dni</span></h2>
+        <p>Szybkie wdrożenie, natychmiastowe efekty</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {processSteps.map(step => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-lg);">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: var(--c-bg-card); border: 2px solid var(--c-border-hover); border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.2rem;">🔧</div>
+            <div class="skill-group" style="flex: 1; padding: var(--s-lg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-xs);">
+                <h3 style="font-size: var(--f-size-lg);">{step.title}</h3>
+                <span class="text-primary" style="font-size: var(--f-size-sm);">{step.day}</span>
+              </div>
+              <p class="text-muted">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pakiety -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pakiety <span class="text-gradient">automatyzacji</span></h2>
+        <p>Od pojedynczych workflow po kompleksową automatyzację firmy</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.best ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.best && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Najpopularniejszy</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">Realizacja: {plan.time}</div>
+              <div style="margin-bottom: var(--s-sm);">{plan.price.includes('od') ? <span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span> : <><span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span></>}</div>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-md);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <p class="text-muted" style="font-size: var(--f-size-xs); font-style: italic; margin-bottom: var(--s-lg);">{plan.examples}</p>
+            <a href="/kontakt" class:list={['btn', plan.best ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Wybierz pakiet</a>
+          </div>
+        ))}
+      </div>
+      <p style="text-align: center; margin-top: var(--s-2xl);" class="text-muted">Koszty platform (Make.com/Zapier) od 19$/mies - pomogę wybrać najlepszą opcję</p>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania o <span class="text-gradient">automatyzację</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-lg);">⏱️ Średnio 10h tygodniowo zaoszczędzone</p>
+      <h2>Przestań tracić czas na <span class="text-gradient">kopiuj-wklej</span></h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Twoi konkurenci już automatyzują procesy i zyskują przewagę. Każdy dzień zwłoki to stracone pieniądze i frustracja zespołu. <strong>Darmowa konsultacja pokaże Ci, co możesz zautomatyzować już dziś.</strong>
+      </p>
+      <div class="skill-group" style="max-width: 450px; margin: 0 auto var(--s-xl); padding: var(--s-lg);">
+        <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Na konsultacji dowiesz się:</h3>
+        <div style="text-align: left;">
+          {["Które procesy automatyzować najpierw", "Ile godzin tygodniowo zaoszczędzisz", "Jakie narzędzia będą najlepsze", "Dokładny koszt i czas wdrożenia"].map(item => (
+            <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+          ))}
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń</span><span class="contact-value"> +48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz</span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Zarezerwuj darmową konsultację →</a>
+      <p class="text-muted" style="margin-top: var(--s-xl); font-size: var(--f-size-sm);">⚡ Konsultacja 30 min · 🎯 Konkretne rekomendacje · 📊 Wycena na miejscu · 🚀 Start automatyzacji w 48h</p>
+    </div>
+  </section>
+
+</Service>

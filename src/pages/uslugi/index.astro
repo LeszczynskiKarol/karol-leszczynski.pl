@@ -1,0 +1,216 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const featured = [
+  { icon: "🚀", title: "Platformy SaaS z AI", href: "/uslugi/platformy-saas-ai", desc: "Inteligentne platformy wykorzystujące Anthropic Claude i OpenAI. MVP w 6-8 tygodni.", price: "od 15 000 zł", tag: "AI" },
+  { icon: "🛒", title: "Sklepy internetowe", href: "/uslugi/sklepy-internetowe-torun", desc: "Szybkie, konwertujące e-commerce z integracjami Allegro, InPost, Stripe. +40% sprzedaży.", price: "od 4 900 zł", tag: "E-commerce" },
+  { icon: "💻", title: "Aplikacje webowe", href: "/uslugi/programista-torun", desc: "Nowoczesne aplikacje SPA/PWA w React i Next.js. Od CRM-ów po dashboardy analityczne.", price: "od 3 000 zł", tag: "Development" },
+];
+
+const services = [
+  {
+    category: "Strony i sklepy internetowe",
+    icon: "🌐",
+    items: [
+      { title: "Strony WWW Toruń", href: "/uslugi/strony-www-torun", desc: "Profesjonalne strony internetowe. Astro, Next.js, WordPress. Lighthouse 95+.", price: "od 2 900 zł" },
+      { title: "Strony internetowe Bydgoszcz", href: "/uslugi/strony-internetowe-bydgoszcz", desc: "Tworzenie stron www dla firm z Bydgoszczy i metropolii.", price: "od 2 900 zł" },
+      { title: "Sklepy internetowe Toruń", href: "/uslugi/sklepy-internetowe-torun", desc: "E-commerce z integracjami Allegro, InPost, Stripe. Migracje z WooCommerce.", price: "od 4 900 zł" },
+      { title: "Sklepy internetowe Bydgoszcz", href: "/uslugi/sklepy-internetowe-bydgoszcz", desc: "Nowoczesne sklepy online. 47 sklepów w portfolio, średni CR 3.5%.", price: "od 4 990 zł" },
+    ],
+  },
+  {
+    category: "Programowanie",
+    icon: "⚡",
+    items: [
+      { title: "Programista Toruń", href: "/uslugi/programista-torun", desc: "Full-Stack Developer. 15 lat doświadczenia, 50+ projektów. Spotkania osobiste.", price: "150–500 zł/h" },
+      { title: "Programista Bydgoszcz", href: "/uslugi/programista-bydgoszcz", desc: "Senior Full-Stack Developer. React, Node.js, AWS, AI. Umowa B2B.", price: "150–600 zł/h" },
+    ],
+  },
+  {
+    category: "AI i automatyzacja",
+    icon: "🧠",
+    items: [
+      { title: "Platformy SaaS z AI", href: "/uslugi/platformy-saas-ai", desc: "Kompletne platformy SaaS z Anthropic Claude, OpenAI. System płatności, panel admina.", price: "od 15 000 zł" },
+      { title: "Integracje AI dla firm", href: "/uslugi/integracje-ai", desc: "Wdrożenia AI w procesach biznesowych. Chatboty, automatyzacja, ROI 250%.", price: "od 2 990 zł" },
+      { title: "Automatyzacja procesów", href: "/uslugi/automatyzacja-procesow", desc: "Make.com, Zapier, Airtable, n8n. 10h tygodniowo zaoszczędzone.", price: "od 990 zł" },
+    ],
+  },
+  {
+    category: "Specjalistyczne",
+    icon: "🎯",
+    items: [
+      { title: "Migracje sklepów", href: "/uslugi/migracje-sklepow", desc: "Z WooCommerce, PrestaShop, Shopify na dedykowane rozwiązanie. 100% zachowanie SEO.", price: "od 7 990 zł" },
+      { title: "Publikacje LaTeX/Quarto", href: "/uslugi/publikacje-latex", desc: "Profesjonalny skład książek, podręczników, prac naukowych. 11 publikacji wydanych.", price: "od 1 990 zł" },
+    ],
+  },
+];
+---
+
+<Base
+  title="Usługi — Strony, sklepy, SaaS z AI, automatyzacja | Karol Leszczyński"
+  description="Tworzenie stron, sklepów internetowych, platform SaaS z AI, integracje, automatyzacja procesów, publikacje LaTeX. Toruń, Bydgoszcz i zdalnie."
+>
+  <main>
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+      <div class="hero-bg"><div class="hero-grid"></div></div>
+      <div class="container">
+        <div class="hero-content" style="max-width: 700px;">
+          <Breadcrumbs items={[{ label: "Usługi" }]} />
+          <h1 class="animate-in animate-delay-1"><span class="text-gradient">Usługi</span></h1>
+          <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+            Kompleksowe rozwiązania web — od strony wizytówki po platformę SaaS z AI. 15 lat doświadczenia, 50+ projektów, Toruń / Bydgoszcz / zdalnie.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); font-size: var(--f-size-sm);">
+            <span>🌐 11 usług</span>
+            <span>💰 Transparentne ceny</span>
+            <span>📞 Darmowa konsultacja</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wyróżnione -->
+    <section class="section" style="background: var(--c-bg-alt);">
+      <div class="container">
+        <div class="section-header">
+          <h2>Najpopularniejsze <span class="text-gradient">usługi</span></h2>
+        </div>
+        <div class="svc-featured-grid">
+          {featured.map(f => (
+            <a href={f.href} class="svc-featured-card">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-md);">
+                <span style="font-size: 2.5rem;">{f.icon}</span>
+                <span class="svc-tag">{f.tag}</span>
+              </div>
+              <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">{f.title}</h3>
+              <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-lg); flex: 1;">{f.desc}</p>
+              <div style="display: flex; justify-content: space-between; align-items: center; padding-top: var(--s-md); border-top: 1px solid var(--c-border);">
+                <span style="font-weight: 700; color: var(--c-primary);">{f.price}</span>
+                <span class="svc-arrow">→</span>
+              </div>
+            </a>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Wszystkie usługi -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Pełna oferta <span class="text-gradient">usług</span></h2>
+          <p>11 specjalizacji pogrupowanych w 4 kategorie</p>
+        </div>
+
+        {services.map(group => (
+          <div style="margin-bottom: var(--s-3xl);">
+            <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-lg); display: flex; align-items: center; gap: var(--s-sm);">
+              <span>{group.icon}</span> {group.category}
+            </h3>
+            <div class="svc-list-grid">
+              {group.items.map(item => (
+                <a href={item.href} class="svc-card">
+                  <div>
+                    <h4 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{item.title}</h4>
+                    <p class="text-muted" style="font-size: var(--f-size-sm); line-height: 1.5;">{item.desc}</p>
+                  </div>
+                  <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--s-md); padding-top: var(--s-sm); border-top: 1px solid var(--c-border);">
+                    <span style="font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent);">{item.price}</span>
+                    <span class="svc-arrow">→</span>
+                  </div>
+                </a>
+              ))}
+            </div>
+          </div>
+        ))}
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background: var(--c-bg-alt);">
+      <div class="container" style="max-width: 700px; text-align: center;">
+        <h2>Nie wiesz, którą usługę <span class="text-gradient">wybrać</span>?</h2>
+        <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+          Opowiedz mi o swoim projekcie — dobiorę technologię, zakres i wycenę. <strong>Pierwsza konsultacja gratis, bez zobowiązań.</strong>
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-md); justify-content: center;">
+          <a href="/kontakt" class="btn btn-primary">Darmowa konsultacja →</a>
+          <a href="tel:+48509370772" class="btn btn-outline">📞 509 370 772</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <style>
+    .svc-featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: var(--s-xl);
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+    .svc-featured-card {
+      display: flex;
+      flex-direction: column;
+      background: var(--c-bg-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--s-xl);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .svc-featured-card:hover {
+      border-color: var(--c-primary);
+      transform: translateY(-4px);
+      box-shadow: var(--c-glow);
+    }
+    .svc-tag {
+      font-size: 10px;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      padding: 3px 10px;
+      background: var(--c-primary-soft);
+      color: var(--c-primary);
+      border-radius: 999px;
+    }
+    .svc-list-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--s-md);
+    }
+    .svc-card {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      background: var(--c-bg-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius);
+      padding: var(--s-lg);
+      transition: var(--transition);
+      text-decoration: none;
+      color: inherit;
+    }
+    .svc-card:hover {
+      border-color: var(--c-border-hover);
+      transform: translateY(-2px);
+    }
+    .svc-arrow {
+      font-size: var(--f-size-lg);
+      color: var(--c-primary);
+      transition: transform 0.2s;
+    }
+    .svc-featured-card:hover .svc-arrow,
+    .svc-card:hover .svc-arrow {
+      transform: translateX(4px);
+    }
+    @media (max-width: 768px) {
+      .svc-featured-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</Base>

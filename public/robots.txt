@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://www.karol-leszczynski.pl/sitemap-index.xml

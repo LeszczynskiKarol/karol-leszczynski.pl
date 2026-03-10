@@ -1,0 +1,276 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPageElement",
+  "name": "Sklepy internetowe Toruń - E-commerce",
+  "description": "Tworzenie sklepów internetowych w Toruniu. WooCommerce, własne rozwiązania, integracje płatności.",
+  "provider": {
+    "@type": "LocalBusiness",
+    "name": "Karol Leszczyński - Sklepy internetowe",
+    "priceRange": "4990-19990 PLN",
+    "telephone": "+48509370772",
+  },
+  "areaServed": { "@type": "City", "name": "Toruń" },
+  "offers": { "@type": "Offer", "price": "4990", "priceCurrency": "PLN", "availability": "https://schema.org/InStock", "validFrom": "2024-01-01" },
+  "potentialAction": { "@type": "OrderAction", "target": { "@type": "EntryPoint", "urlTemplate": "https://www.karol-leszczynski.pl/kontakt" } },
+};
+
+const uspCards = [
+  {
+    icon: "💻", title: "Technologia + Marketing",
+    desc: "Nie tylko koduję, ale też <strong>rozumiem psychologię zakupów</strong>. Twój sklep będzie szybki technicznie i przekonujący marketingowo.",
+    features: ["Opisy produktów które sprzedają", "CTA zoptymalizowane pod konwersję", "Efektywna komunikacja"],
+  },
+  {
+    icon: "📈", title: "SEO od pierwszego dnia",
+    desc: "Sklep zbudowany <strong>od podstaw pod pozycjonowanie</strong>. Bez dodatkowych kosztów na późniejszą optymalizację.",
+    features: ["Struktura URL przyjazna Google", "Schema.org dla produktów", "Automatyczne sitemaps XML"],
+  },
+  {
+    icon: "🚀", title: "Lokalna przewaga",
+    desc: "Jestem z Torunia. <strong>Możemy spotkać się na kawę</strong> i omówić projekt. Wsparcie po wdrożeniu na miejscu.",
+    features: ["Spotkania osobiste w Toruniu", "Szkolenia dla zespołu", "Szybka pomoc w nagłych sytuacjach"],
+  },
+];
+
+const processSteps = [
+  { nr: "01", title: "Analiza i strategia", desc: "Analizuję Twoją konkurencję, grupę docelową i cele biznesowe. Przygotowuję strategię UX/UI i plan SEO.", time: "2-3 dni" },
+  { nr: "02", title: "Projekt i prototyp", desc: "Projektuję interfejs sklepu z myślą o konwersji. Przygotowuję interaktywny prototyp do akceptacji.", time: "5-7 dni" },
+  { nr: "03", title: "Programowanie", desc: "Koduję sklep w najnowszych technologiach. Integruję płatności, dostawy, Allegro i inne systemy.", time: "3-4 tygodnie" },
+  { nr: "04", title: "Content i SEO", desc: "Wypełniam sklep treścią, piszę opisy kategorii i produktów. Optymalizuję pod wyszukiwarki.", time: "1 tydzień" },
+  { nr: "05", title: "Testy i wdrożenie", desc: "Testuję każdy element sklepu. Przeprowadzam szkolenie z obsługi. Uruchamiam na produkcji.", time: "3-5 dni" },
+];
+
+const techStack = [
+  { name: "Next.js 14", desc: "Błyskawiczne ładowanie", icon: "⚡" },
+  { name: "Node.js", desc: "Wydajny backend", icon: "🔧" },
+  { name: "PostgreSQL", desc: "Niezawodna baza danych", icon: "🛡️" },
+  { name: "Stripe", desc: "Bezpieczne płatności", icon: "💳" },
+  { name: "AWS", desc: "Skalowalny hosting", icon: "☁️" },
+  { name: "TypeScript", desc: "Kod bez błędów", icon: "💻" },
+  { name: "Tailwind CSS", desc: "Responsywny design", icon: "📦" },
+  { name: "Redis", desc: "Szybkie cache'owanie", icon: "⚡" },
+];
+
+const plans = [
+  { name: "Start", price: "4 900", desc: "Dla małych firm rozpoczynających sprzedaż online", popular: false, features: ["Do 100 produktów", "Responsywny design", "Płatności Przelewy24", "Integracja InPost", "Panel administracyjny", "Podstawowe SEO", "SSL i hosting (1 rok)", "Szkolenie z obsługi"] },
+  { name: "Profesjonalny", price: "9 900", desc: "Dla firm z większym asortymentem i ambicjami", popular: true, features: ["Do 1000 produktów", "Projekt UX/UI na miarę", "Płatności Stripe + PayPal", "Integracja Allegro", "Automatyzacja procesów", "Zaawansowane SEO", "Newsletter i email marketing", "AI do opisów produktów", "Multijęzyczność", "3 miesiące wsparcia"] },
+  { name: "Enterprise", price: "na zapytanie", desc: "Dedykowane rozwiązania dla dużych firm", popular: false, features: ["Nieograniczona ilość produktów", "Integracje B2B", "API dla partnerów", "Zaawansowana automatyzacja", "Dedicated hosting AWS", "Wsparcie 24/7", "Rozwój i optymalizacja"] },
+];
+
+const faqs = [
+  { q: "Ile trwa stworzenie sklepu internetowego?", a: "Standardowy sklep internetowy tworzę w 6-8 tygodni. Prosty sklep może być gotowy w 4 tygodnie, bardziej rozbudowany projekt może zająć do 12 tygodni." },
+  { q: "Czy mogę sam zarządzać sklepem po wdrożeniu?", a: "Oczywiście! Każdy sklep wyposażam w intuicyjny panel administracyjny. Dodatkowo przeprowadzam szkolenie z obsługi i dostarczam dokumentację. Oferuję też wsparcie po wdrożeniu." },
+  { q: "Czy sklep będzie działał na telefonie?", a: "Tak, wszystkie sklepy tworzę w technologii responsive (RWD). Sklep będzie perfekcyjnie wyglądał i działał na każdym urządzeniu - telefonie, tablecie i komputerze." },
+  { q: "Jakie integracje oferujesz?", a: "Integruję sklepy z Allegro, InPost, DPD, PayU, Przelewy24, Stripe, PayPal, Fakturownia, BaseLinker, Google Analytics, Facebook Pixel i wieloma innymi." },
+  { q: "Czy zajmujesz się też pozycjonowaniem?", a: "Każdy sklep buduję od podstaw z myślą o SEO. Po wdrożeniu mogę również prowadzić działania pozycjonerskie - mam 15 lat doświadczenia w SEO." },
+  { q: "Co jeśli mam już sklep na WooCommerce?", a: "Specjalizuję się w migracjach z WooCommerce. Przeniosę wszystkie produkty, zachowam adresy URL (ważne dla SEO) i poprawię wydajność nawet o 300%." },
+];
+---
+
+<Service title="Sklepy internetowe Toruń — E-commerce" description="Tworzenie sklepów internetowych w Toruniu. WooCommerce, własne rozwiązania, integracje płatności. Wzrost sprzedaży +40%. Od 4900 zł." breadcrumbLabel="Sklepy internetowe Toruń" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">📍 Toruń i okolice</p>
+        <h1 class="animate-in animate-delay-1">Sklepy internetowe <span class="text-gradient">Toruń</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          Tworzę <strong>szybkie, konwertujące sklepy internetowe</strong> które naprawdę sprzedają. 15 lat doświadczenia w e-commerce, copywritingu i SEO - połączenie, którego nie znajdziesz często u programisty.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ Wzrost sprzedaży nawet o +40%</span><span>✅ PageSpeed 90+</span><span>✅ Integracje z Allegro, InPost</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Zamów darmową wycenę →</a>
+          <a href="#portfolio" class="btn btn-outline">Zobacz realizacje</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dlaczego ja - USP -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Dlaczego Twój sklep <span class="text-gradient">zarobi więcej</span> ze mną?</h2>
+        <p>Większość programistów nie rozumie sprzedaży ani biznesu. Większość marketerów nie potrafi kodować. Ja łączę oba światy.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s-xl);">
+        {uspCards.map(card => (
+          <div class="skill-group">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{card.icon}</div>
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">{card.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);" set:html={card.desc} />
+            {card.features.map(f => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);">
+                <span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Portfolio / Case Studies -->
+  <section class="section" id="portfolio">
+    <div class="container">
+      <div class="section-header">
+        <h2>Sklepy które <span class="text-gradient">naprawdę sprzedają</span></h2>
+        <p>Realizacje z konkretnymi wynikami biznesowymi</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        <!-- Case Study 1 - Stojan Shop -->
+        <div class="skill-group" style="padding: var(--s-xl);">
+          <div style="display: flex; justify-content: space-between; align-items: flex-start; flex-wrap: wrap; gap: var(--s-md); margin-bottom: var(--s-lg);">
+            <div>
+              <h3 style="font-size: var(--f-size-2xl);">Silniki-Elektryczne.com.pl</h3>
+              <p class="text-primary" style="font-size: var(--f-size-sm);">Branża: Sprzedaż silników elektrycznych</p>
+            </div>
+            <div style="text-align: right;">
+              <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-accent);">+40%</div>
+              <div class="text-muted" style="font-size: var(--f-size-sm);">wzrost sprzedaży</div>
+            </div>
+          </div>
+          <div style="margin-bottom: var(--s-lg);">
+            <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Wyzwanie:</h4>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">Mało wygodny sklep na WooCommerce, wolne ładowanie, wysokie koszty utrzymania, ograniczone możliwości edycji panelu, brak integracji z Allegro.</p>
+          </div>
+          <div style="margin-bottom: var(--s-lg);">
+            <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">Migracja do własnego rozwiązania Next.js + Node.js. Pełna integracja z Allegro, automatyczne opisy AI, synchronizacja stanów magazynowych. Logiczna struktura sklepu obejmnująca ponad 2000 produktów. Rozbudowany i czytelny panel admina. Mailing AWS SES.</p>
+          </div>
+          <a href="https://www.silniki-elektryczne.com.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">
+            Zobacz sklep <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+          </a>
+        </div>
+
+        <!-- Case Study 2 - Image -->
+        <div class="skill-group" style="padding: 0; overflow: hidden; min-height: 400px;">
+          <img
+            src="https://s3.eu-north-1.amazonaws.com/piszemy.com.pl/stojan/invoices/sklepstojan.png"
+            alt="Sklep Stojan - silniki elektryczne"
+            style="width: 100%; height: 100%; object-fit: cover;"
+            loading="lazy"
+          />
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jak powstaje <span class="text-gradient">Twój sklep</span>?</h2>
+        <p>Sprawdzony proces, który gwarantuje sukces projektu</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {processSteps.map(step => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-xl);">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center;">
+              <span class="text-primary" style="font-weight: 700;">{step.nr}</span>
+            </div>
+            <div style="flex: 1;">
+              <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-xs);">
+                <h3 style="font-size: var(--f-size-xl);">{step.title}</h3>
+                <span class="text-muted" style="font-size: var(--f-size-sm);">{step.time}</span>
+              </div>
+              <p class="text-muted">{step.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-xl);">
+        <p class="text-primary" style="font-size: var(--f-size-lg); font-weight: 600;">Całkowity czas realizacji: 6-8 tygodni</p>
+        <p class="text-muted">Sklep gotowy do sprzedaży w niecałe 2 miesiące</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologie -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Technologie które <span class="text-gradient">gwarantują sukces</span></h2>
+        <p>Używam tylko sprawdzonych, najnowszych rozwiązań</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s-md); max-width: 900px; margin: 0 auto;">
+        {techStack.map(tech => (
+          <div class="skill-group" style="padding: var(--s-md);">
+            <div style="font-size: 1.3rem; margin-bottom: var(--s-sm);">{tech.icon}</div>
+            <h4 style="font-weight: 600; margin-bottom: 2px;">{tech.name}</h4>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{tech.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pakiety -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Wybierz pakiet <span class="text-gradient">dopasowany do Ciebie</span></h2>
+        <p>Transparentne ceny, bez ukrytych kosztów</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.popular ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.popular && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Najpopularniejszy</div>}
+            <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-sm);">{plan.name}</h3>
+            <div style="margin-bottom: var(--s-sm);">
+              {plan.price === "na zapytanie" ? (
+                <span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span>
+              ) : (
+                <><span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span></>
+              )}
+            </div>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-lg);">{plan.desc}</p>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <a href="/kontakt" class:list={['btn', plan.popular ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Wybierz pakiet</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Najczęściej zadawane <span class="text-gradient">pytania</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <h2>Gotowy na sklep, który <span class="text-gradient">naprawdę sprzedaje</span>?</h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">Skontaktuj się ze mną i przekonaj się, dlaczego firmy z Torunia wybierają moje rozwiązania. Pierwsze 30 minut konsultacji za darmo.</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń</span><span class="contact-value">+48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz</span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Zamów darmową wycenę →</a>
+    </div>
+  </section>
+
+</Service>

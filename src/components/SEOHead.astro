@@ -1,0 +1,137 @@
+---
+interface Props {
+  title: string;
+  description: string;
+  canonical?: string;
+  ogImage?: string;
+  ogType?: string;
+  articleDate?: Date;
+  articleModified?: Date;
+  noindex?: boolean;
+}
+
+const {
+  title,
+  description,
+  canonical,
+  ogImage = '/og-default.jpg',
+  ogType = 'website',
+  articleDate,
+  articleModified,
+  noindex = false,
+} = Astro.props;
+
+const siteName = 'Karol Leszczyński';
+const siteUrl = 'https://www.karol-leszczynski.pl';
+const fullTitle = title.includes('Karol') ? title : `${title} | Karol Leszczyński`;
+const canonicalUrl = canonical || new URL(Astro.url.pathname, siteUrl).href;
+const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`;
+---
+
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>{fullTitle}</title>
+<meta name="description" content={description} />
+{noindex && <meta name="robots" content="noindex, nofollow" />}
+<link rel="canonical" href={canonicalUrl} />
+
+<!-- Fonts -->
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<!-- Favicon -->
+<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+<!-- Open Graph -->
+<meta property="og:type" content={ogType} />
+<meta property="og:title" content={fullTitle} />
+<meta property="og:description" content={description} />
+<meta property="og:url" content={canonicalUrl} />
+<meta property="og:site_name" content={siteName} />
+<meta property="og:image" content={ogImageUrl} />
+<meta property="og:locale" content="pl_PL" />
+
+{articleDate && <meta property="article:published_time" content={articleDate.toISOString()} />}
+{articleModified && <meta property="article:modified_time" content={articleModified.toISOString()} />}
+
+<!-- Twitter -->
+<meta name="twitter:card" content="summary_large_image" />
+<meta name="twitter:title" content={fullTitle} />
+<meta name="twitter:description" content={description} />
+<meta name="twitter:image" content={ogImageUrl} />
+
+<!-- JSON-LD Person (global) -->
+{ogType === 'website' && (
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "Person",
+    "name": "Karol Leszczyński",
+    "jobTitle": "Web Developer — Strony, Sklepy, Aplikacje AI",
+    "url": siteUrl,
+    "image": "https://s3.eu-north-1.amazonaws.com/piszemy.com.pl/karol_leszczynski_copywriter.jpeg",
+    "telephone": "+48509370772",
+    "email": "kontakt@karol-leszczynski.pl",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toruń",
+      "addressRegion": "Kujawsko-Pomorskie",
+      "addressCountry": "PL"
+    },
+    "knowsAbout": [
+      "Full-Stack Web Development",
+      "React / Next.js / Astro",
+      "Node.js / Fastify",
+      "AWS Cloud Architecture",
+      "AI Integration (Anthropic Claude, OpenAI)",
+      "E-commerce Development",
+      "SaaS Platform Development",
+      "SEO & Content Marketing",
+      "Copywriting",
+      "LaTeX / Quarto Publishing"
+    ],
+    "sameAs": [
+      "https://www.ecopywriting.pl",
+      "https://www.zostancopywriterem.pl",
+      "https://www.copywritingseo.pl",
+      "https://www.smart-copy.ai",
+      "https://www.smart-edu.ai",
+      "https://www.maturapolski.pl",
+      "https://www.interpunkcja.com.pl",
+      "https://www.torweb.pl",
+      "https://www.silniki-elektryczne.com.pl",
+      "https://silnik-elektryczny.pl",
+      "https://silniki-trojfazowe.pl",
+      "https://ebookcopywriting.pl",
+      "https://icopywriter.pl",
+      "https://sklad-tekstu.pl",
+      "https://praca-magisterska.pl",
+      "https://prace-magisterskie.pl",
+      "https://licencjackie.pl",
+      "https://magisterkaonline.com.pl"
+    ],
+    "offers": {
+      "@type": "Offer",
+      "itemOffered": [
+        {
+          "@type": "Service",
+          "name": "Tworzenie stron i sklepów internetowych",
+          "description": "Profesjonalne strony WWW, sklepy e-commerce, aplikacje webowe"
+        },
+        {
+          "@type": "Service",
+          "name": "Platformy SaaS z AI",
+          "description": "Budowa platform SaaS z integracją sztucznej inteligencji"
+        },
+        {
+          "@type": "Service",
+          "name": "Publikacje LaTeX/Quarto",
+          "description": "Profesjonalny skład publikacji edukacyjnych i naukowych"
+        }
+      ]
+    },
+    "alumniOf": {
+      "@type": "Organization",
+      "name": "15+ lat doświadczenia w digital marketing i web development"
+    }
+  })} />
+)}

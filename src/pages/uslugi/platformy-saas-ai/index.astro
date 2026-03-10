@@ -1,0 +1,355 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "SoftwareApplication",
+  "applicationCategory": "BusinessApplication",
+  "name": "Tworzenie platform SaaS z AI",
+  "description": "Kompletne platformy SaaS wykorzystujące sztuczną inteligencję. MVP w 4-8 tygodni.",
+  "creator": { "@type": "Person", "name": "Karol Leszczyński" },
+  "offers": { "@type": "Offer", "price": "19990", "priceCurrency": "PLN", "priceValidUntil": "2025-12-31" },
+  "featureList": ["Integracje AI (OpenAI, Anthropic)", "System płatności Stripe", "Skalowalna architektura", "Panel administracyjny", "API REST/GraphQL"],
+};
+
+const aiStats = [
+  { icon: "🔄", value: "90%", title: "Automatyzacja 24/7", desc: "Redukcja czasu obsługi klienta" },
+  { icon: "💰", value: "70%", title: "Niższe koszty", desc: "Oszczędności na procesach" },
+  { icon: "📈", value: "∞", title: "Skalowalność", desc: "Bez limitu użytkowników" },
+  { icon: "🎯", value: "100%", title: "Personalizacja", desc: "Dopasowanie do użytkownika" },
+];
+
+const platforms = [
+  { title: "Platformy edukacyjne z AI", icon: "🧠", desc: "Systemy e-learningowe z personalizacją treści, automatycznym sprawdzaniem zadań i generowaniem materiałów.", examples: ["Kursy online", "Systemy egzaminacyjne", "Generatory treści edukacyjnych"] },
+  { title: "Generatory treści AI", icon: "📄", desc: "Platformy do automatycznego tworzenia tekstów, opisów produktów, postów social media.", examples: ["Copywriting AI", "Content marketing", "Opisy produktów"] },
+  { title: "Chatboty i asystenci", icon: "🤖", desc: "Inteligentne systemy obsługi klienta, doradcy produktowi, wirtualni asystenci.", examples: ["Customer service", "Doradcy sprzedażowi", "FAQ automatyczne"] },
+  { title: "Analizy predykcyjne", icon: "📊", desc: "Systemy przewidywania trendów, analizy ryzyka, optymalizacji procesów biznesowych.", examples: ["Prognozy sprzedaży", "Analiza churn", "Scoring leadów"] },
+  { title: "Automatyzacja workflow", icon: "🔄", desc: "Platformy automatyzujące procesy biznesowe, dokumenty, faktury, raporty.", examples: ["Obieg dokumentów", "Automatyczne raporty", "Procesy HR"] },
+  { title: "Personalizacja e-commerce", icon: "🎯", desc: "Systemy rekomendacji produktów, dynamiczne ceny, personalizowane oferty.", examples: ["Rekomendacje AI", "Dynamic pricing", "Personalizacja UX"] },
+];
+
+const aiProviders = [
+  { name: "Anthropic Claude", desc: "Najlepszy do treści", icon: "🤖" },
+  { name: "OpenAI GPT-4", desc: "Uniwersalne zastosowania", icon: "🧠" },
+  { name: "Google Gemini", desc: "Analiza danych", icon: "🌟" },
+  { name: "Stable Diffusion", desc: "Generowanie grafik", icon: "🎨" },
+];
+
+const techStacks = [
+  { title: "Frontend & Backend", techs: ["Next.js 14", "React", "Node.js", "Python FastAPI", "TypeScript", "GraphQL"] },
+  { title: "Bazy danych & Cloud", techs: ["MongoDB", "PostgreSQL", "Redis", "AWS", "Vercel", "Docker"] },
+  { title: "Płatności & Integracje", techs: ["Stripe", "PayPal", "Przelewy24", "Make.com", "Zapier", "Webhook"] },
+];
+
+const processPhases = [
+  { phase: "Discovery", time: "1-2 tygodnie", title: "Analiza potrzeb i planowanie", tasks: ["Warsztaty discovery", "Analiza konkurencji", "Wybór modelu AI", "Architektura systemu", "Plan MVP"] },
+  { phase: "Design", time: "2-3 tygodnie", title: "Projektowanie UX/UI", tasks: ["User flow", "Wireframes", "Prototyp interaktywny", "Design system", "Testy z użytkownikami"] },
+  { phase: "Development", time: "6-8 tygodni", title: "Programowanie", tasks: ["Setup infrastruktury", "Integracja AI", "Frontend & Backend", "System płatności", "Panel administracyjny"] },
+  { phase: "Testing", time: "1-2 tygodnie", title: "Testy i optymalizacja", tasks: ["Testy funkcjonalne", "Testy wydajności", "Testy bezpieczeństwa", "Optymalizacja AI", "Bug fixing"] },
+  { phase: "Launch", time: "1 tydzień", title: "Wdrożenie i wsparcie", tasks: ["Deploy na produkcję", "Monitoring", "Szkolenie zespołu", "Dokumentacja", "Plan rozwoju"] },
+];
+
+const plans = [
+  { name: "MVP", price: "15 000", time: "6-8 tygodni", desc: "Minimum Viable Product do walidacji pomysłu", best: false, features: ["Podstawowa integracja AI", "Do 5 głównych funkcji", "System logowania", "Podstawowe płatności", "Hosting na 3 miesiące", "Wsparcie 1 miesiąc"] },
+  { name: "Standard", price: "35 000", time: "10-12 tygodni", desc: "Pełnoprawna platforma SaaS gotowa do skalowania", best: true, features: ["Zaawansowana integracja AI", "Nieograniczone funkcje", "System subskrypcji", "Panel administracyjny", "Integracje zewnętrzne", "Automatyzacje", "Hosting na 6 miesięcy", "Wsparcie 3 miesiące"] },
+  { name: "Enterprise", price: "od 60 000", time: "3-6 miesięcy", desc: "Dedykowane rozwiązanie dla dużych organizacji", best: false, features: ["Multiple AI providers", "Architektura mikroserwisowa", "Zaawansowane bezpieczeństwo", "White-label", "SLA 99.9%", "Dedykowany zespół", "Wsparcie 12 miesięcy", "Rozwój funkcjonalności"] },
+];
+
+const faqs = [
+  { q: "Ile kosztuje utrzymanie platformy SaaS z AI?", a: "Koszty zależą od skali. Dla małej platformy (do 1000 użytkowników) to około 500-1500 zł/miesiąc (hosting, AI API, bazy danych). Dla większych platform 3000-10000 zł/miesiąc. Koszty AI to zazwyczaj $0.01-0.10 per zapytanie." },
+  { q: "Czy moja platforma będzie zgodna z RODO?", a: "Tak, wszystkie platformy buduję zgodnie z RODO i innymi regulacjami. Implementuję szyfrowanie danych, zgody użytkowników, prawo do usunięcia danych, DPA z dostawcami AI. Mogę też pomóc w przygotowaniu dokumentacji prawnej." },
+  { q: "Jaka jest różnica między różnymi modelami AI?", a: "Claude (Anthropic) jest najlepszy do długich, złożonych tekstów i zadań wymagających rozumowania. GPT-4 (OpenAI) jest bardziej uniwersalny i szybszy. Google Gemini świetnie radzi sobie z analizą danych. Dobieram model do konkretnego zastosowania." },
+  { q: "Czy platforma będzie skalowalna?", a: "Absolutnie tak. Używam architektury mikroserwisowej, auto-skalowania w chmurze, load balancerów. Platformy które tworzę obsługują od 10 do 100 000+ użytkowników bez zmiany kodu." },
+  { q: "Co jeśli API AI przestanie działać?", a: "Implementuję fallback na alternatywne modele AI, cache'owanie odpowiedzi, graceful degradation. W krytycznych systemach można mieć backup z innym dostawcą AI." },
+  { q: "Jak długo trwa zwrot z inwestycji?", a: "Z moich doświadczeń, dobrze zaprojektowana platforma SaaS zwraca inwestycję w 6-12 miesięcy. Smart-Edu.AI zwróciła koszty już po 3 miesiącach dzięki modelowi subskrypcyjnemu." },
+];
+---
+
+<Service title="Platformy SaaS z AI — Inteligentne rozwiązania" description="Tworzę inteligentne platformy SaaS wykorzystujące AI. Anthropic Claude, OpenAI GPT-4. MVP w 6-8 tygodni. 2000+ użytkowników Smart-Edu.AI." breadcrumbLabel="Platformy SaaS z AI" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">✨ Najnowsze technologie AI</p>
+        <h1 class="animate-in animate-delay-1">Platformy <span class="text-gradient">SaaS z AI</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Tworzę inteligentne platformy SaaS</strong> wykorzystujące moc sztucznej inteligencji. Od automatyzacji procesów po generowanie treści - buduję rozwiązania, które skalują Twój biznes.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ 2000+ użytkowników Smart-Edu.AI</span><span>✅ Anthropic & OpenAI Partner</span><span>✅ ROI już po 3 miesiącach</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Porozmawiajmy o Twoim projekcie →</a>
+          <a href="#case-studies" class="btn btn-outline">Zobacz case studies</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Dlaczego AI -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Dlaczego <span class="text-gradient">AI zmienia zasady gry</span>?</h2>
+        <p>Platformy SaaS z AI automatyzują procesy, które wcześniej wymagały całych zespołów. To nie przyszłość - to teraźniejszość biznesu.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-lg); max-width: 900px; margin: 0 auto;">
+        {aiStats.map(s => (
+          <div class="skill-group" style="text-align: center; padding: var(--s-lg);">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{s.icon}</div>
+            <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary); margin-bottom: var(--s-xs);">{s.value}</div>
+            <h3 style="font-weight: 600; margin-bottom: 2px;">{s.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{s.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Jakie platformy -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jakie platformy <span class="text-gradient">mogę dla Ciebie zbudować</span>?</h2>
+        <p>Od prostych chatbotów po zaawansowane systemy analizy danych</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+        {platforms.map(p => (
+          <div class="skill-group">
+            <div style="font-size: 2rem; margin-bottom: var(--s-sm);">{p.icon}</div>
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">{p.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{p.desc}</p>
+            <p class="text-primary" style="font-size: var(--f-size-sm); font-weight: 600; margin-bottom: var(--s-xs);">Przykłady:</p>
+            {p.examples.map(e => (
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                <div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0;"></div>
+                <span class="text-muted">{e}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Case Studies -->
+  <section class="section" id="case-studies" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Platformy które <span class="text-gradient">już działają</span></h2>
+        <p>Realne projekty, mierzalne wyniki</p>
+      </div>
+
+      <!-- Case Study 1 - Smart-Edu.AI -->
+      <div class="cta-section" style="margin-bottom: var(--s-2xl);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); align-items: center;">
+          <div>
+            <p style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; background: var(--c-primary-soft); border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600; color: var(--c-primary); margin-bottom: var(--s-md);">🏆 Case Study #1</p>
+            <h3 style="font-size: var(--f-size-3xl); margin-bottom: var(--s-md);">Smart-Edu.AI</h3>
+            <p class="text-muted" style="font-size: var(--f-size-lg); margin-bottom: var(--s-lg);">
+              Platforma wykorzystująca <strong>Claude AI (Anthropic)</strong> do generowania prac naukowych i zaliczeniowych. System potrafi stworzyć 120-stronicową pracę dyplomową w 20 minut.
+            </p>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Wyzwanie:</h4>
+              <p class="text-muted">Stworzenie platformy zdolnej generować wysokiej jakości treści akademickie z zachowaniem standardów naukowych, cytowań i bibliografii.</p>
+            </div>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4>
+              {["Integracja z Claude AI (Anthropic) dla generowania treści", "System subskrypcji Stripe z różnymi pakietami", "Automatyczne formatowanie APA, MLA, Chicago", "Wsparcie dla 8 języków"].map(item => (
+                <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+              ))}
+            </div>
+            <a href="https://smart-edu.ai" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz platformę <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md);">
+            {[{v:"2000+",l:"Aktywnych użytkowników"},{v:"10k+",l:"Prac wygenerowanych"},{v:"8",l:"Obsługiwanych języków"},{v:"20 min",l:"Generowanie 120 stron"}].map(s => (
+              <div class="skill-group" style="text-align: center; padding: var(--s-lg);">
+                <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary); margin-bottom: var(--s-xs);">{s.v}</div>
+                <div class="text-muted" style="font-size: var(--f-size-sm);">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+
+      <!-- Case Study 2 - Ecopywriting -->
+      <div class="cta-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); align-items: center;">
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md);">
+            {[{v:"500+",l:"Klientów B2B"},{v:"100%",l:"Automatyzacja"},{v:"24h",l:"Czas realizacji"},{v:"-80%",l:"Redukcja kosztów"}].map(s => (
+              <div class="skill-group" style="text-align: center; padding: var(--s-lg);">
+                <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary); margin-bottom: var(--s-xs);">{s.v}</div>
+                <div class="text-muted" style="font-size: var(--f-size-sm);">{s.l}</div>
+              </div>
+            ))}
+          </div>
+          <div>
+            <p style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; background: var(--c-primary-soft); border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600; color: var(--c-primary); margin-bottom: var(--s-md);">🏆 Case Study #2</p>
+            <h3 style="font-size: var(--f-size-3xl); margin-bottom: var(--s-md);">Ecopywriting.pl</h3>
+            <p class="text-muted" style="font-size: var(--f-size-lg); margin-bottom: var(--s-lg);">
+              Platforma do <strong>automatycznego zamawiania tekstów copywriterskich</strong>. System łączy klientów z copywriterami, automatyzuje wyceny i płatności.
+            </p>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Wyzwanie:</h4>
+              <p class="text-muted">Zastąpienie tradycyjnego modelu agencji wymagającego ciągłego kontaktu automatyczną platformą self-service.</p>
+            </div>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4>
+              {["Automatyczna wycena na podstawie typu i długości tekstu", "Panel klienta z historią zamówień", "System komunikacji klient-copywriter", "Płatności Stripe i automatyczne faktury"].map(item => (
+                <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+              ))}
+            </div>
+            <a href="https://ecopywriting.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz platformę <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologie -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Technologie które <span class="text-gradient">wykorzystuję</span></h2>
+        <p>Najnowsze rozwiązania AI i sprawdzone technologie webowe</p>
+      </div>
+      <div style="max-width: 900px; margin: 0 auto;">
+        <!-- AI Providers -->
+        <h3 style="font-size: var(--f-size-xl); font-weight: 700; text-align: center; margin-bottom: var(--s-lg);">Dostawcy AI</h3>
+        <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-lg); margin-bottom: var(--s-2xl);">
+          {aiProviders.map(t => (
+            <div style="background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); border: 1px solid var(--c-border-hover); border-radius: var(--radius); padding: var(--s-md); text-align: center;">
+              <div style="font-size: 2rem; margin-bottom: var(--s-xs);">{t.icon}</div>
+              <h4 style="font-weight: 600; font-size: var(--f-size-sm); margin-bottom: 2px;">{t.name}</h4>
+              <p class="text-muted" style="font-size: var(--f-size-xs);">{t.desc}</p>
+            </div>
+          ))}
+        </div>
+
+        <!-- Tech Stack -->
+        <div style="display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--s-xl);">
+          {techStacks.map(stack => (
+            <div>
+              <h3 style="font-weight: 600; margin-bottom: var(--s-md);">{stack.title}</h3>
+              {stack.techs.map(tech => (
+                <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);">
+                  <div style="width: 8px; height: 8px; background: var(--c-primary); border-radius: 50%;"></div>
+                  <span class="text-muted">{tech}</span>
+                </div>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Od pomysłu do <span class="text-gradient">działającej platformy</span></h2>
+        <p>Sprawdzony proces tworzenia platform SaaS</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {processPhases.map((phase, i) => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-xl);">
+            <div style="flex-shrink: 0; width: 72px; height: 72px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: var(--f-size-xs);">{phase.phase}</div>
+            <div class="skill-group" style="flex: 1; padding: var(--s-lg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-sm);">
+                <h3 style="font-size: var(--f-size-xl);">{phase.title}</h3>
+                <span class="text-primary" style="font-size: var(--f-size-sm);">{phase.time}</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 6px;">
+                {phase.tasks.map(t => (
+                  <div style="display: flex; align-items: center; gap: 6px; font-size: var(--f-size-sm);">
+                    <span style="color: var(--c-accent);">✓</span><span class="text-muted">{t}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-xl);">
+        <p class="text-primary" style="font-size: var(--f-size-lg); font-weight: 600;">Całkowity czas: 10-14 tygodni</p>
+        <p class="text-muted">Od koncepcji do działającej platformy generującej przychody</p>
+      </div>
+    </div>
+  </section>
+
+  <!-- Modele współpracy -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Modele <span class="text-gradient">współpracy</span></h2>
+        <p>Elastyczne opcje dopasowane do Twojego budżetu i potrzeb</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.best ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.best && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Rekomendowany</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">{plan.time}</div>
+              <div style="margin-bottom: var(--s-sm);">
+                <span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span>
+              </div>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <a href="/kontakt" class:list={['btn', plan.best ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Rozpocznij projekt</a>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <p class="text-muted" style="margin-bottom: var(--s-md);">Preferujesz inny model współpracy?</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-md); justify-content: center;">
+          {["💰 Revenue share", "🤝 Joint venture", "⏰ Time & Materials", "🎯 Success fee"].map(m => (
+            <span style="padding: 8px 16px; background: var(--c-bg-alt); border-radius: var(--radius);">{m}</span>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania o <span class="text-gradient">platformy SaaS z AI</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: var(--c-primary-soft); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-primary); margin-bottom: var(--s-lg);">🚀 Dołącz do rewolucji AI</p>
+      <h2>Gotowy wyprzedzić konkurencję <span class="text-gradient">o lata świetlne</span>?</h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Platformy SaaS z AI to nie przyszłość - to teraźniejszość. Firmy które nie zautomatyzują procesów z AI, przegrają z tymi które to zrobią. <strong>Porozmawiajmy o tym, jak AI może transformować Twój biznes.</strong>
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń</span><span class="contact-value">+48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz</span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Umów bezpłatną konsultację AI →</a>
+      <p class="text-muted" style="margin-top: var(--s-xl); font-size: var(--f-size-sm);">🚀 Pierwsze 30 minut konsultacji gratis · 📊 Otrzymasz analizę potencjału AI w Twoim biznesie</p>
+    </div>
+  </section>
+
+</Service>

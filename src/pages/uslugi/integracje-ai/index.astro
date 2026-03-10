@@ -1,0 +1,317 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "TechArticle",
+  "headline": "Integracje AI dla firm",
+  "description": "Wdrażam sztuczną inteligencję w firmach. Chatboty, automatyzacja, ROI 250%.",
+  "author": { "@type": "Person", "name": "Karol Leszczyński", "expertise": "AI Integration" },
+  "offers": { "@type": "AggregateOffer", "priceCurrency": "PLN", "lowPrice": "2990", "highPrice": "19990", "offerCount": "3", "offers": [{ "@type": "Offer", "name": "AI Starter", "price": "2990" }, { "@type": "Offer", "name": "AI Business", "price": "9990" }, { "@type": "Offer", "name": "AI Enterprise", "price": "19990" }] },
+  "about": { "@type": "Thing", "name": "Artificial Intelligence", "description": "OpenAI, Anthropic Claude, Custom AI Solutions" },
+};
+
+const problemItems = [
+  "Pracownicy spędzają 60% czasu na powtarzalnych zadaniach",
+  "Klienci czekają godzinami na odpowiedź",
+  "Błędy ludzkie kosztują tysiące złotych",
+  "Konkurencja z AI przejmuje Twoich klientów",
+  "Skalowanie wymaga zatrudniania nowych osób",
+];
+
+const solutionItems = [
+  "AI wykonuje 80% rutynowych zadań automatycznie",
+  "Chatbot odpowiada klientom 24/7 w sekundach",
+  "99.9% dokładność w przetwarzaniu danych",
+  "Przewaga konkurencyjna dzięki innowacji",
+  "Skalowanie bez zwiększania zespołu",
+];
+
+const departments = [
+  { dept: "Obsługa klienta", icon: "🎧", tasks: ["Chatbot odpowiadający na 80% pytań", "Automatyczna kategoryzacja zgłoszeń", "Analiza sentymentu rozmów", "Generowanie odpowiedzi email", "FAQ dynamiczne"], savings: "60% czasu" },
+  { dept: "Sprzedaż", icon: "📈", tasks: ["Scoring i kwalifikacja leadów", "Personalizowane oferty", "Automatyczne follow-upy", "Prognozowanie sprzedaży", "Analiza konkurencji"], savings: "40% więcej konwersji" },
+  { dept: "Marketing", icon: "🎯", tasks: ["Generowanie treści i postów", "Optymalizacja kampanii", "Personalizacja contentu", "A/B testy automatyczne", "Analiza trendów"], savings: "70% czasu" },
+  { dept: "HR", icon: "👥", tasks: ["Screening CV", "Chatbot dla pracowników", "Onboarding automatyczny", "Analiza satysfakcji", "Planowanie szkoleń"], savings: "50% procesów" },
+  { dept: "Finanse", icon: "🧮", tasks: ["Automatyczne faktury", "Kategoryzacja wydatków", "Prognozy finansowe", "Wykrywanie anomalii", "Raporty automatyczne"], savings: "80% rutyny" },
+  { dept: "Operacje", icon: "⚙️", tasks: ["Optymalizacja procesów", "Predykcyjne utrzymanie", "Zarządzanie zapasami", "Automatyzacja workflow", "Monitoring KPI"], savings: "45% kosztów" },
+];
+
+const industries = [
+  { title: "E-commerce i retail", icon: "🛍️", solutions: ["Rekomendacje produktów AI", "Chatbot sprzedażowy 24/7", "Automatyczne opisy produktów", "Dynamic pricing", "Analiza koszyka"], caseText: "Sklep odzieżowy zwiększył sprzedaż o 35% dzięki personalizacji AI" },
+  { title: "Firmy usługowe", icon: "💼", solutions: ["Automatyczna rezerwacja terminów", "Wirtualny asystent", "Wyceny automatyczne", "CRM z AI", "Analiza satysfakcji"], caseText: "Salon fryzjerski zredukował no-shows o 60% dzięki AI" },
+  { title: "Produkcja i logistyka", icon: "🏭", solutions: ["Predictive maintenance", "Optymalizacja łańcucha dostaw", "Kontrola jakości AI", "Planowanie produkcji", "Automatyzacja dokumentów"], caseText: "Fabryka mebli zmniejszyła przestoje o 40% dzięki AI" },
+  { title: "Edukacja i szkolenia", icon: "🎓", solutions: ["Personalizacja ścieżek nauki", "Automatyczne sprawdzanie prac", "Chatbot dla studentów", "Generowanie materiałów", "Analiza postępów"], caseText: "Szkoła językowa zwiększyła retencję o 50% dzięki AI" },
+  { title: "Zdrowie i wellness", icon: "🏥", solutions: ["Rejestracja online z AI", "Wstępna diagnoza", "Przypomnienia o lekach", "Analiza wyników", "Dokumentacja medyczna"], caseText: "Przychodnia skróciła czas rejestracji o 70% dzięki AI" },
+  { title: "Uniwersalne rozwiązania", icon: "🚀", solutions: ["Automatyzacja dokumentów", "Chatboty i asystenci", "Analiza danych", "Generowanie raportów", "Integracje API"], caseText: "Każda firma może zaoszczędzić min. 20h/tydzień z AI" },
+];
+
+const processSteps = [
+  { step: "1", title: "Audyt AI", time: "1-2 dni", desc: "Analizuję procesy w Twojej firmie i identyfikuję obszary do automatyzacji", deliverables: ["Mapa procesów", "Potencjał oszczędności", "Rekomendacje AI"] },
+  { step: "2", title: "Strategia", time: "2-3 dni", desc: "Przygotowuję plan wdrożenia AI dopasowany do Twoich celów biznesowych", deliverables: ["Roadmapa", "Wybór technologii", "KPIs i metryki"] },
+  { step: "3", title: "Implementacja", time: "1-2 tygodnie", desc: "Integruję AI z Twoimi systemami i konfiguruję automatyzacje", deliverables: ["Integracja API", "Konfiguracja AI", "Testy"] },
+  { step: "4", title: "Optymalizacja", time: "Ongoing", desc: "Monitoruję wyniki i optymalizuję AI dla maksymalnej efektywności", deliverables: ["Monitoring", "Fine-tuning", "Raporty ROI"] },
+];
+
+const caseStudies = [
+  { company: "Agencja marketingowa", size: "15 osób", implementation: "AI do generowania contentu", results: [{ metric: "Czas tworzenia treści", value: "-75%" }, { metric: "Liczba obsługiwanych klientów", value: "+200%" }, { metric: "ROI", value: "320%" }], quote: "AI pozwoliło nam obsłużyć 3x więcej klientów bez zwiększania zespołu" },
+  { company: "Sklep internetowy", size: "5 osób", implementation: "Chatbot i rekomendacje AI", results: [{ metric: "Konwersja", value: "+35%" }, { metric: "Średnia wartość koszyka", value: "+48%" }, { metric: "Zwroty", value: "-22%" }], quote: "Chatbot obsługuje 80% pytań klientów automatycznie 24/7" },
+  { company: "Firma produkcyjna", size: "50 osób", implementation: "Automatyzacja procesów", results: [{ metric: "Czas przetwarzania zamówień", value: "-60%" }, { metric: "Błędy w dokumentacji", value: "-95%" }, { metric: "Oszczędności", value: "25k zł/mies" }], quote: "Automatyzacja AI zwolniła 30% czasu naszego zespołu na rozwój" },
+];
+
+const plans = [
+  { name: "AI Starter", price: "2 990", time: "1 tydzień", desc: "Idealne do rozpoczęcia przygody z AI", best: false, features: ["1 proces do automatyzacji", "Chatbot na stronę WWW", "Integracja z 1 systemem", "Szkolenie zespołu", "1 miesiąc wsparcia", "Raport ROI"] },
+  { name: "AI Business", price: "9 990", time: "2-3 tygodnie", desc: "Kompleksowa automatyzacja dla firm", best: true, features: ["Do 5 procesów", "Zaawansowany chatbot", "Integracje API", "Personalizacja AI", "Panel analityczny", "3 miesiące wsparcia", "Optymalizacja co miesiąc"] },
+  { name: "AI Enterprise", price: "od 19 990", time: "4+ tygodnie", desc: "Transformacja cyfrowa z AI", best: false, features: ["Nieograniczone procesy", "Dedykowane modele AI", "Pełna automatyzacja", "Integracja z ERP/CRM", "Machine Learning", "SLA 99.9%", "Dedykowany opiekun", "Rozwój ciągły"] },
+];
+
+const faqs = [
+  { q: "Czy AI zastąpi moich pracowników?", a: "Nie, AI nie zastępuje pracowników, tylko automatyzuje nudne, powtarzalne zadania. Twój zespół będzie mógł skupić się na kreatywnej pracy, strategii i budowaniu relacji z klientami. AI to narzędzie, które zwiększa produktywność zespołu." },
+  { q: "Ile czasu zajmuje wdrożenie AI?", a: "Podstawowe wdrożenie (np. chatbot) może być gotowe w 3-5 dni. Średniej złożoności automatyzacje zajmują 2-3 tygodnie. Kompleksowe transformacje AI to 4-8 tygodni. Zawsze zaczynamy od pilotażu, żebyś mógł szybko zobaczyć efekty." },
+  { q: "Czy muszę wymienić moje obecne systemy?", a: "Nie! AI integruję z Twoimi obecnymi systemami przez API. Pracuję z WordPress, Shopify, WooCommerce, systemami CRM, ERP, narzędziami Google, Microsoft i wieloma innymi. AI działa jako warstwa nad istniejącą infrastrukturą." },
+  { q: "Jakie są koszty utrzymania AI?", a: "Koszty zależą od skali użycia. Dla małej firmy to 200-500 zł/miesiąc za API AI. Średnie firmy płacą 1000-3000 zł/miesiąc. Zawsze pokazuję dokładną kalkulację kosztów vs oszczędności przed wdrożeniem." },
+  { q: "Co jeśli AI popełni błąd?", a: "Implementuję zabezpieczenia: walidację odpowiedzi, limity decyzyjne, human-in-the-loop dla krytycznych procesów. AI ma 95-99% skuteczności, ale zawsze jest możliwość interwencji człowieka. Dodatkowo AI uczy się i poprawia swoją dokładność." },
+  { q: "Czy moje dane będą bezpieczne?", a: "Absolutnie. Używam tylko certyfikowanych dostawców AI (OpenAI, Anthropic, Google). Dane są szyfrowane, przetwarzane zgodnie z RODO. Możemy też wdrożyć AI on-premise dla maksymalnego bezpieczeństwa." },
+];
+---
+
+<Service title="Integracje AI dla firm — Automatyzacja i wdrożenia" description="Wdrażam sztuczną inteligencję w firmach. Chatboty, automatyzacja procesów, generowanie treści. ROI 250% w 6 miesięcy. Od 2990 zł." breadcrumbLabel="Integracje AI" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">🧠 Wdrożenia AI · Automatyzacja · Optymalizacja</p>
+        <h1 class="animate-in animate-delay-1">Integracje <span class="text-gradient">AI dla firm</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Automatyzuj procesy, które zabierają 80% czasu Twojego zespołu.</strong> Wdrażam sztuczną inteligencję w istniejące systemy biznesowe. Bez rewolucji, bez wymiany oprogramowania - tylko realne usprawnienia.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ Średni ROI: 250% w 6 miesięcy</span><span>✅ 70% redukcja kosztów operacyjnych</span><span>✅ Wdrożenie w 2-4 tygodnie</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Zamów darmowy audyt AI →</a>
+          <a href="#kalkulator" class="btn btn-outline">Kalkulator oszczędności</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Problem/Solution -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); max-width: 900px; margin: 0 auto;">
+        <div class="skill-group" style="border-color: rgba(239,68,68,0.3);">
+          <div style="font-size: 1.5rem; margin-bottom: var(--s-md);">⏱️</div>
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-md);">Bez AI - tracisz czas i pieniądze</h3>
+          {problemItems.map(item => (
+            <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: #ef4444;">✗</span><span class="text-muted">{item}</span></div>
+          ))}
+        </div>
+        <div class="skill-group" style="border-color: rgba(34,197,94,0.3);">
+          <div style="font-size: 1.5rem; margin-bottom: var(--s-md);">🚀</div>
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-md);">Z AI - automatyzacja i wzrost</h3>
+          {solutionItems.map(item => (
+            <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span class="text-muted">{item}</span></div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Co możesz zautomatyzować -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Co możesz <span class="text-gradient">zautomatyzować z AI</span>?</h2>
+        <p>Praktyczne zastosowania AI w każdym dziale Twojej firmy</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {departments.map(dept => (
+          <div class="skill-group">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-md);">
+              <div style="display: flex; align-items: center; gap: var(--s-sm);"><span style="font-size: 1.3rem;">{dept.icon}</span><h3 style="font-size: var(--f-size-lg);">{dept.dept}</h3></div>
+              <span style="font-size: var(--f-size-sm); color: var(--c-accent); font-weight: 600;">{dept.savings}</span>
+            </div>
+            {dept.tasks.map(t => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);"><div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div><span class="text-muted">{t}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Branże -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>AI dla <span class="text-gradient">każdej branży</span></h2>
+        <p>Specjalizuję się w wdrożeniach AI dostosowanych do specyfiki branży</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {industries.map(item => (
+          <div class="skill-group" style="padding: var(--s-xl);">
+            <div style="display: flex; align-items: flex-start; gap: var(--s-md); margin-bottom: var(--s-lg);">
+              <span style="font-size: 2.5rem;">{item.icon}</span>
+              <div><h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-xs);">{item.title}</h3><p class="text-primary" style="font-size: var(--f-size-sm);">{item.caseText}</p></div>
+            </div>
+            {item.solutions.map(s => (
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{s}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Kalkulator oszczędności -->
+  <section class="section" id="kalkulator">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header">
+        <h2>Kalkulator <span class="text-gradient">oszczędności z AI</span></h2>
+        <p>Zobacz ile możesz zaoszczędzić automatyzując procesy</p>
+      </div>
+      <div class="cta-section">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-xl);">
+          <div>
+            <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Twoje dane:</h3>
+            {[{l:"Liczba pracowników",v:"10-50"},{l:"Średnia pensja (brutto)",v:"6 000 zł"},{l:"% czasu na rutynowe zadania",v:"40%"}].map(d => (
+              <div style="margin-bottom: var(--s-sm);"><span class="text-muted" style="font-size: var(--f-size-sm);">{d.l}</span><div style="font-size: var(--f-size-2xl); font-weight: 800;">{d.v}</div></div>
+            ))}
+          </div>
+          <div>
+            <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Potencjalne oszczędności:</h3>
+            {[{l:"Miesięcznie",v:"12 000 zł",c:"var(--c-accent)"},{l:"Rocznie",v:"144 000 zł",c:"var(--c-accent)"},{l:"Zwolniony czas",v:"800h/miesiąc",c:"var(--c-primary)"}].map(d => (
+              <div class="skill-group" style="padding: var(--s-md); margin-bottom: var(--s-sm);"><span class="text-muted" style="font-size: var(--f-size-sm);">{d.l}</span><div style={`font-size: var(--f-size-3xl); font-weight: 800; color: ${d.c};`}>{d.v}</div></div>
+            ))}
+          </div>
+        </div>
+        <div style="text-align: center; margin-top: var(--s-xl);">
+          <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">* Kalkulacja dla 30 pracowników przy automatyzacji 40% zadań</p>
+          <a href="/kontakt" class="btn btn-primary">Otrzymaj dokładną wycenę →</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces wdrożenia -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Wdrożenie AI w <span class="text-gradient">4 prostych krokach</span></h2>
+        <p>Od audytu do działającego rozwiązania w 2-4 tygodnie</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-lg); max-width: 960px; margin: 0 auto;">
+        {processSteps.map(phase => (
+          <div class="skill-group">
+            <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: var(--f-size-xl); margin-bottom: var(--s-md);">{phase.step}</div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{phase.title}</h3>
+            <p class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">{phase.time}</p>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{phase.desc}</p>
+            {phase.deliverables.map(d => (
+              <div style="display: flex; align-items: center; gap: 6px; font-size: var(--f-size-xs); margin-bottom: 4px;"><span style="color: var(--c-accent);">✓</span><span class="text-muted">{d}</span></div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- ROI Examples -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Realne <span class="text-gradient">wyniki wdrożeń</span></h2>
+        <p>Liczby nie kłamią - AI naprawdę działa</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {caseStudies.map(study => (
+          <div class="skill-group">
+            <div style="margin-bottom: var(--s-md);"><h3 style="font-size: var(--f-size-lg);">{study.company}</h3><p class="text-muted" style="font-size: var(--f-size-sm);">{study.size}</p></div>
+            <div style="background: var(--c-primary-soft); border-radius: var(--radius); padding: var(--s-sm) var(--s-md); margin-bottom: var(--s-md);"><p class="text-primary" style="font-size: var(--f-size-sm);">{study.implementation}</p></div>
+            {study.results.map(r => (
+              <div style="display: flex; justify-content: space-between; margin-bottom: 6px; font-size: var(--f-size-sm);"><span class="text-muted">{r.metric}</span><span style={`font-weight: 700; color: ${r.value.includes('+') || r.value.includes('k') ? 'var(--c-accent)' : 'var(--c-primary)'};`}>{r.value}</span></div>
+            ))}
+            <blockquote style="margin-top: var(--s-md); font-size: var(--f-size-sm); font-style: italic; border-left: 2px solid var(--c-border-hover); padding-left: var(--s-sm);" class="text-muted">&ldquo;{study.quote}&rdquo;</blockquote>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pakiety -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Pakiety <span class="text-gradient">wdrożeniowe</span></h2>
+        <p>Od prostych automatyzacji po kompleksowe transformacje AI</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.best ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.best && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Najpopularniejszy</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">Wdrożenie: {plan.time}</div>
+              <div style="margin-bottom: var(--s-sm);"><span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span></div>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <a href="/kontakt" class:list={['btn', plan.best ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Wybierz pakiet</a>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <p class="text-muted" style="margin-bottom: var(--s-md);">Potrzebujesz rozwiązania szytego na miarę?</p>
+        <a href="/kontakt" class="project-card-link">Zapytaj o dedykowane wdrożenie →</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania o <span class="text-gradient">wdrożenia AI</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-lg);">💰 Średni zwrot z inwestycji: 250% w 6 miesięcy</p>
+      <h2>Każdy dzień bez AI to <span class="text-gradient">stracone pieniądze</span></h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Twoja konkurencja już wdraża AI. Firma która zautomatyzuje procesy pierwsza, wygra rynek. <strong>Darmowy audyt AI pokaże Ci dokładnie, gdzie tracisz pieniądze i jak AI może to zmienić.</strong>
+      </p>
+      <div class="skill-group" style="max-width: 450px; margin: 0 auto var(--s-xl); padding: var(--s-lg);">
+        <h3 style="font-weight: 600; margin-bottom: var(--s-md);">Darmowy audyt AI zawiera:</h3>
+        <div style="text-align: left;">
+          {["Analiza 5 kluczowych procesów w firmie", "Kalkulacja potencjalnych oszczędności", "Rekomendacje konkretnych rozwiązań AI", "Plan wdrożenia z timeline i kosztami"].map(item => (
+            <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+          ))}
+        </div>
+      </div>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń teraz</span><span class="contact-value">+48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz</span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Zamów darmowy audyt AI →</a>
+      <p class="text-muted" style="margin-top: var(--s-xl); font-size: var(--f-size-sm);">⚡ Audyt w 48h · 📊 Raport PDF · 🎯 100% praktycznych rekomendacji · 🆓 Bez zobowiązań</p>
+    </div>
+  </section>
+
+</Service>

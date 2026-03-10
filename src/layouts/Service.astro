@@ -1,0 +1,26 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+interface Props {
+  title: string;
+  description: string;
+  breadcrumbLabel: string;
+  structuredData?: object;
+}
+
+const { title, description, breadcrumbLabel, structuredData } = Astro.props;
+---
+
+<Base title={title} description={description}>
+  <Breadcrumbs items={[
+    { label: 'Usługi', href: '/uslugi' },
+    { label: breadcrumbLabel },
+  ]} />
+
+  {structuredData && (
+    <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+  )}
+
+  <slot />
+</Base>

@@ -1,0 +1,507 @@
+---
+import Base from '@/layouts/Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "CollectionPage",
+  "name": "Portfolio — Projekty Karol Leszczyński",
+  "description": "30+ zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.",
+  "author": { "@type": "Person", "name": "Karol Leszczyński" },
+  "about": { "@type": "Thing", "name": "Web Development Portfolio" },
+};
+
+const categories = [
+  { id: "all", label: "Wszystkie", count: 27 },
+  { id: "saas", label: "SaaS / AI", count: 4 },
+  { id: "ecommerce", label: "E-commerce", count: 3 },
+  { id: "publishing", label: "Publikacje", count: 2 },
+  { id: "content", label: "Content / Blogi", count: 7 },
+  { id: "client", label: "Strony klientów", count: 9 },
+  { id: "edtech", label: "EdTech", count: 4 },
+];
+
+const projects = [
+  // === SaaS / AI ===
+  {
+    title: "Smart-Copy.AI",
+    cat: "saas",
+    catLabel: "SaaS / AI Content",
+    description: "Platforma AI do generowania treści marketingowych z multi-agent architecture. Teksty do 150 stron, 8 języków, Stripe payments.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic AI", "Stripe", "AWS"],
+    link: "https://smart-copy.ai",
+    year: "2024–2025",
+    highlight: true,
+    stats: [{ label: "Języków", value: "8" }, { label: "Max stron", value: "150" }],
+  },
+  {
+    title: "MaturaPolski.pl",
+    cat: "saas",
+    catLabel: "SaaS / EdTech",
+    description: "Platforma AI do nauki przed maturą z języka polskiego. Ocena wypracowań przez AI, sesje nauki, adaptywny dobór zadań.",
+    technologies: ["React", "Fastify", "Prisma", "PostgreSQL", "Anthropic AI", "Stripe", "WebSockets", "BullMQ"],
+    link: "https://maturapolski.pl",
+    year: "2024–2025",
+    highlight: true,
+  },
+  {
+    title: "Smart-Edu.AI",
+    cat: "saas",
+    catLabel: "SaaS / EdTech",
+    description: "Platforma AI do generowania prac pisemnych i naukowych. 120-stronicowa praca dyplomowa w 20 minut, 8 języków.",
+    technologies: ["React", "Fastify", "Prisma", "PostgreSQL", "Anthropic AI", "Stripe", "AWS EC2"],
+    link: "https://smart-edu.ai",
+    year: "2024–2025",
+    highlight: true,
+    stats: [{ label: "Użytkowników", value: "2000+" }, { label: "Prac wygenerowanych", value: "10k+" }],
+  },
+  {
+    title: "Interpunkcja.com.pl",
+    cat: "saas",
+    catLabel: "SaaS / AI Tools",
+    description: "Korektor interpunkcji AI — sprawdzanie przecinków z wyjaśnieniami zasad polskiej pisowni. Plan Lifetime 299 zł.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic AI", "Stripe"],
+    link: "https://interpunkcja.com.pl",
+    year: "2025",
+    highlight: true,
+  },
+  // === E-commerce ===
+  {
+    title: "Silniki-Elektryczne.com.pl",
+    cat: "ecommerce",
+    catLabel: "E-commerce",
+    description: "Sklep e-commerce z migracją z WooCommerce. +40% sprzedaży, 2000+ produktów, integracja Allegro, AI opisy produktów.",
+    technologies: ["Astro SSR", "Fastify", "Prisma", "PostgreSQL", "Allegro API", "Stripe", "AWS"],
+    link: "https://www.silniki-elektryczne.com.pl",
+    year: "2021–2025",
+    highlight: true,
+    stats: [{ label: "Wzrost sprzedaży", value: "+40%" }, { label: "Produktów", value: "2000+" }],
+  },
+  {
+    title: "Silnik-Elektryczny.pl",
+    cat: "ecommerce",
+    catLabel: "SEO / E-commerce",
+    description: "Satelita SEO dla sklepu Stojan. Zautomatyzowany pipeline: CodeBuild rebuild, Lambda proxy, Schema JSON-LD, GDPR cookies.",
+    technologies: ["Astro SSG", "AWS S3/CloudFront", "AWS CodeBuild", "AWS Lambda", "Schema.org"],
+    link: "https://silnik-elektryczny.pl",
+    year: "2025",
+  },
+  {
+    title: "Silniki-Trojfazowe.pl",
+    cat: "ecommerce",
+    catLabel: "SEO / E-commerce",
+    description: "Druga satelita SEO sklepu Stojan. Automatyczne generowanie treści i sitemap, pipeline CI/CD, Google Consent Mode v2.",
+    technologies: ["Astro SSG", "AWS S3/CloudFront", "AWS CodeBuild", "AWS Lambda"],
+    link: "https://silniki-trojfazowe.pl",
+    year: "2025",
+  },
+  // === Publishing ===
+  {
+    title: "Zeszyty ćwiczeń (11 publikacji)",
+    cat: "publishing",
+    catLabel: "Publishing / EdTech",
+    description: "11 profesjonalnych zeszytów ćwiczeń dla szkół policealnych. Treści merytoryczne + profesjonalny skład LaTeX/Quarto.",
+    technologies: ["Quarto", "LaTeX", "Python", "TikZ", "BibTeX"],
+    link: "/uslugi/publikacje-latex",
+    year: "2025",
+    highlight: true,
+    stats: [{ label: "Publikacji", value: "11" }, { label: "Stron składu", value: "1500+" }],
+    internal: true,
+  },
+  {
+    title: "eBookCopywriting.pl",
+    cat: "publishing",
+    catLabel: "Publishing / E-commerce",
+    description: "Landing page z płatnościami Stripe do sprzedaży autorskiego e-booka o copywritingu. Natychmiastowe pobieranie po płatności.",
+    technologies: ["Astro", "AWS Lambda", "Stripe", "AWS S3/CloudFront"],
+    link: "https://ebookcopywriting.pl",
+    year: "2024–2025",
+  },
+  // === Content / Blogi ===
+  {
+    title: "ZostańCopywriterem.pl",
+    cat: "content",
+    catLabel: "Blog / Content",
+    description: "Blog edukacyjny o copywritingu. Pillar-cluster architecture, content collections, poradniki dla początkujących i zaawansowanych.",
+    technologies: ["Astro", "Content Collections", "AWS S3/CloudFront"],
+    link: "https://www.zostancopywriterem.pl",
+    year: "2025",
+  },
+  {
+    title: "CopywritingSEO.pl",
+    cat: "content",
+    catLabel: "Blog / SEO Content",
+    description: "Specjalistyczny blog o SEO copywritingu. Struktura pillar-cluster, artykuły o E-E-A-T, strategia treści, optymalizacja.",
+    technologies: ["Astro", "Content Collections", "AWS S3/CloudFront"],
+    link: "https://copywritingseo.pl",
+    year: "2024–2025",
+  },
+  {
+    title: "eCopywriting.pl",
+    cat: "content",
+    catLabel: "Agencja / Strona firmowa",
+    description: "Strona agencji copywriterskiej. Portfolio, oferta usług content marketingowych, SEO, blog firmowy.",
+    technologies: ["Astro", "AWS S3/CloudFront", "AWS SES"],
+    link: "https://www.ecopywriting.pl",
+    year: "2024–2025",
+  },
+  {
+    title: "iCopywriter.pl",
+    cat: "content",
+    catLabel: "Blog / Content",
+    description: "Portal o copywritingu z artykułami i poradnikami. Część ekosystemu stron contentowych.",
+    technologies: ["Astro", "AWS S3/CloudFront"],
+    link: "https://icopywriter.pl",
+    year: "2024–2025",
+  },
+  {
+    title: "Sklad-Tekstu.pl",
+    cat: "content",
+    catLabel: "Blog / Content",
+    description: "Serwis o składzie tekstu, typografii i redakcji. Autorskie treści edukacyjne, optymalizacja SEO.",
+    technologies: ["Astro", "AWS S3/CloudFront"],
+    link: "https://sklad-tekstu.pl",
+    year: "2024–2025",
+  },
+  // === Client websites ===
+  {
+    title: "Nadamel.pl",
+    cat: "client",
+    catLabel: "Strona firmowa",
+    description: "Strona dla firmy stolarskiej. Astro SSG, 8 podstron usługowych, Lighthouse 98+, AWS S3 + CloudFront.",
+    technologies: ["Astro", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://nadamel.pl",
+    year: "2025",
+  },
+  {
+    title: "TorWeb.pl",
+    cat: "client",
+    catLabel: "Agencja interaktywna",
+    description: "Strona własnej agencji. 12 realizacji, 6 podstron usługowych, GDPR cookies, Google Consent Mode v2, dark/light mode.",
+    technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "GA4", "GTM", "AWS"],
+    link: "https://torweb.pl",
+    year: "2025",
+  },
+  {
+    title: "UniaTorun.pl",
+    cat: "client",
+    catLabel: "Sport / Strona firmowa",
+    description: "Strona akademii piłkarskiej. 17 stron, custom video player, formularze zapisów, GDPR + Consent Mode v2.",
+    technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "GA4", "GTM", "AWS"],
+    link: "https://www.uniatorun.pl",
+    year: "2025",
+  },
+  {
+    title: "GrandKuchnie.pl",
+    cat: "client",
+    catLabel: "Strona firmowa",
+    description: "Strona producenta kuchni. Portfolio realizacji z CMS, galeria z lightbox, Google Analytics + Ads.",
+    technologies: ["Next.js", "Prisma", "React", "AWS S3", "Tailwind CSS"],
+    link: "https://grandkuchnie.pl",
+    year: "2025",
+  },
+  {
+    title: "ArtKuchnie.pl",
+    cat: "client",
+    catLabel: "Strona firmowa",
+    description: "Strona firmy kuchennej. Prezentacja oferty, galeria realizacji, optymalizacja SEO.",
+    technologies: ["Astro", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://artkuchnie.pl",
+    year: "2024–2025",
+  },
+  {
+    title: "By-Interior.pl",
+    cat: "client",
+    catLabel: "Portfolio / Design",
+    description: "Strona studia projektowania wnętrz. Portfolio, zespół, opinie klientów. Serverless Lambda backend.",
+    technologies: ["Astro 4", "TypeScript", "Tailwind CSS", "AWS Lambda", "AWS S3/CloudFront"],
+    link: "https://by-interior.pl",
+    year: "2025",
+  },
+  {
+    title: "Project-Design.pl",
+    cat: "client",
+    catLabel: "Portfolio / Design",
+    description: "Portfolio studia projektowania wnętrz z Torunia. Cloudinary, filtrowanie projektów, Lighthouse 98+.",
+    technologies: ["Astro", "Cloudinary", "AWS S3/CloudFront", "Tailwind CSS"],
+    link: "https://project-design.pl",
+    year: "2024",
+  },
+  {
+    title: "Meble-Bydgoszcz.pl",
+    cat: "client",
+    catLabel: "Strona firmowa",
+    description: "Strona firmy meblowej. Dynamiczne opinie Google Places API przez serverless Lambda. AWS S3 + CloudFront.",
+    technologies: ["Astro", "AWS Lambda", "Google Places API", "AWS S3/CloudFront"],
+    link: "https://meble-bydgoszcz.pl",
+    year: "2024–2025",
+  },
+  {
+    title: "Mekra.pl",
+    cat: "client",
+    catLabel: "Strona firmowa",
+    description: "Strona firmowa z rozbudowaną strukturą podstron. Optymalizacja SEO, responsywny design, AWS hosting.",
+    technologies: ["Astro", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://mekra.pl",
+    year: "2024–2025",
+  },
+  // === EdTech portals ===
+  {
+    title: "Praca-Magisterska.pl",
+    cat: "edtech",
+    catLabel: "Content / EdTech",
+    description: "Portal edukacyjny z poradnikami o pisaniu prac magisterskich. Autorskie treści, sprzedaż e-booków przez Stripe/Lambda.",
+    technologies: ["Astro", "AWS Lambda", "Stripe", "AWS S3/CloudFront"],
+    link: "https://praca-magisterska.pl",
+    year: "2025",
+  },
+  {
+    title: "Prace-Magisterskie.pl",
+    cat: "edtech",
+    catLabel: "Content / EdTech",
+    description: "Portal edukacyjny z bazą wiedzy o pisaniu prac dyplomowych. Autorskie treści, SSG, AWS CDN.",
+    technologies: ["Astro 4", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://prace-magisterskie.pl",
+    year: "2025",
+  },
+  {
+    title: "MagisterkaOnline.com.pl",
+    cat: "edtech",
+    catLabel: "Content / EdTech",
+    description: "30+ poradników o pisaniu pracy magisterskiej. Rozbudowana sekcja metodologii (16 artykułów).",
+    technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://magisterkaonline.com.pl",
+    year: "2025",
+  },
+  {
+    title: "Licencjackie.pl",
+    cat: "edtech",
+    catLabel: "Content / EdTech",
+    description: "Portal edukacyjny o pracach licencjackich. Poradniki, tematy prac, zasady formatowania i cytowania.",
+    technologies: ["Astro", "Tailwind CSS", "AWS S3/CloudFront"],
+    link: "https://licencjackie.pl",
+    year: "2025",
+  },
+  // extra content sites for content category
+  {
+    title: "Praca-Magisterska.pl",
+    cat: "content",
+    catLabel: "Content / EdTech",
+    skip: true, // duplicate - already in edtech
+  },
+];
+
+// Filter out duplicates
+const displayProjects = projects.filter(p => !p.skip);
+---
+
+<Base title="Projekty — Portfolio | Karol Leszczyński" description="30+ zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.">
+  <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
+
+  <main>
+    <!-- Hero -->
+    <section class="hero" style="min-height: 50vh;">
+      <div class="hero-bg"><div class="hero-grid"></div></div>
+      <div class="container">
+        <div class="hero-content" style="max-width: 700px;">
+          <Breadcrumbs items={[{ label: "Projekty" }]} />
+          <h1 class="animate-in animate-delay-1">Moje <span class="text-gradient">projekty</span></h1>
+          <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+            Kilkaset zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX. Każdy projekt to działający produkt z mierzalnymi wynikami.
+          </p>
+          <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); font-size: var(--f-size-sm);">
+            <span>⚡ 4 platformy SaaS z AI</span>
+            <span>🛒 3 sklepy e-commerce</span>
+            <span>🌐 +20 stron klientów</span>
+            <span>📚 +20 publikacji LaTeX</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Wyróżnione projekty -->
+    <section class="section" style="background: var(--c-bg-alt);">
+      <div class="container">
+        <div class="section-header">
+          <h2>Flagowe <span class="text-gradient">realizacje</span></h2>
+          <p>Projekty z największym impactem biznesowym</p>
+        </div>
+        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+          {displayProjects.filter(p => p.highlight && p.stats).map(project => (
+            <div class="skill-group" style="padding: var(--s-xl);">
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-md);">
+                <div>
+                  <h3 style="font-size: var(--f-size-2xl);">{project.title}</h3>
+                  <span class="text-primary" style="font-size: var(--f-size-sm);">{project.catLabel}</span>
+                </div>
+                <span class="text-muted" style="font-size: var(--f-size-sm);">{project.year}</span>
+              </div>
+              <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-lg);">{project.description}</p>
+              {project.stats && (
+                <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-lg);">
+                  {project.stats.map(s => (
+                    <div>
+                      <div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{s.value}</div>
+                      <div class="text-muted" style="font-size: var(--f-size-xs);">{s.label}</div>
+                    </div>
+                  ))}
+                </div>
+              )}
+              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-md);">
+                {project.technologies.slice(0, 5).map(t => (
+                  <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{t}</span>
+                ))}
+                {project.technologies.length > 5 && <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-bg-alt); border-radius: 999px;" class="text-muted">+{project.technologies.length - 5}</span>}
+              </div>
+              {project.link !== "#" && (
+                <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link">
+                  {project.internal ? "Zobacz usługę" : "Odwiedź stronę"} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+      </div>
+    </section>
+
+    <!-- Wszystkie projekty z filtrami CSS -->
+    <section class="section">
+      <div class="container">
+        <div class="section-header">
+          <h2>Wszystkie <span class="text-gradient">realizacje</span></h2>
+          <p>27 projektów w 6 kategoriach</p>
+        </div>
+
+        <!-- CSS-only filter: radios + labels + grid must be siblings -->
+        <div class="portfolio-wrapper">
+          {categories.map((cat, i) => (
+            <Fragment>
+              <input type="radio" name="cat-filter" id={`filter-${cat.id}`} class="portfolio-radio" checked={i === 0} />
+            </Fragment>
+          ))}
+          <div class="portfolio-filters">
+            {categories.map(cat => (
+              <label for={`filter-${cat.id}`} class="portfolio-filter-label">{cat.label} <span class="portfolio-filter-count">{cat.count}</span></label>
+            ))}
+          </div>
+
+          <div class="portfolio-grid">
+          {displayProjects.map(project => (
+            <div class={`portfolio-card`} data-cat={project.cat}>
+              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-sm);">
+                <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{project.catLabel}</span>
+                <span class="text-muted" style="font-size: var(--f-size-xs);">{project.year}</span>
+              </div>
+              <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{project.title}</h3>
+              <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md); line-height: 1.5;">{project.description}</p>
+              <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s-md);">
+                {project.technologies.slice(0, 4).map(t => (
+                  <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius); border: 1px solid var(--c-border);">{t}</span>
+                ))}
+                {project.technologies.length > 4 && <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius);" class="text-muted">+{project.technologies.length - 4}</span>}
+              </div>
+              {project.link && project.link !== "#" && (
+                <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link" style="font-size: var(--f-size-sm);">
+                  {project.internal ? "Szczegóły" : "Odwiedź"} →
+                </a>
+              )}
+            </div>
+          ))}
+        </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="section" style="background: var(--c-bg-alt);">
+      <div class="container" style="max-width: 700px; text-align: center;">
+        <h2>Masz pomysł na <span class="text-gradient">kolejny projekt</span>?</h2>
+        <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+          Każdy z tych 27 projektów zaczął się od rozmowy. Opowiedz mi o swoim pomyśle — <strong>pierwsza konsultacja gratis</strong>.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-md); justify-content: center; margin-bottom: var(--s-xl);">
+          <a href="/kontakt" class="btn btn-primary">Porozmawiajmy o Twoim projekcie →</a>
+          <a href="tel:+48509370772" class="btn btn-outline">📞 509 370 772</a>
+        </div>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); justify-content: center; font-size: var(--f-size-sm);" class="text-muted">
+          <span>✅ 15+ lat doświadczenia</span>
+          <span>✅ Pełen stack: front + back + infra</span>
+          <span>✅ Własne produkty SaaS</span>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- CSS-only portfolio filter -->
+  <style>
+    .portfolio-filters {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      justify-content: center;
+      margin-bottom: var(--s-2xl);
+    }
+    .portfolio-radio { display: none; }
+    .portfolio-filter-label {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 8px 20px;
+      border-radius: 999px;
+      font-size: var(--f-size-sm);
+      font-weight: 500;
+      cursor: pointer;
+      background: var(--c-bg-card);
+      border: 1px solid var(--c-border);
+      transition: var(--transition);
+    }
+    .portfolio-filter-label:hover { border-color: var(--c-border-hover); }
+    .portfolio-radio:checked + .portfolio-filter-label {
+      background: var(--c-primary);
+      color: #fff;
+      border-color: var(--c-primary);
+    }
+    .portfolio-filter-count {
+      font-size: 10px;
+      opacity: 0.7;
+    }
+
+    .portfolio-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+      gap: var(--s-lg);
+      max-width: 1100px;
+      margin: 0 auto;
+    }
+    .portfolio-card {
+      background: var(--c-bg-card);
+      border: 1px solid var(--c-border);
+      border-radius: var(--radius-lg);
+      padding: var(--s-lg);
+      transition: var(--transition);
+    }
+    .portfolio-card:hover {
+      border-color: var(--c-border-hover);
+      transform: translateY(-2px);
+    }
+
+    /* CSS-only filter logic */
+    #filter-all:checked ~ .portfolio-grid .portfolio-card { display: block; }
+    #filter-saas:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-saas:checked ~ .portfolio-grid .portfolio-card[data-cat="saas"] { display: block; }
+    #filter-ecommerce:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-ecommerce:checked ~ .portfolio-grid .portfolio-card[data-cat="ecommerce"] { display: block; }
+    #filter-publishing:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-publishing:checked ~ .portfolio-grid .portfolio-card[data-cat="publishing"] { display: block; }
+    #filter-content:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-content:checked ~ .portfolio-grid .portfolio-card[data-cat="content"] { display: block; }
+    #filter-client:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-client:checked ~ .portfolio-grid .portfolio-card[data-cat="client"] { display: block; }
+    #filter-edtech:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-edtech:checked ~ .portfolio-grid .portfolio-card[data-cat="edtech"] { display: block; }
+
+    @media (max-width: 768px) {
+      .portfolio-grid { grid-template-columns: 1fr; }
+    }
+  </style>
+</Base>

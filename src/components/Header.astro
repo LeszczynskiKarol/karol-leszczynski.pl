@@ -1,0 +1,162 @@
+---
+interface Props {
+  currentPath: string;
+}
+
+const { currentPath } = Astro.props;
+
+const services = {
+  'Strony internetowe': [
+    { label: 'Toruń', href: '/uslugi/strony-www-torun' },
+    { label: 'Bydgoszcz', href: '/uslugi/strony-internetowe-bydgoszcz' },
+  ],
+  'Sklepy internetowe': [
+    { label: 'Toruń', href: '/uslugi/sklepy-internetowe-torun' },
+    { label: 'Bydgoszcz', href: '/uslugi/sklepy-internetowe-bydgoszcz' },
+  ],
+  'Programista': [
+    { label: 'Toruń', href: '/uslugi/programista-torun' },
+    { label: 'Bydgoszcz', href: '/uslugi/programista-bydgoszcz' },
+  ],
+  'Specjalistyczne': [
+    { label: 'Platformy SaaS z AI', href: '/uslugi/platformy-saas-ai' },
+    { label: 'Integracje AI', href: '/uslugi/integracje-ai' },
+    { label: 'Migracje sklepów', href: '/uslugi/migracje-sklepow' },
+    { label: 'Automatyzacja procesów', href: '/uslugi/automatyzacja-procesow' },
+    { label: 'Publikacje LaTeX', href: '/uslugi/publikacje-latex' },
+  ],
+};
+
+const navItems = [
+  { label: 'Start', href: '/' },
+  { label: 'Projekty', href: '/projekty' },
+  { label: 'O mnie', href: '/#o-mnie' },
+  { label: 'Kontakt', href: '/kontakt' },
+];
+---
+
+<nav class="nav" id="navbar">
+  <div class="container nav-inner">
+    <a href="/" class="nav-logo" aria-label="Strona główna">
+      <span class="bracket">&lt;</span>KL<span class="bracket">/&gt;</span>
+    </a>
+
+    <div class="nav-links">
+      {navItems.map(item => (
+        item.label === 'Start' ? (
+          <a href={item.href} class:list={[{ active: currentPath === '/' }]}>{item.label}</a>
+        ) : (
+          <a href={item.href}>{item.label}</a>
+        )
+      ))}
+
+      <!-- Services dropdown -->
+      <div class="nav-dropdown">
+        <a href="/uslugi" class="nav-dropdown-trigger">
+          Usługi
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
+        </a>
+        <div class="nav-dropdown-menu">
+          {Object.entries(services).map(([category, items]) => (
+            <div>
+              <div class="nav-dropdown-category">{category}</div>
+              {items.map(service => (
+                <a href={service.href}>{service.label}</a>
+              ))}
+            </div>
+          ))}
+        </div>
+      </div>
+
+      <button class="theme-toggle" id="theme-toggle" aria-label="Zmień motyw" type="button">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+    </div>
+
+    <!-- Mobile -->
+    <div style="display:flex;align-items:center;gap:8px;">
+      <button class="theme-toggle mobile-only" id="theme-toggle-mobile" aria-label="Zmień motyw" type="button" style="display:none;">
+        <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="5"/><line x1="12" y1="1" x2="12" y2="3"/><line x1="12" y1="21" x2="12" y2="23"/><line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/><line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/><line x1="1" y1="12" x2="3" y2="12"/><line x1="21" y1="12" x2="23" y2="12"/><line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/><line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/></svg>
+        <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/></svg>
+      </button>
+      <button class="mobile-toggle" id="mobile-toggle" aria-label="Menu" type="button">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+</nav>
+
+<!-- Mobile menu -->
+<div class="mobile-menu" id="mobile-menu">
+  {navItems.map(item => (
+    <a href={item.href}>{item.label}</a>
+  ))}
+  <a href="/uslugi">Usługi — przegląd</a>
+  {Object.entries(services).map(([category, items]) => (
+    <>
+      <div class="mobile-menu-category">{category}</div>
+      {items.map(service => (
+        <a href={service.href} class="sub-link">{service.label}</a>
+      ))}
+    </>
+  ))}
+</div>
+
+<script>
+  // Scroll behavior for nav
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    navbar?.classList.toggle('scrolled', window.scrollY > 50);
+  });
+
+  // Mobile menu
+  const mobileToggle = document.getElementById('mobile-toggle');
+  const mobileMenu = document.getElementById('mobile-menu');
+  mobileToggle?.addEventListener('click', () => {
+    mobileMenu?.classList.toggle('open');
+  });
+
+  // Close mobile menu on link click
+  mobileMenu?.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', () => mobileMenu?.classList.remove('open'));
+  });
+
+  // Theme toggle
+  function initTheme() {
+    const saved = localStorage.getItem('theme');
+    if (saved === 'light') {
+      document.documentElement.classList.add('light');
+    }
+    updateIcons();
+  }
+
+  function toggleTheme() {
+    document.documentElement.classList.toggle('light');
+    const isLight = document.documentElement.classList.contains('light');
+    localStorage.setItem('theme', isLight ? 'light' : 'dark');
+    updateIcons();
+  }
+
+  function updateIcons() {
+    const isLight = document.documentElement.classList.contains('light');
+    document.querySelectorAll('.icon-sun').forEach(el => {
+      (el as HTMLElement).style.display = isLight ? 'block' : 'none';
+    });
+    document.querySelectorAll('.icon-moon').forEach(el => {
+      (el as HTMLElement).style.display = isLight ? 'none' : 'block';
+    });
+  }
+
+  initTheme();
+  document.getElementById('theme-toggle')?.addEventListener('click', toggleTheme);
+  document.getElementById('theme-toggle-mobile')?.addEventListener('click', toggleTheme);
+
+  // Show mobile theme toggle on small screens
+  const mqCheck = () => {
+    const btn = document.getElementById('theme-toggle-mobile');
+    if (btn) btn.style.display = window.innerWidth <= 768 ? 'flex' : 'none';
+  };
+  mqCheck();
+  window.addEventListener('resize', mqCheck);
+</script>

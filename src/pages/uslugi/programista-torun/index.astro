@@ -1,0 +1,263 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "ProfessionalService",
+  "name": "Programista Toruń - Karol Leszczyński",
+  "description": "Doświadczony programista w Toruniu. 15 lat doświadczenia, aplikacje webowe, sklepy internetowe.",
+  "provider": { "@type": "Person", "name": "Karol Leszczyński", "jobTitle": "Full-Stack Developer", "telephone": "+48509370772", "email": "kontakt@karol-leszczynski.pl" },
+  "address": { "@type": "PostalAddress", "addressLocality": "Toruń", "addressRegion": "Kujawsko-Pomorskie", "addressCountry": "PL" },
+  "geo": { "@type": "GeoCoordinates", "latitude": "53.0138", "longitude": "18.5981" },
+  "areaServed": [{ "@type": "City", "name": "Toruń" }],
+  "priceRange": "150-500 PLN/h",
+  "openingHours": "Mo-Fr 09:00-17:00",
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "50" },
+};
+
+const localBenefits = [
+  { icon: "👥", title: "Spotkania osobiste", desc: "Możemy spotkać się w Toruniu na kawę i omówić projekt" },
+  { icon: "⏰", title: "Dostępność", desc: "Szybka komunikacja bez opóźnień - jestem dostępny, gdy potrzebujesz wsparcia" },
+  { icon: "🛡️", title: "Polska umowa i faktura", desc: "Pełna transparentność, polski NIP, możliwość podpisania umowy" },
+  { icon: "🎯", title: "Znam lokalny rynek", desc: "Wiem, jak działają firmy w regionie i jakie mają potrzeby" },
+];
+
+const experienceStats = [
+  { label: "Lata doświadczenia", value: "15+" },
+  { label: "Zrealizowane projekty", value: "50+" },
+  { label: "Technologie", value: "30+" },
+  { label: "Zadowoleni klienci", value: "98%" },
+];
+
+const services = [
+  { title: "Aplikacje webowe", icon: "💻", desc: "Nowoczesne aplikacje SPA/PWA w React i Next.js", features: ["Single Page Applications", "Progressive Web Apps", "Panel administracyjny", "Systemy CRM/ERP", "Dashboardy analityczne"] },
+  { title: "Sklepy internetowe", icon: "📦", desc: "E-commerce od podstaw lub na gotowych platformach", features: ["Własne rozwiązania Node.js", "WooCommerce", "Shopify", "Integracje płatności", "Synchronizacja z Allegro"] },
+  { title: "Integracje AI", icon: "⚡", desc: "Wdrażam sztuczną inteligencję w Twojej firmie", features: ["Chatboty AI", "Automatyzacja procesów", "Generowanie treści", "Analiza danych", "Personalizacja"] },
+  { title: "API & Backend", icon: "⚙️", desc: "Solidne rozwiązania backendowe i integracje", features: ["RESTful API", "GraphQL", "Mikrousługi", "Integracje zewnętrzne", "Websockets"] },
+  { title: "Automatyzacja", icon: "🚀", desc: "Automatyzuję procesy biznesowe i workflow", features: ["Make.com / Zapier", "Skrypty automatyzujące", "Web scraping", "Integracje systemów", "CI/CD pipelines"] },
+  { title: "Wsparcie techniczne", icon: "🛡️", desc: "Utrzymanie i rozwój istniejących aplikacji", features: ["Debugging", "Optymalizacja wydajności", "Aktualizacje", "Migracje", "Code review"] },
+];
+
+const techGroups = [
+  { category: "Frontend", techs: ["React", "Next.js", "TypeScript", "Tailwind CSS"] },
+  { category: "Backend", techs: ["Node.js", "Express", "Python", "PHP"] },
+  { category: "Bazy danych", techs: ["MongoDB", "PostgreSQL", "MySQL", "Redis"] },
+  { category: "Cloud", techs: ["AWS", "Vercel", "Docker", "Nginx"] },
+  { category: "AI/ML", techs: ["OpenAI", "Anthropic", "LangChain", "TensorFlow"] },
+  { category: "CMS", techs: ["WordPress", "Strapi", "Sanity", "Directus"] },
+  { category: "E-commerce", techs: ["WooCommerce", "Shopify", "Stripe", "PayPal"] },
+  { category: "DevOps", techs: ["Git", "CI/CD", "Linux", "PM2"] },
+];
+
+const processSteps = [
+  { step: "1", title: "Konsultacja", desc: "Spotykamy się osobiście lub online. Omawiamy Twoje potrzeby i cele biznesowe.", time: "1-2 dni" },
+  { step: "2", title: "Wycena", desc: "Przygotowuję szczegółową wycenę z harmonogramem i zakresem prac.", time: "2-3 dni" },
+  { step: "3", title: "Realizacja", desc: "Programuję rozwiązanie z regularnym raportowaniem postępów.", time: "2-8 tygodni" },
+  { step: "4", title: "Wdrożenie", desc: "Deploy, testy, szkolenie. Gwarancja i wsparcie po uruchomieniu.", time: "3-5 dni" },
+];
+
+const usps = [
+  { icon: "🏆", title: "15 lat doświadczenia", desc: "Od 2009 roku w branży digital. Znam biznes od strony marketingu i technologii." },
+  { icon: "👥", title: "Lokalne wsparcie", desc: "Jestem z Torunia. Możemy spotkać się osobiście, podpisać umowę, wystawię fakturę." },
+  { icon: "📈", title: "Biznesowe podejście", desc: "Nie tylko koduję - rozumiem cele biznesowe i pomagam je osiągnąć przez technologię." },
+  { icon: "🛡️", title: "Gwarancja jakości", desc: "Czysty kod, dokumentacja, testy. Gwarancja na wykonane prace." },
+  { icon: "⏰", title: "Terminowość", desc: "Dotrzymuję terminów. Regularnie informuję o postępach prac." },
+  { icon: "⚡", title: "Nowoczesne rozwiązania", desc: "Wykorzystuję najnowsze technologie, w tym AI i automatyzację." },
+];
+
+const faqs = [
+  { q: "Ile kosztuje stworzenie aplikacji webowej?", a: "Ceny zaczynają się od 3000 zł za prostą stronę. Aplikacje webowe to koszt 8000-30000 zł w zależności od złożoności. Dokładną wycenę przygotuję po poznaniu wymagań." },
+  { q: "Jak długo trwa realizacja projektu?", a: "Prosta strona: 1-2 tygodnie. Sklep internetowy: 3-4 tygodnie. Zaawansowana aplikacja: 4-12 tygodni. Zawsze ustalam realistyczne terminy." },
+  { q: "Czy oferujesz wsparcie po wdrożeniu?", a: "Tak, oferuję pakiety wsparcia od 500 zł/miesiąc. Obejmują aktualizacje, drobne zmiany, monitoring i pomoc techniczną." },
+  { q: "Jakie technologie wykorzystujesz?", a: "Głównie React, Next.js, Node.js, TypeScript. Ale dobieriam technologię do projektu - WordPress dla blogów, WooCommerce dla e-commerce, Python dla AI." },
+  { q: "Czy możesz przejąć istniejący projekt?", a: "Tak, regularnie przejmuję i rozwijam istniejące projekty. Zaczynam od audytu kodu, identyfikuję problemy i proponuję plan rozwoju." },
+];
+---
+
+<Service title="Programista Toruń — Full-Stack Developer" description="Doświadczony programista w Toruniu. 15 lat doświadczenia, 50+ projektów. Aplikacje webowe, sklepy internetowe, integracje AI. React, Next.js, Node.js, AWS." breadcrumbLabel="Programista Toruń" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">📍 Toruń · Kujawsko-Pomorskie</p>
+        <h1 class="animate-in animate-delay-1">Programista <span class="text-gradient">Toruń</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Szukasz doświadczonego programisty w Toruniu?</strong> 15 lat doświadczenia w branży digital. Od copywritera do Full-Stack Developera - znam biznes od każdej strony. Tworzę aplikacje webowe, sklepy internetowe, platformy SaaS i integruję AI.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ 50+ zrealizowanych projektów</span><span>✅ Lokalne wsparcie</span><span>✅ Spotkania osobiste</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Darmowa konsultacja →</a>
+          <a href="tel:+48509370772" class="btn btn-outline">📞 509 370 772</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- O mnie - lokalny kontekst -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Doświadczony <span class="text-gradient">programista z Torunia</span></h2>
+        <p>Od 2009 roku w branży digital</p>
+      </div>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); max-width: 960px; margin: 0 auto;">
+        <!-- Dlaczego lokalny -->
+        <div class="skill-group">
+          <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-lg);">Dlaczego lokalny programista?</h3>
+          {localBenefits.map(b => (
+            <div style="display: flex; align-items: flex-start; gap: var(--s-md); margin-bottom: var(--s-md);">
+              <span style="font-size: 1.3rem; flex-shrink: 0;">{b.icon}</span>
+              <div>
+                <strong>{b.title}</strong>
+                <p class="text-muted" style="font-size: var(--f-size-sm);">{b.desc}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        <!-- Doświadczenie -->
+        <div style="background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); border-radius: var(--radius-lg); padding: var(--s-xl);">
+          <h3 style="font-size: var(--f-size-2xl); margin-bottom: var(--s-lg);">Moje doświadczenie</h3>
+          {experienceStats.map(s => (
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: var(--s-sm) var(--s-md); background: var(--c-bg-card); border-radius: var(--radius); margin-bottom: var(--s-sm);">
+              <span style="font-weight: 500;">{s.label}</span>
+              <span style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{s.value}</span>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Usługi programistyczne -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Co mogę dla Ciebie <span class="text-gradient">zaprogramować</span>?</h2>
+        <p>Kompleksowe usługi programistyczne dla firm z Torunia i okolic</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: var(--s-lg); max-width: 1000px; margin: 0 auto;">
+        {services.map(svc => (
+          <div class="skill-group">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{svc.icon}</div>
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-xs);">{svc.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{svc.desc}</p>
+            {svc.features.map(f => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                <div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                <span class="text-muted">{f}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Technologie -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Technologie które <span class="text-gradient">wykorzystuję</span></h2>
+        <p>Pracuję z najnowszymi technologiami i frameworkami</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: var(--s-lg); max-width: 900px; margin: 0 auto;">
+        {techGroups.map(g => (
+          <div class="skill-group">
+            <h3 class="text-primary" style="font-weight: 600; margin-bottom: var(--s-sm);">{g.category}</h3>
+            {g.techs.map(t => (
+              <div class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: 4px;">{t}</div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces współpracy -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jak wygląda <span class="text-gradient">współpraca</span>?</h2>
+        <p>Prosty i transparentny proces od pomysłu do wdrożenia</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-lg); max-width: 960px; margin: 0 auto;">
+        {processSteps.map(phase => (
+          <div class="skill-group">
+            <div style="display: flex; align-items: center; justify-content: space-between; margin-bottom: var(--s-md);">
+              <div style="width: 48px; height: 48px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700; font-size: var(--f-size-xl);">{phase.step}</div>
+            </div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{phase.title}</h3>
+            <p class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">{phase.time}</p>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{phase.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Co Ci mogę zaproponować -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Co Ci mogę <span class="text-gradient">zaproponować</span>?</h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {usps.map(item => (
+          <div class="skill-group" style="text-align: center;">
+            <div style="width: 64px; height: 64px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--s-md); font-size: 1.5rem;">{item.icon}</div>
+            <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{item.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm);">{item.desc}</p>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Najczęstsze <span class="text-gradient">pytania</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-lg);">ℹ️ Darmowa konsultacja dla firm z Torunia</p>
+      <h2>Potrzebujesz <span class="text-gradient">programisty w Toruniu</span>?</h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Zadzwoń lub napisz - omówimy Twój projekt i zaproponuję najlepsze rozwiązanie. <strong>Pierwsza konsultacja jest całkowicie bezpłatna i niezobowiązująca.</strong>
+      </p>
+
+      <div class="skill-group" style="max-width: 550px; margin: 0 auto var(--s-xl); padding: var(--s-xl);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-lg);">
+          <a href="tel:+48509370772" style="display: flex; flex-direction: column; align-items: center; gap: var(--s-sm); padding: var(--s-md); background: var(--c-bg-alt); border-radius: var(--radius); transition: var(--transition);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center;">📞</div>
+            <span class="text-muted" style="font-size: var(--f-size-sm);">Zadzwoń</span>
+            <span style="font-weight: 600; font-size: var(--f-size-lg);">+48 509 370 772</span>
+          </a>
+          <a href="mailto:kontakt@karol-leszczynski.pl" style="display: flex; flex-direction: column; align-items: center; gap: var(--s-sm); padding: var(--s-md); background: var(--c-bg-alt); border-radius: var(--radius); transition: var(--transition);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: 50%; display: flex; align-items: center; justify-content: center;">✉️</div>
+            <span class="text-muted" style="font-size: var(--f-size-sm);">Napisz</span>
+            <span style="font-weight: 600; font-size: var(--f-size-lg);">kontakt@karol-leszczynski.pl</span>
+          </a>
+        </div>
+        <p class="text-muted" style="text-align: center; margin-top: var(--s-md); font-size: var(--f-size-sm);">📍 Toruń, Kujawsko-Pomorskie</p>
+      </div>
+
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Umów darmową konsultację →</a>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-lg); margin-top: var(--s-xl); font-size: var(--f-size-sm);" class="text-muted">
+        <span>✅ Bezpłatna wycena</span><span>✅ Lokalne spotkanie</span><span>✅ Umowa i faktura</span>
+      </div>
+    </div>
+  </section>
+
+</Service>

@@ -1,0 +1,300 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Strony internetowe Toruń",
+  "description": "Tworzenie stron internetowych w Toruniu. Next.js, WordPress, responsywne, SEO.",
+  "creator": {
+    "@type": "LocalBusiness",
+    "name": "Karol Leszczyński - Strony WWW",
+    "address": { "@type": "PostalAddress", "addressLocality": "Toruń", "addressRegion": "Kujawsko-Pomorskie" },
+    "telephone": "+48509370772",
+  },
+  "offers": { "@type": "AggregateOffer", "priceCurrency": "PLN", "lowPrice": "1990", "highPrice": "9990" },
+  "potentialAction": { "@type": "ContactAction", "target": { "@type": "ContactPoint", "telephone": "+48509370772", "contactType": "sales" } },
+};
+
+const stats = [
+  { value: "50+", label: "Stron WWW zrealizowanych" },
+  { value: "95+", label: "Średni PageSpeed" },
+  { value: "14 dni", label: "Średni czas realizacji" },
+  { value: "100%", label: "Zadowolonych klientów" },
+];
+
+const siteTypes = [
+  { title: "Strony firmowe", desc: "Profesjonalne strony prezentujące Twoją firmę, usługi i portfolio. Idealne dla małych i średnich firm.", features: ["O firmie", "Usługi", "Portfolio", "Kontakt", "Blog firmowy"], icon: "🌐" },
+  { title: "Landing Page", desc: "Strony sprzedażowe nastawione na konkretną konwersję. Idealne do kampanii reklamowych.", features: ["Jeden cel", "Wysoka konwersja", "A/B testy", "Integracje", "Analytics"], icon: "🎯" },
+  { title: "Strony portfolio", desc: "Prezentacja Twoich projektów i realizacji. Dla freelancerów, artystów, architektów.", features: ["Galerie", "Case studies", "Filtry projektów", "Lightbox", "Animacje"], icon: "🎨" },
+  { title: "Strony usługowe", desc: "Kompleksowa prezentacja usług z możliwością rezerwacji i wyceny online.", features: ["Katalog usług", "Kalendarze", "Formularze", "Kalkulatory", "Płatności"], icon: "📅" },
+  { title: "Blogi i magazyny", desc: "Platformy contentowe z zaawansowanym CMS. Łatwe zarządzanie treścią.", features: ["CMS", "Kategorie", "Tagi", "Newsletter", "Komentarze"], icon: "📝" },
+  { title: "Aplikacje webowe", desc: "Zaawansowane systemy i platformy SaaS. Panele klienta, CRM, automatyzacje.", features: ["Logowanie", "Panel admina", "API", "Bazy danych", "Integracje"], icon: "💻" },
+];
+
+const processSteps = [
+  { day: "Dzień 1-2", title: "Brief & Strategia", tasks: ["Analiza konkurencji", "Mapa strony", "Strategia SEO", "Wireframes"] },
+  { day: "Dzień 3-5", title: "Projekt graficzny", tasks: ["Projekt UI/UX", "Wybór kolorystyki", "Typografia", "Responsywność"] },
+  { day: "Dzień 6-10", title: "Kodowanie", tasks: ["Frontend", "Backend", "Integracje", "Optymalizacja"] },
+  { day: "Dzień 11-14", title: "Finalizacja", tasks: ["Treści i SEO", "Testy", "Szkolenie", "Publikacja"] },
+];
+
+const packageFeatures = [
+  { icon: "📱", title: "Responsywny design", desc: "Strona idealnie dopasowana do każdego urządzenia" },
+  { icon: "⚡", title: "PageSpeed 80+", desc: "Błyskawiczne ładowanie, lepsza pozycja w Google" },
+  { icon: "🔍", title: "Optymalizacja SEO", desc: "Meta tagi, struktura URL, Schema.org, sitemap" },
+  { icon: "🔒", title: "Certyfikat SSL", desc: "Bezpieczne połączenie HTTPS w standardzie" },
+  { icon: "📊", title: "Google Analytics", desc: "Pełna analityka ruchu i zachowań użytkowników" },
+  { icon: "🎧", title: "Wsparcie 3 miesiące", desc: "Pomoc techniczna i drobne poprawki gratis" },
+];
+
+const plans = [
+  { name: "Wizytówka", price: "1 990", time: "7 dni", desc: "Prosta strona dla małych firm i freelancerów", popular: false, features: ["Do 5 podstron", "Responsywny design", "Formularz kontaktowy", "Podstawowe SEO", "Google Maps", "SSL i hosting (1 rok)", "1 miesiąc wsparcia"] },
+  { name: "Biznes", price: "3 990", time: "14 dni", desc: "Profesjonalna strona firmowa z CMS", popular: true, features: ["Do 15 podstron", "System CMS", "Blog firmowy", "Galeria/Portfolio", "Zaawansowane SEO", "Google Analytics", "Newsletter", "Animacje i efekty", "SSL i hosting (1 rok)", "3 miesiące wsparcia"] },
+  { name: "Premium", price: "+7 990", time: "21+ dni", desc: "Zaawansowane strony i aplikacje webowe", popular: false, features: ["Nieograniczone podstrony", "Dedykowany projekt UX/UI", "Zaawansowany CMS", "Integracje API", "Panel klienta", "Wielojęzyczność", "Optymalizacja konwersji", "A/B testy", "Dedykowany hosting", "6 miesięcy wsparcia"] },
+];
+
+const faqs = [
+  { q: "W jakich technologiach tworzysz strony WWW?", a: "Używam najnowszych technologii: Next.js, React, Astro, Node.js, TypeScript. To gwarantuje szybkość, bezpieczeństwo i skalowalność. Dla prostszych projektów mogę użyć WordPress, ale zawsze polecam nowoczesne, dedykowany strony internetowe czy to firmowe, czy na użytek prywatny." },
+  { q: "Czy mogę sam edytować treści na stronie?", a: "Jeśli zamawiasz stronę z CMS-em, edytowanie treści odbywa się w intuicyjnym, graficznym panelu administratora. W przypadku statycznych stron WWW edycja zawartości odbywa się poprzez modyfikację kodu plików składających się na witrynę." },
+  { q: "Ile kosztuje utrzymanie strony?", a: "Hosting i domena to koszt około 300-500 zł rocznie dla standardowej strony. Pierwszy rok masz w cenie." },
+  { q: "Czy strona będzie wysoko w Google?", a: "Każdą stronę buduję zgodnie z najlepszymi praktykami SEO. To solidna podstawa do pozycjonowania, jednak pamiętaj, że bez działań w zakresie SEO istnieją nikłe szanse na osiągnięcie wysokich pozycji, szczególnie jeśli działasz w wysoce konkurencyjnym otoczeniu." },
+  { q: "Co, jeśli będę potrzebował zmian po wdrożeniu?", a: "Przez pierwsze 1-3 miesiące (zależnie od pakietu) masz darmowe wsparcie i drobne poprawki. Później oferuję wsparcie w abonamencie lub rozliczenie godzinowe." },
+  { q: "Dlaczego warto wybrać lokalnego wykonawcę z Torunia?", a: "Możemy spotkać się osobiście, omówić projekt przy kawie. Jestem na miejscu, gdy potrzebujesz pomocy. Znam lokalny rynek i specyfikę firm z regionu kujawsko-pomorskiego." },
+];
+---
+
+<Service title="Strony internetowe Toruń — Tworzenie stron WWW" description="Tworzenie stron internetowych w Toruniu. Next.js, React, Astro, WordPress. Responsywne, SEO w standardzie. PageSpeed 95+. Od 1990 zł." breadcrumbLabel="Strony WWW Toruń" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">📍 Toruń · Kujawsko-Pomorskie</p>
+        <h1 class="animate-in animate-delay-1">Strony internetowe <span class="text-gradient">Toruń</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">Strony WWW, które przyciągają klientów i budują zaufanie. Łączę 15 lat doświadczenia w copywritingu z najnowszymi technologiami web. Twoja strona będzie szybka, piękna i skuteczna w sprzedaży.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ PageSpeed 95+</span><span>✅ Gotowa w 14 dni</span><span>✅ SEO w standardzie</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Zamów bezpłatną wycenę →</a>
+          <a href="#realizacje" class="btn btn-outline">Zobacz realizacje</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats Bar -->
+  <section style="padding: var(--s-2xl) 0; background: var(--c-primary-soft); border-top: 1px solid var(--c-border); border-bottom: 1px solid var(--c-border);">
+    <div class="container">
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-xl); text-align: center;">
+        {stats.map(s => (
+          <div>
+            <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary);">{s.value}</div>
+            <div class="text-muted" style="font-size: var(--f-size-sm);">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Dlaczego ja -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Strona WWW to <span class="text-gradient">więcej niż kod</span></h2>
+        <p>To przede wszystkim narzędzie sprzedaży. Dlatego każdą stronę projektuję z myślą o konwersji, wykorzystując wiedzę z 15 lat pracy w marketingu.</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--s-md); font-size: 2rem;">✍️</div>
+          <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">Copywriter z 15-letnim stażem</h3>
+          <p class="text-muted">Napisałem ponad <strong>5000 tekstów sprzedażowych</strong>. Wiem, jak słowa przekładają się na sprzedaż. Twoja strona WWW będzie miała treści, które konwertują.</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--s-md); font-size: 2rem;">🔍</div>
+          <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">Specjalista SEO</h3>
+          <p class="text-muted">Od 2012 roku pozycjonuję strony. <strong>Każdą stronę buduję od podstaw pod Google</strong>. Zero dodatkowych kosztów na późniejszą optymalizację.</p>
+        </div>
+        <div style="text-align: center;">
+          <div style="width: 80px; height: 80px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto var(--s-md); font-size: 2rem;">💻</div>
+          <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">Full-Stack Developer</h3>
+          <p class="text-muted">Używam najnowszych technologii: <strong>Next.js, React, Node.js, Astro</strong>. Twoja strona będzie szybsza od 95% konkurencji.</p>
+        </div>
+      </div>
+      <div class="cta-section" style="margin-top: var(--s-3xl);">
+        <div style="font-size: 2.5rem; margin-bottom: var(--s-md);">✨</div>
+        <h3 style="font-size: var(--f-size-2xl);">Webdesigner z Torunia</h3>
+        <p>Możemy spotkać się na kawę w Toruniu. Omówimy projekt twarzą w twarz. Po wdrożeniu jestem na miejscu, gdy potrzebujesz pomocy.</p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-sm); justify-content: center; margin-top: var(--s-md);">
+          <span class="about-tag">Spotkania osobiste</span><span class="about-tag">Szkolenia na miejscu</span><span class="about-tag">Lokalne wsparcie</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Typy stron -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Jakie strony internetowe <span class="text-gradient">tworzę</span>?</h2>
+        <p>Od wizytówek po zaawansowane aplikacje webowe</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--s-lg); max-width: 1100px; margin: 0 auto;">
+        {siteTypes.map(type => (
+          <div class="skill-group">
+            <div style="font-size: 1.5rem; margin-bottom: var(--s-sm);">{type.icon}</div>
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-sm);">{type.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{type.desc}</p>
+            {type.features.map(f => (
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                <div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0;"></div>
+                <span class="text-muted">{f}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Realizacje -->
+  <section class="section" id="realizacje">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ostatnie <span class="text-gradient">realizacje</span></h2>
+        <p>Strony które przynoszą efekty moim klientom</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(380px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        <div class="project-card">
+          <div class="project-card-image"><img src="/projects/grandkuchnie.jpg" alt="GrandKuchnie.pl - strona internetowa" style="width:100%;height:100%;object-fit:cover;" /></div>
+          <div class="project-card-body">
+            <h3>GrandKuchnie.pl</h3>
+            <p class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">Producent mebli kuchennych</p>
+            <p>Elegancka strona firmowa z rozbudowanym portfolio realizacji, zoptymalizowana pod kątem SEO. System CMS do samodzielnego dodawania projektów.</p>
+            <div class="project-card-tech"><span class="tech-tag">Next.js</span><span class="tech-tag">Prisma</span><span class="tech-tag">AWS S3</span></div>
+            <a href="https://grandkuchnie.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz stronę <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+        </div>
+        <div class="project-card">
+          <div class="project-card-image"><img src="/projects/meble-bydgoszcz.png" alt="Meble-Bydgoszcz - strona internetowa" style="width:100%;height:100%;object-fit:cover;" /></div>
+          <div class="project-card-body">
+            <h3>Meble-Bydgoszcz.pl</h3>
+            <p class="text-primary" style="font-size: var(--f-size-sm); margin-bottom: var(--s-sm);">Firmowa strona WWW</p>
+            <p>Rozbudowana strony firmy zajmującej się projektowaniem i tworzeniem mebli na wymiar. Pełen zakres usług, optymalizacja SEO, formularz kontaktowy, galeria zdjęć, czytelna struktura.</p>
+            <div class="project-card-tech"><span class="tech-tag">Astro</span><span class="tech-tag">AWS Cloudfront</span><span class="tech-tag">AWS S3</span></div>
+            <a href="https://meble-bydgoszcz.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz stronę <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <a href="/projekty" class="projects-page-link">Zobacz więcej projektów <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg></a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Strona WWW w <span class="text-gradient">14 dni</span></h2>
+        <p>Sprawdzony proces, który gwarantuje terminowość</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: var(--s-lg); max-width: 960px; margin: 0 auto;">
+        {processSteps.map(phase => (
+          <div class="skill-group">
+            <span class="text-primary font-mono" style="font-size: var(--f-size-sm); font-weight: 600;">{phase.day}</span>
+            <h3 style="font-size: var(--f-size-lg); margin: var(--s-xs) 0 var(--s-md);">{phase.title}</h3>
+            {phase.tasks.map(task => (
+              <div style="display: flex; align-items: center; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);">
+                <span style="color: var(--c-accent);">✓</span><span class="text-muted">{task}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Co otrzymujesz -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Co otrzymujesz <span class="text-gradient">w pakiecie</span>?</h2>
+        <p>Kompletne rozwiązanie bez ukrytych kosztów</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {packageFeatures.map(f => (
+          <div style="display: flex; gap: var(--s-md);">
+            <div style="width: 48px; height: 48px; background: var(--c-primary-soft); border-radius: var(--radius); display: flex; align-items: center; justify-content: center; font-size: 1.3rem; flex-shrink: 0;">{f.icon}</div>
+            <div>
+              <h3 style="font-weight: 600; margin-bottom: 4px;">{f.title}</h3>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{f.desc}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Cennik -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Przejrzyste <span class="text-gradient">ceny</span></h2>
+        <p>Wybierz pakiet dopasowany do Twoich potrzeb</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.popular ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.popular && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: var(--c-primary); color: #fff; padding: 2px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600;">Najpopularniejszy</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div class="text-primary" style="font-size: var(--f-size-sm); margin: var(--s-xs) 0;">Realizacja: {plan.time}</div>
+              <div style="margin: var(--s-sm) 0;"><span style="font-size: var(--f-size-3xl); font-weight: 800;">{plan.price}</span><span class="text-muted"> zł netto</span></div>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <a href="/kontakt" class:list={['btn', plan.popular ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Zamów pakiet</a>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Często zadawane <span class="text-gradient">pytania</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <h2>Potrzebujesz strony WWW w <span class="text-gradient">Toruniu</span>?</h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">Zadzwoń lub napisz. Przygotuje bezpłatną wycenę Twojej strony internetowej. Spotkajmy się na kawę w Toruniu i omówmy Twój projekt!</p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-xl); justify-content: center; margin-bottom: var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.88.37 1.87.7 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.94.33 1.93.57 2.81.7A2 2 0 0 1 22 16.92z"/></svg></div>
+          <div><span class="contact-label">Zadzwoń</span><span class="contact-value">+48 509 370 772</span></div>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="min-width: 240px;">
+          <div class="contact-icon"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg></div>
+          <div><span class="contact-label">Napisz</span><span class="contact-value">kontakt@karol-leszczynski.pl</span></div>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Zamów bezpłatną wycenę →</a>
+      <p class="text-muted" style="margin-top: var(--s-lg); font-size: var(--f-size-sm);">📍 Toruń</p>
+    </div>
+  </section>
+
+</Service>

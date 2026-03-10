@@ -1,0 +1,308 @@
+---
+import Service from '@/layouts/Service.astro';
+
+const structuredData = {
+  "@context": "https://schema.org",
+  "@type": "WebPageElement",
+  "name": "Sklepy internetowe Bydgoszcz - Nowoczesne e-commerce",
+  "description": "Tworzenie sklepów internetowych w Bydgoszczy. Nowoczesne rozwiązania e-commerce, integracje z marketplace, płatności online.",
+  "provider": { "@type": "LocalBusiness", "name": "Karol Leszczyński - Sklepy internetowe Bydgoszcz", "priceRange": "4990-24990 PLN", "telephone": "+48509370772" },
+  "areaServed": { "@type": "City", "name": "Bydgoszcz" },
+  "offers": { "@type": "Offer", "price": "4990", "priceCurrency": "PLN", "availability": "https://schema.org/InStock", "validFrom": "2024-01-01" },
+  "aggregateRating": { "@type": "AggregateRating", "ratingValue": "5.0", "reviewCount": "47", "bestRating": "5" },
+};
+
+const salesStats = [
+  { value: "340%", label: "Wzrost ruchu organicznego", color: "var(--c-accent)" },
+  { value: "3.5%", label: "Średnia konwersja", color: "var(--c-primary)" },
+  { value: "45%", label: "Wzrost przychodów", color: "var(--c-accent)" },
+  { value: "1.8s", label: "Czas ładowania", color: "var(--c-primary)" },
+];
+
+const featureTabs = [
+  { key: "konwersja", title: "Optymalizacja konwersji", desc: "Każdy element zaprojektowany pod sprzedaż", items: ["Psychologia zakupów online", "A/B testy elementów", "Inteligentne rekomendacje", "Uproszczony checkout", "Trust badges i social proof"] },
+  { key: "mobile", title: "Mobile-first design", desc: "65% zakupów z telefonu - Twój sklep musi być gotowy", items: ["PWA - działa jak aplikacja", "Offline mode", "Push notifications", "One-click checkout", "Apple Pay / Google Pay"] },
+  { key: "automatyzacja", title: "Pełna automatyzacja", desc: "Sklep pracuje za Ciebie 24/7", items: ["Auto-import z hurtowni", "Synchronizacja stanów", "Automatyczne faktury", "Email marketing", "Powiadomienia SMS"] },
+];
+
+const realizacje = [
+  { name: "FashionHub Bydgoszcz", category: "Moda & Akcesoria", results: "+65% konwersji w 3 miesiące", tech: "Next.js + Stripe", features: ["Wirtualna przymierzalnia AR", "Personalizowane rekomendacje AI", "Integracja z Instagramem"], metric: "12K", metricLabel: "Użytkowników/mies." },
+  { name: "TechStore24", category: "Elektronika", results: "3.8% conversion rate", tech: "Node.js + MongoDB", features: ["Porównywarka produktów", "Live chat z ekspertem", "Raty 0% online"], metric: "850K", metricLabel: "Przychód/rok" },
+  { name: "EkoMarket", category: "Żywność ekologiczna", results: "2h dostawa w Bydgoszczy", tech: "React + Express", features: ["Subskrypcje produktów", "Program lojalnościowy", "Śledzenie dostaw GPS"], metric: "4.9★", metricLabel: "Ocena klientów" },
+];
+
+const processPhases = [
+  { week: "Tydzień 1", title: "Discovery & Research", tasks: ["Analiza konkurencji w Bydgoszczy", "Badanie grupy docelowej", "Strategia UX/UI", "Mapa funkcjonalności"], deliverable: "Brief strategiczny" },
+  { week: "Tydzień 2-3", title: "Design & Prototyp", tasks: ["Wireframes kluczowych stron", "Projekt graficzny", "Interaktywny prototyp", "Testy użyteczności"], deliverable: "Prototyp Figma" },
+  { week: "Tydzień 4-6", title: "Development", tasks: ["Frontend w React/Next.js", "Backend Node.js/Python", "Integracje płatności", "Panel administracyjny"], deliverable: "Sklep na staging" },
+  { week: "Tydzień 7-8", title: "Launch & Growth", tasks: ["Migracja produktów", "Konfiguracja SEO", "Testy wydajnościowe", "Szkolenie zespołu"], deliverable: "Sklep na produkcji" },
+];
+
+const plans = [
+  { name: "Start-up", price: "4 990", installment: "415 zł x 12 rat", desc: "Idealny na start w e-commerce", popular: false, time: "3-4 tygodnie", support: "30 dni wsparcia", features: ["Do 100 produktów", "Design z szablonu premium", "Płatności online (P24, PayU)", "Integracja InPost/DPD", "RWD + PWA", "Google Analytics 4", "SSL + hosting 12 mies.", "2h szkolenia"] },
+  { name: "Business", price: "12 990", installment: "649 zł x 20 rat", desc: "Dla rozwijających się firm", popular: true, time: "6-8 tygodni", support: "6 miesięcy wsparcia", features: ["Do 5000 produktów", "Dedykowany design UX/UI", "Multi-payment (Stripe, PayPal)", "Marketplace (Allegro, Amazon)", "Marketing automation", "AI rekomendacje", "Multi-language", "Advanced SEO", "CRM integration", "A/B testing"] },
+  { name: "Enterprise", price: "24 990+", installment: "Indywidualne raty", desc: "Zaawansowane rozwiązania B2B/B2C", popular: false, time: "10-12 tygodni", support: "12 miesięcy wsparcia", features: ["Nieograniczone produkty", "Custom development", "Headless commerce", "API dla partnerów", "ERP/WMS integration", "Dedykowany serwer", "Load balancing", "24/7 monitoring", "SLA 99.9%", "Dedykowany PM"] },
+];
+
+const faqs = [
+  { q: "Czy mogę sprzedawać w całej Polsce mając sklep w Bydgoszczy?", a: "Oczywiście! Tworzę sklepy działające globalnie. Dodatkowo optymalizuję pod lokalne SEO, więc będziesz widoczny zarówno w Bydgoszczy, jak i w całej Polsce. Integruję wszystkich głównych kurierów i systemy płatności." },
+  { q: "Jak długo trwa pozycjonowanie nowego sklepu?", a: "Pierwsze efekty SEO widać po 2-3 miesiącach. Pełne rezultaty po 6-12 miesiącach. Każdy sklep buduję od podstaw pod SEO - struktura, szybkość, schema.org. Mam 15 lat doświadczenia w pozycjonowaniu." },
+  { q: "Czy mogę integrować sklep z moim systemem magazynowym?", a: "Tak, integruję sklepy z popularnymi systemami: Subiekt, Comarch, SAP, własne rozwiązania przez API. Synchronizacja stanów magazynowych w czasie rzeczywistym." },
+  { q: "Ile kosztuje utrzymanie sklepu miesięcznie?", a: "Hosting od 50 zł/mies dla małych sklepów. Średni sklep to 150-300 zł/mies (hosting + domeny + certyfikaty). Duże sklepy z dużym ruchem od 500 zł. Oferuję pakiety maintanance z aktualizacjami." },
+  { q: "Czy sklep będzie działał szybko przy dużym ruchu?", a: "Absolutnie. Używam CDN, cache'owania, optymalizacji obrazów. Sklepy obsługują tysiące użytkowników jednocześnie. Load time poniżej 2 sekund gwarantowany." },
+  { q: "Oferujesz wsparcie po uruchomieniu sklepu?", a: "Tak, każdy pakiet zawiera okres wsparcia (30 dni - 12 miesięcy). Później oferuję pakiety wsparcia od 500 zł/mies obejmujące aktualizacje, monitoring, drobne zmiany." },
+];
+
+const reviews = [
+  { name: "Michał Kowalski", company: "FashionHub Bydgoszcz", text: "Sklep przekroczył nasze oczekiwania. Konwersja wzrosła o 65% w 3 miesiące! Karol nie tylko koduje, ale rozumie biznes." },
+  { name: "Anna Nowak", company: "EkoMarket", text: "Profesjonalizm na najwyższym poziomie. Sklep działa błyskawicznie, obsługa prosta, a wsparcie po wdrożeniu bezcenne." },
+  { name: "Tomasz Wiśniewski", company: "TechStore24", text: "Migracja z PrestaShop przebiegła bez problemów. Nowy sklep jest 5x szybszy i generuje 40% więcej sprzedaży." },
+];
+---
+
+<Service title="Sklepy internetowe Bydgoszcz — Nowoczesne e-commerce" description="Tworzenie sklepów internetowych w Bydgoszczy. Nowoczesne rozwiązania e-commerce, integracje z marketplace, płatności online. Od 4990 zł. 47 sklepów w portfolio." breadcrumbLabel="Sklepy internetowe Bydgoszcz" structuredData={structuredData}>
+
+  <!-- Hero -->
+  <section class="hero" style="min-height: 70vh;">
+    <div class="hero-bg"><div class="hero-grid"></div></div>
+    <div class="container">
+      <div class="hero-content" style="max-width: 700px;">
+        <p class="text-primary font-mono animate-in" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">📍 Bydgoszcz · Metropolia Bydgoszcz-Toruń</p>
+        <h1 class="animate-in animate-delay-1">Sklepy internetowe <span class="text-gradient">Bydgoszcz</span></h1>
+        <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
+          <strong>Nowoczesne sklepy internetowe na zamówienie</strong> dla firm z Bydgoszczy. Nie tylko programuję - projektuję kompletne rozwiązania e-commerce, które zwiększają sprzedaż średnio o 45%. Doświadczenie w marketingu + najnowsze technologie = Twój sukces online.
+        </p>
+        <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); margin-bottom: var(--s-xl); font-size: var(--f-size-sm);">
+          <span>✅ 47 sklepów w portfolio</span><span>✅ Średni CR 3.5%</span><span>✅ Realizacja 4-8 tygodni</span>
+        </div>
+        <div class="hero-actions animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">Bezpłatna konsultacja →</a>
+          <a href="tel:+48509370772" class="btn btn-outline">📞 509 370 772</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Statystyki sprzedaży -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Liczby mówią <span class="text-gradient">same za siebie</span></h2>
+        <p>Średnie wyniki moich sklepów po pierwszym roku działania</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--s-lg); max-width: 900px; margin: 0 auto;">
+        {salesStats.map(s => (
+          <div class="skill-group" style="text-align: center; padding: var(--s-lg);">
+            <div style={`font-size: var(--f-size-3xl); font-weight: 800; color: ${s.color}; margin-bottom: var(--s-xs);`}>{s.value}</div>
+            <div class="text-muted" style="font-size: var(--f-size-sm);">{s.label}</div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Funkcje które zwiększają sprzedaż -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Funkcje które <span class="text-gradient">zwiększają sprzedaż</span></h2>
+        <p>Każdy sklep wyposażam w sprawdzone rozwiązania</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+        {featureTabs.map(tab => (
+          <div class="skill-group">
+            <h3 style="font-size: var(--f-size-xl); margin-bottom: var(--s-xs);">{tab.title}</h3>
+            <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">{tab.desc}</p>
+            {tab.items.map(item => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 8px; font-size: var(--f-size-sm);">
+                <span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{item}</span>
+              </div>
+            ))}
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Realizacje -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ostatnie <span class="text-gradient">realizacje</span></h2>
+        <p>Sklepy które napędzają biznes moich klientów</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+        {realizacje.map(p => (
+          <div class="skill-group">
+            <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-md);">
+              <div>
+                <h3 style="font-size: var(--f-size-xl); margin-bottom: 2px;">{p.name}</h3>
+                <p class="text-primary" style="font-size: var(--f-size-sm);">{p.category}</p>
+              </div>
+              <span style="font-size: 1.5rem;">🏆</span>
+            </div>
+            <div style="padding: var(--s-sm) var(--s-md); background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); border-radius: var(--radius); margin-bottom: var(--s-md);">
+              <p style="font-size: var(--f-size-sm); font-weight: 600;">{p.results}</p>
+            </div>
+            {p.features.map(f => (
+              <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 4px; font-size: var(--f-size-sm);">
+                <div style="width: 6px; height: 6px; background: var(--c-primary); border-radius: 50%; flex-shrink: 0; margin-top: 6px;"></div>
+                <span class="text-muted">{f}</span>
+              </div>
+            ))}
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-top: var(--s-md); padding-top: var(--s-md); border-top: 1px solid var(--c-border);">
+              <div>
+                <div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{p.metric}</div>
+                <div class="text-muted" style="font-size: var(--f-size-xs);">{p.metricLabel}</div>
+              </div>
+              <span class="text-muted" style="font-size: var(--f-size-xs);">{p.tech}</span>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Proces -->
+  <section class="section">
+    <div class="container">
+      <div class="section-header">
+        <h2>Od pomysłu do <span class="text-gradient">pierwszej sprzedaży</span></h2>
+        <p>Sprawdzony proces gwarantujący sukces</p>
+      </div>
+      <div style="max-width: 800px; margin: 0 auto;">
+        {processPhases.map((phase, i) => (
+          <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-2xl);">
+            <div style="flex-shrink: 0; width: 56px; height: 56px; background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: #fff; font-weight: 700;">{i + 1}</div>
+            <div class="skill-group" style="flex: 1; padding: var(--s-lg);">
+              <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: var(--s-sm);">
+                <h3 style="font-size: var(--f-size-xl);">{phase.title}</h3>
+                <span class="text-primary font-mono" style="font-size: var(--f-size-sm); font-weight: 600;">{phase.week}</span>
+              </div>
+              <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md);">
+                <div>
+                  {phase.tasks.map(t => (
+                    <div style="display: flex; align-items: flex-start; gap: 6px; margin-bottom: 6px; font-size: var(--f-size-sm);">
+                      <span class="text-primary">›</span><span class="text-muted">{t}</span>
+                    </div>
+                  ))}
+                </div>
+                <div style="background: var(--c-primary-soft); border-radius: var(--radius); padding: var(--s-md);">
+                  <p class="text-muted" style="font-size: var(--f-size-xs); margin-bottom: 4px;">Deliverable:</p>
+                  <p class="text-primary" style="font-weight: 600;">{phase.deliverable}</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- Pakiety cenowe -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Inwestycja w <span class="text-gradient">Twój sukces</span></h2>
+        <p>Transparentne ceny, płatność w ratach 0%</p>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
+        {plans.map(plan => (
+          <div class="skill-group" style={plan.popular ? 'border-color: var(--c-primary); box-shadow: var(--c-glow); position: relative;' : ''}>
+            {plan.popular && <div style="position: absolute; top: -12px; left: 50%; transform: translateX(-50%); background: linear-gradient(135deg, var(--c-primary), var(--c-accent)); color: #fff; padding: 4px 16px; border-radius: 999px; font-size: var(--f-size-xs); font-weight: 700; display: flex; align-items: center; gap: 4px;">⭐ Bestseller</div>}
+            <div style="text-align: center; margin-bottom: var(--s-lg);">
+              <h3 style="font-size: var(--f-size-2xl);">{plan.name}</h3>
+              <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary); margin: var(--s-xs) 0;">{plan.price} <span style="font-size: var(--f-size-base);">zł</span></div>
+              <p style="font-size: var(--f-size-sm); color: var(--c-accent); font-weight: 600; margin-bottom: var(--s-sm);">{plan.installment}</p>
+              <p class="text-muted" style="font-size: var(--f-size-sm);">{plan.desc}</p>
+            </div>
+            <ul style="margin-bottom: var(--s-lg);">
+              {plan.features.map(f => (
+                <li style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent); flex-shrink: 0;">✓</span><span>{f}</span></li>
+              ))}
+            </ul>
+            <div style="margin-bottom: var(--s-lg); font-size: var(--f-size-sm);">
+              <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--c-bg-alt); border-radius: var(--radius); margin-bottom: 6px;">
+                <span class="text-muted">Realizacja:</span><span style="font-weight: 600;">{plan.time}</span>
+              </div>
+              <div style="display: flex; justify-content: space-between; padding: 8px; background: var(--c-bg-alt); border-radius: var(--radius);">
+                <span class="text-muted">Wsparcie:</span><span style="font-weight: 600; color: var(--c-accent);">{plan.support}</span>
+              </div>
+            </div>
+            <a href="/kontakt" class:list={['btn', plan.popular ? 'btn-primary' : 'btn-outline']} style="width: 100%; justify-content: center;">Zamów pakiet</a>
+          </div>
+        ))}
+      </div>
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <p class="text-muted" style="margin-bottom: var(--s-md);">Wszystkie ceny netto. Możliwość negocjacji przy większych projektach.</p>
+        <div style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px;">
+          <span style="color: var(--c-accent);">🛡️</span>
+          <span style="font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent);">Gwarancja satysfakcji lub zwrot pieniędzy</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FAQ -->
+  <section class="section">
+    <div class="container" style="max-width: 800px;">
+      <div class="section-header"><h2>Pytania <span class="text-gradient">przedsiębiorców z Bydgoszczy</span></h2></div>
+      {faqs.map(item => (
+        <details class="faq-item"><summary>{item.q}</summary><div class="faq-answer">{item.a}</div></details>
+      ))}
+    </div>
+  </section>
+
+  <!-- Testimonials -->
+  <section class="section" style="background: var(--c-bg-alt);">
+    <div class="container">
+      <div class="section-header">
+        <h2>Opinie <span class="text-gradient">zadowolonych klientów</span></h2>
+      </div>
+      <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: var(--s-xl); max-width: 960px; margin: 0 auto;">
+        {reviews.map(r => (
+          <div class="skill-group">
+            <div style="margin-bottom: var(--s-md); color: #eab308;">⭐⭐⭐⭐⭐</div>
+            <blockquote class="text-muted" style="font-size: var(--f-size-sm); font-style: italic; margin-bottom: var(--s-md);">
+              &ldquo;{r.text}&rdquo;
+            </blockquote>
+            <div>
+              <p style="font-weight: 600;">{r.name}</p>
+              <p class="text-primary" style="font-size: var(--f-size-sm);">{r.company}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="section">
+    <div class="container" style="max-width: 800px; text-align: center;">
+      <p style="display: inline-flex; align-items: center; gap: 8px; padding: 8px 20px; background: rgba(34,197,94,0.1); border-radius: 999px; font-size: var(--f-size-sm); font-weight: 600; color: var(--c-accent); margin-bottom: var(--s-lg);">⏰ Odpowiedź w 24h · Start projektu w 7 dni</p>
+      <h2>Zacznij sprzedawać online <span class="text-gradient">już za 4 tygodnie</span></h2>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
+        Dołącz do grona 47 zadowolonych właścicieli sklepów z Bydgoszczy i regionu. <strong>Pierwsza konsultacja bezpłatna i bez zobowiązań.</strong>
+      </p>
+      <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-lg); max-width: 500px; margin: 0 auto var(--s-xl);">
+        <a href="tel:+48509370772" class="contact-item" style="flex-direction: column; text-align: center;">
+          <div class="contact-icon" style="margin-bottom: var(--s-sm);">📞</div>
+          <span class="contact-label">Zadzwoń teraz</span>
+          <span class="contact-value" style="font-size: var(--f-size-lg);">509 370 772</span>
+        </a>
+        <a href="mailto:kontakt@karol-leszczynski.pl" class="contact-item" style="flex-direction: column; text-align: center;">
+          <div class="contact-icon" style="margin-bottom: var(--s-sm);">✉️</div>
+          <span class="contact-label">Napisz</span>
+          <span class="contact-value">kontakt@karol-leszczynski.pl</span>
+        </a>
+      </div>
+      <a href="/kontakt" class="btn btn-primary" style="font-size: var(--f-size-lg);">Umów bezpłatną konsultację →</a>
+      <div style="display: flex; flex-wrap: wrap; justify-content: center; gap: var(--s-lg); margin-top: var(--s-xl); font-size: var(--f-size-sm);" class="text-muted">
+        <span>✅ Darmowa wycena w 48h</span>
+        <span>✅ Płatność w ratach 0%</span>
+        <span>✅ Gwarancja satysfakcji</span>
+      </div>
+    </div>
+  </section>
+
+</Service>
