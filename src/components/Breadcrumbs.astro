@@ -27,15 +27,13 @@ const breadcrumbSchema = {
 ---
 
 <nav class="breadcrumbs" aria-label="Breadcrumb">
-  <div class="container">
-    <a href="/">Strona główna</a>
-    {items.map(item => (
-      <>
-        <span aria-hidden="true">/</span>
-        {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
-      </>
-    ))}
-  </div>
+  <a href="/">Strona główna</a>
+  {items.map(item => (
+    <>
+      <span aria-hidden="true">/</span>
+      {item.href ? <a href={item.href}>{item.label}</a> : <span>{item.label}</span>}
+    </>
+  ))}
 </nav>
 
 <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />

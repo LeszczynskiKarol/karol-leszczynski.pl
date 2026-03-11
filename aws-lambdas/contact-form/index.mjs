@@ -7,7 +7,7 @@ import { S3Client, GetObjectCommand } from "@aws-sdk/client-s3";
 import { getSignedUrl } from "@aws-sdk/s3-request-presigner";
 
 const REGION = process.env.AWS_REGION || "eu-central-1";
-const SES_REGION = "eu-central-1"; // SES verified in eu-central-1
+const SES_REGION = "us-east-1"; // SES production account in N. Virginia
 const ses = new SESClient({ region: SES_REGION });
 const s3 = new S3Client({ region: REGION });
 
@@ -23,7 +23,11 @@ const ALLOWED_ORIGINS = [
 ];
 
 function esc(str) {
-  return String(str || "").replace(/&/g, "&amp;").replace(/</g, "&lt;").replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+  return String(str || "")
+    .replace(/&/g, "&amp;")
+    .replace(/</g, "&lt;")
+    .replace(/>/g, "&gt;")
+    .replace(/"/g, "&quot;");
 }
 
 function fmtSize(bytes) {
@@ -34,7 +38,9 @@ function fmtSize(bytes) {
 
 export const handler = async (event) => {
   const origin = event.headers?.origin || "";
-  const allowOrigin = ALLOWED_ORIGINS.includes(origin) ? origin : "https://www.karol-leszczynski.pl";
+  const allowOrigin = ALLOWED_ORIGINS.includes(origin)
+    ? origin
+    : "https://www.karol-leszczynski.pl";
 
   const headers = {
     "Access-Control-Allow-Origin": allowOrigin,
@@ -49,14 +55,33 @@ export const handler = async (event) => {
 
   try {
     const body = JSON.parse(event.body || "{}");
-    const { name, email, phone, message, serviceType, website, budget, attachments } = body;
+    const {
+      name,
+      email,
+      phone,
+      message,
+      serviceType,
+      website,
+      budget,
+      attachments,
+    } = body;
 
     if (!name || !email || !message) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: "Brak wymaganych pól (name, email, message)" }) };
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({
+          error: "Brak wymaganych pól (name, email, message)",
+        }),
+      };
     }
 
     if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-      return { statusCode: 400, headers, body: JSON.stringify({ error: "Nieprawidłowy adres email" }) };
+      return {
+        statusCode: 400,
+        headers,
+        body: JSON.stringify({ error: "Nieprawidłowy adres email" }),
+      };
     }
 
     // Attachment download links (7 days)
@@ -65,10 +90,18 @@ export const handler = async (event) => {
       const links = [];
       for (const att of attachments) {
         try {
-          const url = await getSignedUrl(s3, new GetObjectCommand({ Bucket: BUCKET, Key: att.key }), { expiresIn: 7 * 24 * 3600 });
-          links.push(`<li style="margin-bottom:4px"><a href="${url}" style="color:#3b82f6;text-decoration:underline">${esc(att.name)}</a> <span style="color:#8b9dc3;font-size:12px">(${fmtSize(att.size || 0)})</span></li>`);
+          const url = await getSignedUrl(
+            s3,
+            new GetObjectCommand({ Bucket: BUCKET, Key: att.key }),
+            { expiresIn: 7 * 24 * 3600 },
+          );
+          links.push(
+            `<li style="margin-bottom:4px"><a href="${url}" style="color:#3b82f6;text-decoration:underline">${esc(att.name)}</a> <span style="color:#8b9dc3;font-size:12px">(${fmtSize(att.size || 0)})</span></li>`,
+          );
         } catch (err) {
-          links.push(`<li>${esc(att.name)} — <em style="color:#8b9dc3">błąd generowania linku</em></li>`);
+          links.push(
+            `<li>${esc(att.name)} — <em style="color:#8b9dc3">błąd generowania linku</em></li>`,
+          );
         }
       }
       attachmentsHtml = `
@@ -81,7 +114,13 @@ export const handler = async (event) => {
         </tr>`;
     }
 
-    const dateStr = new Date().toLocaleDateString("pl-PL", { year: "numeric", month: "long", day: "numeric", hour: "2-digit", minute: "2-digit" });
+    const dateStr = new Date().toLocaleDateString("pl-PL", {
+      year: "numeric",
+      month: "long",
+      day: "numeric",
+      hour: "2-digit",
+      minute: "2-digit",
+    });
 
     const htmlBody = `
 <!DOCTYPE html>
@@ -127,19 +166,32 @@ export const handler = async (event) => {
 </body>
 </html>`;
 
-    await ses.send(new SendEmailCommand({
-      Source: `${FROM_NAME} <${FROM_EMAIL}>`,
-      Destination: { ToAddresses: [TO_EMAIL] },
-      ReplyToAddresses: [email],
-      Message: {
-        Subject: { Data: `Nowe zapytanie: ${name}${serviceType ? " — " + serviceType : ""}`, Charset: "UTF-8" },
-        Body: { Html: { Data: htmlBody, Charset: "UTF-8" } },
-      },
-    }));
+    await ses.send(
+      new SendEmailCommand({
+        Source: `${FROM_NAME} <${FROM_EMAIL}>`,
+        Destination: { ToAddresses: [TO_EMAIL] },
+        ReplyToAddresses: [email],
+        Message: {
+          Subject: {
+            Data: `Nowe zapytanie: ${name}${serviceType ? " — " + serviceType : ""}`,
+            Charset: "UTF-8",
+          },
+          Body: { Html: { Data: htmlBody, Charset: "UTF-8" } },
+        },
+      }),
+    );
 
-    return { statusCode: 200, headers, body: JSON.stringify({ success: true }) };
+    return {
+      statusCode: 200,
+      headers,
+      body: JSON.stringify({ success: true }),
+    };
   } catch (error) {
     console.error("Contact form error:", error);
-    return { statusCode: 500, headers, body: JSON.stringify({ error: "Błąd wysyłania wiadomości" }) };
+    return {
+      statusCode: 500,
+      headers,
+      body: JSON.stringify({ error: "Błąd wysyłania wiadomości" }),
+    };
   }
 };

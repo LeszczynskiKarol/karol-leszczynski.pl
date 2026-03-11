@@ -1,0 +1,280 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base
+  title="Polityka prywatności — Karol Leszczyński"
+  description="Polityka prywatności serwisu karol-leszczynski.pl. Informacje o przetwarzaniu danych osobowych, plikach cookie i prawach użytkowników."
+  noindex={true}
+  noTracking={true}
+>
+  <section class="section" style="padding-top: 120px;">
+    <div class="container">
+      <div style="max-width: 800px; margin: 0 auto;">
+        <h1 style="font-size: var(--f-size-3xl); margin-bottom: var(--s-sm);">Polityka prywatności</h1>
+        <p class="text-muted" style="margin-bottom: var(--s-3xl); font-family: var(--f-mono); font-size: var(--f-size-sm);">
+          Ostatnia aktualizacja: 11 marca 2026
+        </p>
+
+        <div class="pp">
+          <h2>1. Administrator danych osobowych</h2>
+          <p>
+            Administratorem danych osobowych przetwarzanych za pośrednictwem serwisu
+            <strong>karol-leszczynski.pl</strong> jest:
+          </p>
+          <p>
+            <strong>Karol Leszczyński</strong><br>
+            prowadzący działalność gospodarczą pod firmą eCopywriting Karol Leszczyński<br>
+            ul. Przy Kaszowniku 17/14, 87-100 Toruń, Polska<br>
+            NIP: 9562216468<br>
+            E-mail: <a href="mailto:kontakt@karol-leszczynski.pl">kontakt@karol-leszczynski.pl</a><br>
+            Tel.: +48 509 370 772
+          </p>
+
+          <h2>2. Podstawy prawne przetwarzania</h2>
+          <p>
+            Dane osobowe przetwarzane są zgodnie z Rozporządzeniem Parlamentu Europejskiego i&nbsp;Rady (UE) 2016/679
+            z dnia 27 kwietnia 2016 r. (RODO) na następujących podstawach:
+          </p>
+          <p>
+            <strong>Art. 6 ust. 1 lit. a)</strong> — zgoda użytkownika (pliki cookie analityczne i&nbsp;marketingowe,
+            formularz kontaktowy).<br>
+            <strong>Art. 6 ust. 1 lit. b)</strong> — niezbędność do wykonania umowy lub podjęcia działań przed
+            jej zawarciem (obsługa zapytań ofertowych).<br>
+            <strong>Art. 6 ust. 1 lit. f)</strong> — prawnie uzasadniony interes administratora (zapewnienie
+            bezpieczeństwa serwisu, pliki cookie niezbędne do działania strony, analityka w&nbsp;formie zanonimizowanej).
+          </p>
+
+          <h2>3. Zakres zbieranych danych</h2>
+
+          <h3>3.1 Formularz kontaktowy</h3>
+          <p>
+            Formularz kontaktowy na stronie <strong>/kontakt</strong> zbiera następujące dane:
+            imię, adres e-mail, numer telefonu (opcjonalnie), treść wiadomości oraz opcjonalnie
+            pliki załączników. Dane te przetwarzane są wyłącznie w celu obsługi zapytania
+            i&nbsp;nie są przekazywane podmiotom trzecim.
+          </p>
+          <p>
+            Załączniki przesyłane są do serwisu Amazon S3 (region: eu-central-1, Frankfurt)
+            i&nbsp;automatycznie usuwane po 30 dniach. Wiadomości e-mail wysyłane są za
+            pośrednictwem Amazon Simple Email Service (SES, region: us-east-1).
+          </p>
+
+          <h3>3.2 Dane zbierane automatycznie</h3>
+          <p>
+            Serwer hostingowy (Amazon CloudFront) automatycznie rejestruje adres IP,
+            typ przeglądarki, czas dostępu i&nbsp;żądane adresy URL. Dane te służą
+            zapewnieniu bezpieczeństwa i&nbsp;wydajności serwisu i nie są łączone
+            z&nbsp;danymi osobowymi.
+          </p>
+
+          <h2>4. Pliki cookie</h2>
+
+          <h3>4.1 Czym są pliki cookie?</h3>
+          <p>
+            Pliki cookie to niewielkie pliki tekstowe zapisywane na urządzeniu użytkownika
+            przez przeglądarkę internetową. Służą do zapamiętywania preferencji, analizy
+            ruchu i&nbsp;personalizacji treści.
+          </p>
+
+          <h3>4.2 Rodzaje stosowanych plików cookie</h3>
+
+          <p><strong>Niezbędne (zawsze aktywne)</strong></p>
+          <p>
+            <code>kl_consent</code> — przechowuje informację o wyrażonych zgodach na pliki
+            cookie. Ważność: 180 dni. Nie zawiera danych osobowych.
+          </p>
+
+          <p><strong>Analityczne (wymagają zgody)</strong></p>
+          <p>
+            <code>_ga</code>, <code>_ga_T4JJ4B0JH2</code> — pliki cookie Google Analytics 4.
+            Zbierają anonimowe dane o odwiedzinach: liczba odsłon, źródła ruchu, czas
+            spędzony na stronie, popularne podstrony. Adresy IP są anonimizowane
+            (<code>anonymize_ip: true</code>). Ważność: do 2 lat.
+            Dostawca: Google Ireland Limited, Gordon House, Barrow Street, Dublin 4, Irlandia.
+          </p>
+
+          <p><strong>Marketingowe (wymagają zgody)</strong></p>
+          <p>
+            Obecnie serwis nie stosuje plików cookie marketingowych. Zgoda na tę kategorię
+            jest pobierana prewencyjnie na wypadek przyszłego wdrożenia remarketingu
+            Google Ads.
+          </p>
+
+          <p><strong>Funkcjonalne (wymagają zgody)</strong></p>
+          <p>
+            <code>localStorage: theme</code> — zapamiętanie wybranego motywu (jasny/ciemny).
+            Dane przechowywane lokalnie w przeglądarce, nie są wysyłane na serwer.
+          </p>
+
+          <h3>4.3 Google Consent Mode v2</h3>
+          <p>
+            Serwis implementuje Google Consent Mode v2. Oznacza to, że skrypty Google
+            Analytics ładują się na każdej stronie, ale <strong>nie zbierają danych osobowych
+            ani nie zapisują plików cookie</strong> do momentu wyrażenia zgody przez
+            użytkownika. W przypadku braku zgody Google Analytics pracuje w&nbsp;trybie
+            bezplikowym (cookieless), wysyłając jedynie zanonimizowane sygnały (pingi)
+            bez identyfikacji użytkownika.
+          </p>
+
+          <h3>4.4 Zarządzanie zgodami</h3>
+          <p>
+            Przy pierwszej wizycie wyświetlany jest baner z&nbsp;możliwością:
+            zaakceptowania wszystkich plików cookie, odrzucenia opcjonalnych
+            lub dostosowania poszczególnych kategorii. Zgody można zmienić w&nbsp;dowolnym
+            momencie klikając link <strong>&ldquo;Ustawienia cookies&rdquo;</strong>
+            w&nbsp;stopce strony.
+          </p>
+          <p>
+            Użytkownik może również zarządzać plikami cookie na poziomie przeglądarki.
+            Większość przeglądarek pozwala na blokowanie, usuwanie lub ograniczanie
+            plików cookie w ustawieniach prywatności.
+          </p>
+
+          <h2>5. Przekazywanie danych</h2>
+
+          <h3>5.1 Podmioty przetwarzające (procesory)</h3>
+          <p>
+            Dane mogą być przetwarzane przez następujące podmioty trzecie:
+          </p>
+          <p>
+            <strong>Amazon Web Services, Inc.</strong> (Seattle, USA) — hosting serwisu
+            (S3, CloudFront, Lambda, SES). Dane przetwarzane w regionach EU (Frankfurt,
+            Stockholm) z&nbsp;wyjątkiem SES (N. Virginia). Transfer danych do USA objęty
+            jest EU-U.S. Data Privacy Framework.
+          </p>
+          <p>
+            <strong>Google Ireland Limited</strong> (Dublin, Irlandia) — Google Analytics 4.
+            Dane przetwarzane na serwerach Google w UE. Transfer danych poza EOG objęty
+            jest standardowymi klauzulami umownymi (SCC) i&nbsp;EU-U.S. Data Privacy Framework.
+          </p>
+
+          <h3>5.2 Państwa trzecie</h3>
+          <p>
+            W związku z korzystaniem z usług AWS i Google dane mogą być przetwarzane
+            w Stanach Zjednoczonych. Oba podmioty uczestniczą w EU-U.S. Data Privacy
+            Framework, co zapewnia odpowiedni poziom ochrony danych zgodnie z&nbsp;decyzją
+            Komisji Europejskiej z dnia 10 lipca 2023 r.
+          </p>
+
+          <h2>6. Okres przechowywania danych</h2>
+          <p>
+            Dane z formularza kontaktowego przechowywane są przez okres niezbędny
+            do obsługi zapytania, nie dłużej niż 12 miesięcy od ostatniego kontaktu.
+            Załączniki na S3 usuwane są automatycznie po 30 dniach. Pliki cookie
+            analityczne wygasają zgodnie z&nbsp;okresami wskazanymi w&nbsp;sekcji 4.2.
+            Zgody cookie przechowywane są przez 180 dni.
+          </p>
+
+          <h2>7. Prawa użytkowników</h2>
+          <p>
+            Zgodnie z RODO przysługują Ci następujące prawa:
+          </p>
+          <p>
+            <strong>Prawo dostępu</strong> (art. 15) — możesz żądać informacji o przetwarzanych danych.<br>
+            <strong>Prawo do sprostowania</strong> (art. 16) — możesz żądać poprawienia nieprawidłowych danych.<br>
+            <strong>Prawo do usunięcia</strong> (art. 17) — możesz żądać usunięcia danych (&bdquo;prawo do bycia zapomnianym&rdquo;).<br>
+            <strong>Prawo do ograniczenia przetwarzania</strong> (art. 18) — możesz żądać ograniczenia przetwarzania.<br>
+            <strong>Prawo do przenoszenia danych</strong> (art. 20) — możesz żądać przekazania danych w formacie maszynowym.<br>
+            <strong>Prawo do sprzeciwu</strong> (art. 21) — możesz sprzeciwić się przetwarzaniu opartemu na prawnie uzasadnionym interesie.<br>
+            <strong>Prawo do cofnięcia zgody</strong> (art. 7 ust. 3) — możesz cofnąć zgodę w dowolnym momencie,
+            co nie wpływa na zgodność z prawem przetwarzania dokonanego przed cofnięciem.
+          </p>
+          <p>
+            Aby skorzystać z powyższych praw, wyślij wiadomość na adres
+            <a href="mailto:kontakt@karol-leszczynski.pl">kontakt@karol-leszczynski.pl</a>.
+            Odpowiedź udzielona zostanie w terminie 30 dni.
+          </p>
+
+          <h2>8. Prawo do skargi</h2>
+          <p>
+            Jeśli uważasz, że przetwarzanie Twoich danych narusza przepisy RODO,
+            masz prawo wnieść skargę do organu nadzorczego:
+          </p>
+          <p>
+            Prezes Urzędu Ochrony Danych Osobowych (PUODO)<br>
+            ul. Stawki 2, 00-193 Warszawa<br>
+            <a href="https://uodo.gov.pl" target="_blank" rel="noopener noreferrer">uodo.gov.pl</a>
+          </p>
+
+          <h2>9. Bezpieczeństwo danych</h2>
+          <p>
+            Serwis korzysta z protokołu HTTPS (TLS 1.2+) zapewnianego przez Amazon
+            CloudFront. Formularze chronione są przed atakami CSRF. Pliki załączników
+            przesyłane są z użyciem presigned URL (jednorazowe, wygasające linki S3).
+            Dostęp do infrastruktury AWS zabezpieczony jest uwierzytelnianiem IAM.
+          </p>
+
+          <h2>10. Zmiany w polityce prywatności</h2>
+          <p>
+            Administrator zastrzega sobie prawo do zmiany niniejszej polityki prywatności.
+            O istotnych zmianach użytkownicy zostaną poinformowani poprzez wyświetlenie
+            stosownego komunikatu na stronie. Data ostatniej aktualizacji znajduje się
+            na początku dokumentu.
+          </p>
+
+          <h2>11. Kontakt</h2>
+          <p>
+            W sprawach dotyczących ochrony danych osobowych i&nbsp;prywatności prosimy
+            o kontakt:
+          </p>
+          <p>
+            E-mail: <a href="mailto:kontakt@karol-leszczynski.pl">kontakt@karol-leszczynski.pl</a><br>
+            Tel.: +48 509 370 772<br>
+            Adres: ul. Przy Kaszowniku 17/14, 87-100 Toruń
+          </p>
+        </div>
+
+        <div style="margin-top: var(--s-3xl); text-align: center;">
+          <a href="/" class="btn btn-outline">← Wróć na stronę główną</a>
+        </div>
+      </div>
+    </div>
+  </section>
+</Base>
+
+<style>
+  .pp h2 {
+    font-size: var(--f-size-xl);
+    margin-top: var(--s-2xl);
+    margin-bottom: var(--s-md);
+    padding-bottom: var(--s-sm);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .pp h3 {
+    font-size: var(--f-size-lg);
+    margin-top: var(--s-xl);
+    margin-bottom: var(--s-sm);
+  }
+
+  .pp p {
+    color: var(--c-text-muted);
+    margin-bottom: var(--s-md);
+    line-height: 1.8;
+  }
+
+  .pp strong {
+    color: var(--c-text);
+    font-weight: 600;
+  }
+
+  .pp a {
+    color: var(--c-primary);
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .pp a:hover {
+    color: var(--c-primary-hover);
+  }
+
+  .pp code {
+    font-family: var(--f-mono);
+    font-size: var(--f-size-sm);
+    background: var(--c-code-bg);
+    padding: 2px 6px;
+    border-radius: 4px;
+    color: var(--c-primary);
+  }
+</style>

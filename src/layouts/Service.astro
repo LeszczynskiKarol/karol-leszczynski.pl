@@ -13,14 +13,18 @@ const { title, description, breadcrumbLabel, structuredData } = Astro.props;
 ---
 
 <Base title={title} description={description}>
-  <Breadcrumbs items={[
-    { label: 'Usługi', href: '/uslugi' },
-    { label: breadcrumbLabel },
-  ]} />
-
   {structuredData && (
     <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
   )}
+
+  <div class="service-breadcrumb-bar">
+    <div class="container">
+      <Breadcrumbs items={[
+        { label: 'Usługi', href: '/uslugi' },
+        { label: breadcrumbLabel },
+      ]} />
+    </div>
+  </div>
 
   <slot />
 </Base>

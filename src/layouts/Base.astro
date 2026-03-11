@@ -12,16 +12,65 @@ interface Props {
   articleDate?: Date;
   articleModified?: Date;
   noindex?: boolean;
+  noTracking?: boolean;
 }
 
 const props = Astro.props;
 const currentPath = Astro.url.pathname;
+const GA_ID = 'G-T4JJ4B0JH2';
 ---
 
 <!DOCTYPE html>
 <html lang="pl">
 <head>
   <SEOHead {...props} />
+
+  {/* ═══ GOOGLE CONSENT MODE v2 — BEFORE gtag.js ═══ */}
+  {!props.noTracking && (
+    <script is:inline>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+
+      gtag('consent', 'default', {
+        'ad_storage': 'denied',
+        'ad_user_data': 'denied',
+        'ad_personalization': 'denied',
+        'analytics_storage': 'denied',
+        'functionality_storage': 'denied',
+        'personalization_storage': 'denied',
+        'security_storage': 'granted',
+        'wait_for_update': 500
+      });
+
+      try {
+        var saved = localStorage.getItem('kl_consent');
+        if (saved) {
+          var c = JSON.parse(saved);
+          gtag('consent', 'update', {
+            'analytics_storage': c.analytics ? 'granted' : 'denied',
+            'ad_storage': c.marketing ? 'granted' : 'denied',
+            'ad_user_data': c.marketing ? 'granted' : 'denied',
+            'ad_personalization': c.marketing ? 'granted' : 'denied',
+            'functionality_storage': c.functional ? 'granted' : 'denied',
+            'personalization_storage': c.functional ? 'granted' : 'denied'
+          });
+        }
+      } catch(e) {}
+    </script>
+  )}
+
+  {/* ═══ GA4 — loads AFTER consent defaults ═══ */}
+  {!props.noTracking && (
+    <Fragment>
+      <script async src={`https://www.googletagmanager.com/gtag/js?id=${GA_ID}`}></script>
+      <script is:inline define:vars={{ GA_ID }}>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', GA_ID, { 'anonymize_ip': true });
+      </script>
+    </Fragment>
+  )}
 </head>
 <body>
   <Header currentPath={currentPath} />
@@ -29,5 +78,154 @@ const currentPath = Astro.url.pathname;
     <slot />
   </main>
   <Footer />
+
+  {/* ═══ COOKIE CONSENT BANNER ═══ */}
+  {!props.noTracking && (
+    <div class="cb" id="cookie-banner" role="dialog" aria-label="Ustawienia plików cookie" hidden>
+      <div class="cb-inner">
+        <div class="cb-main">
+          <h3 class="cb-title">Szanujemy Twoją prywatność</h3>
+          <p class="cb-text">
+            Używamy plików cookie do analizy ruchu i ulepszania strony.
+            Możesz zaakceptować wszystkie, odrzucić opcjonalne lub dostosować preferencje.
+            <a href="/polityka-prywatnosci" class="cb-link">Polityka prywatności</a>
+          </p>
+
+          <div class="cb-actions">
+            <button type="button" class="cb-btn cb-btn--accept" id="cb-accept-all">Akceptuję wszystkie</button>
+            <button type="button" class="cb-btn cb-btn--reject" id="cb-reject-all">Tylko niezbędne</button>
+            <button type="button" class="cb-btn cb-btn--settings" id="cb-show-settings">Ustawienia</button>
+          </div>
+        </div>
+
+        <div class="cb-settings" id="cb-settings" hidden>
+          <div class="cb-setting">
+            <div class="cb-setting-info">
+              <span class="cb-setting-name">Niezbędne</span>
+              <span class="cb-setting-desc">Wymagane do działania strony. Nie można wyłączyć.</span>
+            </div>
+            <label class="cb-toggle cb-toggle--locked">
+              <input type="checkbox" checked disabled />
+              <span class="cb-toggle-track"></span>
+            </label>
+          </div>
+          <div class="cb-setting">
+            <div class="cb-setting-info">
+              <span class="cb-setting-name">Analityczne</span>
+              <span class="cb-setting-desc">Google Analytics 4 — anonimowe statystyki odwiedzin i źródeł ruchu.</span>
+            </div>
+            <label class="cb-toggle">
+              <input type="checkbox" id="cb-analytics" />
+              <span class="cb-toggle-track"></span>
+            </label>
+          </div>
+          <div class="cb-setting">
+            <div class="cb-setting-info">
+              <span class="cb-setting-name">Marketingowe</span>
+              <span class="cb-setting-desc">Remarketing i personalizacja reklam Google Ads.</span>
+            </div>
+            <label class="cb-toggle">
+              <input type="checkbox" id="cb-marketing" />
+              <span class="cb-toggle-track"></span>
+            </label>
+          </div>
+          <div class="cb-setting">
+            <div class="cb-setting-info">
+              <span class="cb-setting-name">Funkcjonalne</span>
+              <span class="cb-setting-desc">Zapamiętywanie preferencji (motyw jasny/ciemny).</span>
+            </div>
+            <label class="cb-toggle">
+              <input type="checkbox" id="cb-functional" checked />
+              <span class="cb-toggle-track"></span>
+            </label>
+          </div>
+          <div class="cb-actions">
+            <button type="button" class="cb-btn cb-btn--accept" id="cb-save-settings">Zapisz ustawienia</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  {!props.noTracking && (
+    <script is:inline>
+    (function() {
+      var banner = document.getElementById('cookie-banner');
+      var panel = document.getElementById('cb-settings');
+      if (!banner) return;
+
+      var chkA = document.getElementById('cb-analytics');
+      var chkM = document.getElementById('cb-marketing');
+      var chkF = document.getElementById('cb-functional');
+
+      // Show if no consent yet
+      try { if (!localStorage.getItem('kl_consent')) banner.removeAttribute('hidden'); }
+      catch(e) { banner.removeAttribute('hidden'); }
+
+      function restore() {
+        try {
+          var s = localStorage.getItem('kl_consent');
+          if (s) {
+            var c = JSON.parse(s);
+            if (chkA) chkA.checked = !!c.analytics;
+            if (chkM) chkM.checked = !!c.marketing;
+            if (chkF) chkF.checked = !!c.functional;
+          }
+        } catch(e) {}
+      }
+
+      function save(analytics, marketing, functional) {
+        var consent = {
+          analytics: !!analytics,
+          marketing: !!marketing,
+          functional: !!functional,
+          timestamp: new Date().toISOString(),
+          version: 2
+        };
+        try { localStorage.setItem('kl_consent', JSON.stringify(consent)); } catch(e) {}
+        var exp = new Date(Date.now() + 180*86400000).toUTCString();
+        document.cookie = 'kl_consent=' + encodeURIComponent(JSON.stringify(consent))
+          + ';expires=' + exp + ';path=/;SameSite=Lax;Secure';
+
+        if (typeof gtag === 'function') {
+          gtag('consent', 'update', {
+            'analytics_storage': consent.analytics ? 'granted' : 'denied',
+            'ad_storage': consent.marketing ? 'granted' : 'denied',
+            'ad_user_data': consent.marketing ? 'granted' : 'denied',
+            'ad_personalization': consent.marketing ? 'granted' : 'denied',
+            'functionality_storage': consent.functional ? 'granted' : 'denied',
+            'personalization_storage': consent.functional ? 'granted' : 'denied'
+          });
+        }
+        banner.setAttribute('hidden', '');
+      }
+
+      document.getElementById('cb-accept-all').addEventListener('click', function() { save(true, true, true); });
+      document.getElementById('cb-reject-all').addEventListener('click', function() { save(false, false, false); });
+
+      document.getElementById('cb-show-settings').addEventListener('click', function() {
+        var h = panel.hasAttribute('hidden');
+        if (h) { panel.removeAttribute('hidden'); this.textContent = 'Ukryj'; restore(); }
+        else { panel.setAttribute('hidden', ''); this.textContent = 'Ustawienia'; }
+      });
+
+      document.getElementById('cb-save-settings').addEventListener('click', function() {
+        save(chkA && chkA.checked, chkM && chkM.checked, chkF && chkF.checked);
+      });
+
+      // Reopen from footer
+      document.addEventListener('click', function(e) {
+        if (e.target && e.target.id === 'open-cookie-settings') {
+          e.preventDefault();
+          banner.removeAttribute('hidden');
+          panel.removeAttribute('hidden');
+          var b = document.getElementById('cb-show-settings');
+          if (b) b.textContent = 'Ukryj';
+          restore();
+        }
+      });
+    })();
+    </script>
+  )}
 </body>
 </html>
