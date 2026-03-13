@@ -373,61 +373,13 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
       </div>
     </section>
 
-    <!-- Flagowe -->
-    <section class="section" style="background: var(--c-bg-alt);">
-      <div class="container">
-        <div class="section-header">
-          <h2>Flagowe <span class="text-gradient">realizacje</span></h2>
-          <p>Projekty z największym impactem biznesowym</p>
-        </div>
-        <div class="featured-grid">
-          {highlighted.map(project => (
-            <div class="featured-card">
-              {project.image && (
-                <div class="featured-card-img">
-                  <img src={project.image} alt={project.title} loading="lazy" width="500" height="280" />
-                </div>
-              )}
-              <div class="featured-card-body">
-                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-sm);">
-                  <div>
-                    <h3 style="font-size: var(--f-size-xl);">{project.title}</h3>
-                    <span class="text-primary" style="font-size: var(--f-size-xs);">{project.catLabel}</span>
-                  </div>
-                  <span class="text-muted" style="font-size: var(--f-size-xs);">{project.year}</span>
-                </div>
-                <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md); line-height: 1.6;">{project.description}</p>
-                {project.stats && (
-                  <div style="display: flex; gap: var(--s-xl); margin-bottom: var(--s-md);">
-                    {project.stats.map(s => (
-                      <div>
-                        <div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{s.value}</div>
-                        <div class="text-muted" style="font-size: var(--f-size-xs);">{s.label}</div>
-                      </div>
-                    ))}
-                  </div>
-                )}
-                <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s-md);">
-                  {project.technologies.slice(0, 5).map(t => (
-                    <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{t}</span>
-                  ))}
-                  {project.technologies.length > 5 && <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-bg-alt); border-radius: 999px;" class="text-muted">+{project.technologies.length - 5}</span>}
-                </div>
-                <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link">
-                  {project.internal ? "Zobacz usługę" : "Odwiedź stronę"} →
-                </a>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
+
 
     <!-- Wszystkie -->
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <h2>Najważniejsze <span class="text-gradient">realizacje</span></h2>
+          <h2>Ostatnie <span class="text-gradient">realizacje</span></h2>
           <p>30 projektów w 8 kategoriach</p>
         </div>
 
