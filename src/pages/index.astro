@@ -7,24 +7,27 @@ const projects = [
   {
     id: 1,
     title: "Smart-Copy.AI",
+    image: "/projects/smart-copy.jpg",
     category: "SaaS / AI Content",
     description: "Generator treści AI z multi-agent architecture (director + do 7 writerów). Google Custom Search + web scraping do researchu źródeł. Teksty 2–150 stron, 8 języków, pay-per-use (3,99 zł/1000 zn.). WYSIWYG TipTap editor, eksport PDF/DOCX/HTML, i18n, blog CMS, panel admina.",
     technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "TanStack Query", "i18next", "AWS EC2"],
-    link: "https://smart-copy.ai",
+    link: "https://www.smart-copy.ai",
     year: "2024–2025",
   },
   {
     id: 2,
-    title: "Smart-Edu.AI",
-    category: "SaaS / EdTech",
-    description: "Platforma AI do generowania prac dyplomowych i naukowych. 120-stronicowa praca magisterska w 20 minut. Identyczny stack i architektura jak Smart-Copy.AI — multi-agent writing pipeline, web research, 8 języków, Stripe payments, panel admina.",
-    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "AWS EC2"],
-    link: "https://smart-edu.ai",
-    year: "2024–2025",
+    title: "Silniki-Elektryczne.com.pl",
+    image: "/projects/stojan.jpg",
+    category: "E-commerce",
+    description: "Sklep e-commerce silników elektrycznych (migracja z WooCommerce, +40% sprzedaży). 2000+ produktów, bidirectional Allegro sync (event polling, DB-persisted lastEventId), Stripe checkout (card/P24/BLIK + COD), custom analytics (sessions, funnels, sources), Google Merchant Feed, email SES, S3 invoice upload, system zadań wewnętrznych.",
+    technologies: ["Astro 5 SSR", "Fastify", "Prisma", "PostgreSQL", "Stripe", "Allegro API", "AWS SES", "AWS S3", "Sharp"],
+    link: "https://www.silniki-elektryczne.com.pl",
+    year: "2021–2025",
   },
   {
     id: 3,
     title: "MaturaPolski.pl",
+    image: "/projects/maturapolski.jpg",
     category: "SaaS / EdTech",
     description: "Platforma do nauki przed maturą z polskiego. Ocena wypracowań przez AI z web research (Google Custom Search + scraping), adaptywny dobór zadań, spaced repetition, sesje nauki z AI podsumowaniem, baza wiedzy (lektury, epoki, autorzy), arkusze maturalne, system subskrypcji freemium/premium, leaderboard, panel admina.",
     technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude Sonnet", "Stripe", "BullMQ", "WebSockets", "AWS EC2", "AWS SES"],
@@ -34,6 +37,7 @@ const projects = [
   {
     id: 4,
     title: "Interpunkcja.com.pl",
+    image: "/projects/interpunkcja.jpg",
     category: "SaaS / AI Tools",
     description: "Korektor polskiej interpunkcji, ortografii, pisowni łącznej/rozdzielnej, gramatyki i stylistyki. AI Claude Sonnet analizuje tekst i zwraca JSON z pozycjami błędów, regułami i wyjaśnieniami. Google OAuth, freemium (5 sprawdzeń/dzień), plan Lifetime 299 zł, panel admina z artykułami.",
     technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude Sonnet", "Stripe", "Vite", "Recharts"],
@@ -44,6 +48,7 @@ const projects = [
     id: 5,
     title: "Copywriting24.pl",
     category: "SaaS / AI Tools",
+    image: "/projects/copywriting24.jpg",
     description: "Darmowy generator treści SEO bez rejestracji. 3 generacje dziennie (fingerprint + IP limiting), SSE streaming, 3 długości (1000/2000/3000 zn.), frazy kluczowe, HTML output. Claude Haiku 4.5 — najtańszy model, optymalizacja kosztów.",
     technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Haiku 4.5", "Vite", "Tailwind CSS", "Docker"],
     link: "https://copywriting24.pl",
@@ -52,16 +57,18 @@ const projects = [
   // === E-commerce ===
   {
     id: 6,
-    title: "Silniki-Elektryczne.com.pl",
-    category: "E-commerce",
-    description: "Sklep e-commerce silników elektrycznych (migracja z WooCommerce, +40% sprzedaży). 2000+ produktów, bidirectional Allegro sync (event polling, DB-persisted lastEventId), Stripe checkout (card/P24/BLIK + COD), custom analytics (sessions, funnels, sources), Google Merchant Feed, email SES, S3 invoice upload, system zadań wewnętrznych.",
-    technologies: ["Astro 5 SSR", "Fastify", "Prisma", "PostgreSQL", "Stripe", "Allegro API", "AWS SES", "AWS S3", "Sharp"],
-    link: "https://www.silniki-elektryczne.com.pl",
-    year: "2021–2025",
+    title: "Smart-Edu.AI",
+    image: "/projects/smartedu.jpg",
+    category: "SaaS / EdTech",
+    description: "Platforma AI do generowania prac dyplomowych i naukowych. 120-stronicowa praca magisterska w 20 minut. Identyczny stack i architektura jak Smart-Copy.AI — multi-agent writing pipeline, web research, 8 języków, Stripe payments, panel admina.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "AWS EC2"],
+    link: "https://smart-edu.ai",
+    year: "2024–2025",
   },
   {
     id: 7,
     title: "Silnik-Elektryczny.pl",
+    image: "/projects/silnik-elektryczny.jpg",
     category: "SEO / E-commerce",
     description: "Statyczna satelita SEO dla silników używanych. Astro SSG budowany przez CodeBuild, deploy na S3/CloudFront. Lambda proxy filtruje produkty z API głównego sklepu (condition=uzywany, stock>0). Auto-rebuild po zamówieniu/zmianie stocku via webhook + EventBridge cron co 30 min. GDPR, Schema.org, checkout przez API Stojan.",
     technologies: ["Astro SSG", "AWS Lambda", "AWS CodeBuild", "AWS S3/CloudFront", "EventBridge", "Tailwind CSS"],
@@ -72,6 +79,7 @@ const projects = [
     id: 8,
     title: "Silniki-Trojfazowe.pl",
     category: "SEO / E-commerce",
+    image: "/projects/silniki-trojfazowe.jpg",
     description: "Druga satelita SEO — wyłącznie silniki trójfazowe. Identyczna architektura: Astro SSG + Lambda proxy + CodeBuild pipeline + auto-rebuild. Google Consent Mode v2, Schema JSON-LD.",
     technologies: ["Astro SSG", "AWS Lambda", "AWS CodeBuild", "AWS S3/CloudFront", "EventBridge"],
     link: "https://silniki-trojfazowe.pl",
@@ -81,6 +89,7 @@ const projects = [
   {
     id: 9,
     title: "Zeszyty ćwiczeń (11 publikacji)",
+    image: "/projects/zeszyty.jpg",
     category: "Publishing / EdTech",
     description: "11 zeszytów ćwiczeń dla szkół policealnych (technik masażysta, opiekun medyczny, terapeuta zajęciowy i in.). Treści merytoryczne + profesjonalny skład LaTeX/Quarto. Custom LaTeX classes, TikZ diagrams, print-ready PDF (CMYK, spady, crop marks).",
     technologies: ["Quarto", "LaTeX", "XeLaTeX", "Python", "TikZ", "BibTeX", "tcolorbox"],
@@ -90,6 +99,7 @@ const projects = [
   {
     id: 10,
     title: "Copywriting 360° (ebook)",
+    image: "/projects/ebook.jpg",
     category: "Publishing",
     description: "Autorski ebook o copywritingu — 16 rozdziałów, 250+ stron. Od psychologii perswazji przez nagłówki, storytelling, SEO copywriting, e-commerce, B2B po AI. Pełny skład w Quarto/LaTeX z custom environments (wskazówka, uwaga, ważne, formuła, ćwiczenie). Sprzedaż przez Stripe Lambda na eBookCopywriting.pl.",
     technologies: ["Quarto", "LaTeX", "XeLaTeX", "Astro", "AWS Lambda", "Stripe", "AWS S3"],
@@ -101,6 +111,7 @@ const projects = [
     id: 11,
     title: "Sklad-Tekstu.pl",
     category: "Agencja / LaTeX",
+    image: "/projects/sklad-tekstu.jpg",
     description: "Strona agencji od profesjonalnego składu tekstu LaTeX. 9 usług, portfolio z interaktywnym PDF viewerem (iframe modal), galeria showcase z lightboxem, blog Content Collections, formularz kontaktowy Lambda + S3 presign. Design inspirowany typografią wydawniczą.",
     technologies: ["Astro", "Content Collections", "AWS Lambda", "AWS S3/CloudFront", "AWS SES"],
     link: "https://sklad-tekstu.pl",
@@ -112,12 +123,14 @@ const projects = [
     category: "Agencja / Strona firmowa",
     description: "Strona agencji copywriterskiej. 9 usług (copywriting, ebooki, LaTeX, naming, opisy), blog Content Collections, testimoniale z logotypami klientów, sekcja SEO, Schema.org Organization/WebSite. Design system z custom variables.",
     technologies: ["Astro", "Content Collections", "AWS S3/CloudFront", "Schema.org"],
+    image: "/projects/agencja-copywriterska.jpg",
     link: "https://agencja-copywriterska.pl",
     year: "2025",
   },
   {
     id: 13,
     title: "eCopywriting.pl",
+    image: "/projects/ecopywriting.jpg",
     category: "Agencja / Strona firmowa",
     description: "Strona agencji copywriterskiej. Portfolio usług content marketingowych, blog firmowy, formularz kontaktowy AWS SES.",
     technologies: ["Astro", "AWS S3/CloudFront", "AWS SES"],
@@ -128,6 +141,7 @@ const projects = [
     id: 14,
     title: "CopywritingSEO.pl",
     category: "Blog / SEO Content",
+    image: "/projects/copywritingseo.jpg",
     description: "Blog o SEO copywritingu z architekturą pillar-cluster. Content Collections, formularz kontaktowy Lambda z załącznikami (S3 presign), GDPR cookies, Google Consent Mode v2.",
     technologies: ["Astro", "Content Collections", "AWS Lambda", "AWS S3/CloudFront", "AWS SES"],
     link: "https://copywritingseo.pl",
@@ -135,8 +149,9 @@ const projects = [
   },
   {
     id: 15,
-    title: "ZostańCopywriterem.pl",
+    title: "ZostanCopywriterem.pl",
     category: "Blog / Content",
+    image: "/projects/zostancopywriterem.jpg",
     description: "Blog edukacyjny o profesji copywritera. Pillar-cluster architecture, Content Collections, poradniki dla początkujących i zaawansowanych.",
     technologies: ["Astro", "Content Collections", "AWS S3/CloudFront"],
     link: "https://www.zostancopywriterem.pl",
@@ -146,6 +161,7 @@ const projects = [
     id: 16,
     title: "1copywriting.pl",
     category: "Blog / Content",
+    image: "/projects/1copywriting.jpg",
     description: "Blog o copywritingu z systemem newslettera. Lambda newsletter backend, panel admina do zarządzania subskrypcjami, deploy S3 + CloudFront.",
     technologies: ["Astro", "AWS Lambda", "AWS S3/CloudFront"],
     link: "https://1copywriting.pl",
@@ -154,6 +170,7 @@ const projects = [
   {
     id: 17,
     title: "Copywriting-Blog.pl",
+    image: "/projects/copywriting-blog.jpg",
     category: "Blog / Content",
     description: "Blog tematyczny o copywritingu i content marketingu. Standard Astro SSG + AWS CDN.",
     technologies: ["Astro", "AWS S3/CloudFront"],
@@ -164,6 +181,7 @@ const projects = [
     id: 18,
     title: "iCopywriter.pl",
     category: "Blog / Content",
+    image: "/projects/icopywriter.jpg",
     description: "Portal o copywritingu z artykułami i poradnikami. Część ekosystemu stron contentowych.",
     technologies: ["Astro", "AWS S3/CloudFront"],
     link: "https://icopywriter.pl",
@@ -173,6 +191,7 @@ const projects = [
   {
     id: 19,
     title: "TorWeb.pl",
+    image: "/projects/torweb.jpg",
     category: "Agencja interaktywna",
     description: "Strona własnej agencji webowej. 12 realizacji, 6 podstron usługowych, dark/light mode, GDPR cookies, Google Consent Mode v2, GA4 + GTM.",
     technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "GA4", "GTM", "AWS S3/CloudFront"],
@@ -182,6 +201,7 @@ const projects = [
   {
     id: 20,
     title: "Nadamel.pl",
+    image: "/projects/nadamel.jpg",
     category: "Strona firmowa",
     description: "Strona firmy stolarskiej (rozkrój i oklejanie płyt). 8 podstron usługowych, Lighthouse 98+, formularz kontaktowy.",
     technologies: ["Astro", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
@@ -191,6 +211,7 @@ const projects = [
   {
     id: 21,
     title: "UniaTorun.pl",
+    image: "/projects/uniatorun.jpg",
     category: "Sport / Strona firmowa",
     description: "Strona akademii piłkarskiej. 17 stron, custom video player, formularze zapisów, GDPR + Consent Mode v2.",
     technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "GA4", "GTM", "AWS S3/CloudFront"],
@@ -200,6 +221,7 @@ const projects = [
   {
     id: 22,
     title: "GrandKuchnie.pl",
+    image: "/projects/grandkuchnie.jpg",
     category: "Strona firmowa",
     description: "Strona producenta kuchni na wymiar. Portfolio realizacji z CMS, galeria z lightboxem, Google Analytics + Ads.",
     technologies: ["Next.js", "Prisma", "React", "AWS S3", "Tailwind CSS"],
@@ -210,6 +232,7 @@ const projects = [
     id: 23,
     title: "ArtKuchnie.pl",
     category: "Strona firmowa",
+    image: "/projects/artkuchnie.jpg",
     description: "Strona firmy produkującej kuchnie na wymiar. Galeria realizacji, optymalizacja SEO, Page Speed 80-90.",
     technologies: ["Astro", "Tailwind CSS", "AWS S3/CloudFront"],
     link: "https://artkuchnie.pl",
@@ -219,6 +242,7 @@ const projects = [
     id: 24,
     title: "Mekra.pl",
     category: "Strona firmowa",
+    image: "/projects/mekra.jpg",
     description: "Producent i montaż frontów ramiakowych. Rozbudowana struktura podstron, formularz kontaktowy Lambda + S3 presign.",
     technologies: ["Astro", "Tailwind CSS", "AWS Lambda", "AWS S3/CloudFront"],
     link: "https://mekra.pl",
@@ -227,6 +251,7 @@ const projects = [
   {
     id: 25,
     title: "By-Interior.pl",
+    image: "/projects/by-interior.jpg",
     category: "Portfolio / Design",
     description: "Studio projektowania wnętrz. Portfolio, zespół, opinie klientów. Serverless Lambda backend.",
     technologies: ["Astro 4", "TypeScript", "Tailwind CSS", "AWS Lambda", "AWS S3/CloudFront"],
@@ -236,6 +261,7 @@ const projects = [
   {
     id: 26,
     title: "Project-Design.pl",
+    image: "/projects/project-design.jpg",
     category: "Portfolio / Design",
     description: "Portfolio biura projektowego wnętrz z Torunia. Obrazy przez Cloudinary, filtrowanie projektów, Lighthouse 98+.",
     technologies: ["Astro", "Cloudinary", "AWS S3/CloudFront", "Tailwind CSS"],
@@ -245,6 +271,7 @@ const projects = [
   {
     id: 27,
     title: "Meble-Bydgoszcz.pl",
+    image: "/projects/meble-bydgoszcz.jpg",
     category: "Strona firmowa",
     description: "Firma meblowa — meble na wymiar. Dynamiczne opinie Google Places API przez serverless Lambda, blog z artykułami, GitHub Actions deploy.",
     technologies: ["Astro", "AWS Lambda", "Google Places API", "AWS S3/CloudFront"],
@@ -255,24 +282,18 @@ const projects = [
   {
     id: 28,
     title: "Praca-Magisterska.pl",
+    image: "/projects/praca-magisterska.jpg",
     category: "Content / EdTech",
     description: "Portal z 30+ poradnikami o pisaniu prac magisterskich. 2000+ tematów z 20+ kierunków, rozbudowana sekcja metodologii (12 podartykułów), sprzedaż e-booków Stripe/Lambda, integracja Smart-Edu.AI.",
     technologies: ["Astro", "Tailwind CSS", "AWS Lambda", "Stripe", "AWS S3/CloudFront"],
     link: "https://praca-magisterska.pl",
     year: "2025",
   },
+  
   {
     id: 29,
-    title: "Prace-Magisterskie.pl",
-    category: "Content / EdTech",
-    description: "Portal edukacyjny z bazą wiedzy o pisaniu prac dyplomowych. Autorskie treści, SSG, AWS CDN.",
-    technologies: ["Astro 4", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
-    link: "https://prace-magisterskie.pl",
-    year: "2025",
-  },
-  {
-    id: 30,
     title: "MagisterkaOnline.com.pl",
+    image: "/projects/magisterkaonline.jpg",
     category: "Content / EdTech",
     description: "30+ poradników o pisaniu pracy magisterskiej. Rozbudowana sekcja metodologii (16 artykułów).",
     technologies: ["Astro 5", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
@@ -280,8 +301,9 @@ const projects = [
     year: "2025",
   },
   {
-    id: 31,
+    id: 30,
     title: "Licencjackie.pl",
+    image: "/projects/licencjackie.jpg",
     category: "Content / EdTech",
     description: "Portal edukacyjny o pracach licencjackich. Poradniki, tematy prac, zasady formatowania i cytowania.",
     technologies: ["Astro", "Tailwind CSS", "AWS S3/CloudFront"],
@@ -388,7 +410,7 @@ const timeline = [
           <p>
             Jestem autorem <strong>11 publikacji edukacyjnych</strong> przeznaczonych dla słuchaczy szkół policealnych przygotowujących się do egzaminów
             zawodowych na takich kierunkach jak m.in. technik masażysta, opiekun medyczny, terapeuta zajęciowy. Zeszyty ćwiczeń zostały stworzone
-            w LaTeX/Quarto - wszystkie gotowe do profesjonalnego druku. Napisałem także autorski e-book <em>&ldquo;Jak zostać copywriterem&rdquo;</em>,
+            w LaTeX/Quarto - wszystkie gotowe do profesjonalnego druku. Napisałem także autorski e-book <em>„Copywriting360°”</em>,
             w którym dzielę się swoją wiedzą i doświadczeniem.
           </p>
 
@@ -442,7 +464,11 @@ const timeline = [
         {projects.map(project => (
           <div class="project-card">
             <div class="project-card-image">
-              <span class="project-card-initials">{project.title.substring(0, 2)}</span>
+              {project.image ? (
+                <img src={project.image} alt={project.title} loading="lazy" width="400" height="225" />
+              ) : (
+                <span class="project-card-initials">{project.title.substring(0, 2)}</span>
+              )}
             </div>
             <div class="project-card-body">
               <div class="project-card-meta">
@@ -489,10 +515,12 @@ const timeline = [
     const toggle = document.getElementById('projects-toggle');
     if (grid && toggle) {
       toggle.addEventListener('click', () => {
-        const isCollapsed = grid.classList.contains('projects-collapsed');
-        grid.classList.toggle('projects-collapsed');
-        toggle.textContent = isCollapsed ? 'Zwiń projekty ↑' : 'Pokaż więcej projektów ↓';
-      });
+    const scrollY = window.scrollY;                          
+    const isCollapsed = grid.classList.contains('projects-collapsed');
+    grid.classList.toggle('projects-collapsed');
+    toggle.textContent = isCollapsed ? 'Zwiń projekty ↑' : 'Pokaż więcej projektów ↓';
+    window.scrollTo(0, scrollY);                             
+});
     }
   </script>
 
@@ -537,7 +565,7 @@ const timeline = [
           </div>
           <div>
             <span class="contact-label">Zadzwoń</span>
-            <span class="contact-value">+48 509 370 772</span>
+            <span class="contact-value"> +48 509 370 772</span>
           </div>
         </a>
 
@@ -551,29 +579,22 @@ const timeline = [
           </div>
         </a>
 
-        <div class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
-          </div>
-          <div>
-            <span class="contact-label">Lokalizacja</span>
-            <span class="contact-value">Toruń, Polska</span>
-          </div>
-        </div>
+        
 
-        <a href="https://www.ecopywriting.pl" target="_blank" rel="noopener" class="contact-item">
-          <div class="contact-icon">
-            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          </div>
-          <div>
-            <span class="contact-label">Agencja</span>
-            <span class="contact-value">ecopywriting.pl</span>
-          </div>
-        </a>
+        
       </div>
 
-      
-      
+      <!-- CTA -->
+      <div style="margin-top: var(--s-3xl);">
+        <div class="cta-section">
+          <h2>Rozpocznij współpracę</h2>
+          <p>Opisz swój projekt, a odezwę się w ciągu 24 godzin z propozycją rozwiązania.</p>
+          <a href="/kontakt" class="btn btn-primary">
+            Wysyłam zapytanie
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+        </div>
+      </div>
     </div>
   </section>
 

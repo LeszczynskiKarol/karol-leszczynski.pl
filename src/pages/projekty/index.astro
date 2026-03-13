@@ -6,9 +6,8 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Portfolio — Projekty Karol Leszczyński",
-  "description": "30+ zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.",
+  "description": "31 zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX.",
   "author": { "@type": "Person", "name": "Karol Leszczyński" },
-  "about": { "@type": "Thing", "name": "Web Development Portfolio" },
 };
 
 const categories = [
@@ -16,69 +15,40 @@ const categories = [
   { id: "saas", label: "SaaS / AI", count: 5 },
   { id: "ecommerce", label: "E-commerce", count: 3 },
   { id: "publishing", label: "Publikacje", count: 2 },
-  { id: "content", label: "Content / Blogi", count: 8 },
   { id: "agency", label: "Agencje", count: 3 },
+  { id: "content", label: "Content / Blogi", count: 5 },
   { id: "client", label: "Strony klientów", count: 9 },
   { id: "edtech", label: "EdTech", count: 4 },
 ];
 
-
-const projects = [
-  // === SaaS / AI ===
+const projects: Array<{
+  title: string;
+  image?: string;
+  cat: string;
+  catLabel: string;
+  description: string;
+  technologies: string[];
+  link: string;
+  year: string;
+  internal?: boolean;
+  highlight?: boolean;
+  stats?: Array<{ label: string; value: string }>;
+}> = [
   {
     title: "Smart-Copy.AI",
+    image: "/projects/smart-copy.jpg",
     cat: "saas",
     catLabel: "SaaS / AI Content",
     description: "Generator treści AI z multi-agent architecture (director + do 7 writerów). Google Custom Search + web scraping, 8 języków, pay-per-use 3,99 zł/1000 zn. WYSIWYG TipTap, eksport PDF/DOCX/HTML, i18n, blog CMS.",
     technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "TanStack Query", "i18next"],
-    link: "https://smart-copy.ai",
+    link: "https://www.smart-copy.ai",
     year: "2024–2025",
     highlight: true,
     stats: [{ label: "Języków", value: "8" }, { label: "Max stron", value: "150" }],
   },
   {
-    title: "Smart-Edu.AI",
-    cat: "saas",
-    catLabel: "SaaS / EdTech",
-    description: "Platforma AI do generowania prac dyplomowych i naukowych. 120 stron w 20 minut. Multi-agent writing pipeline, web research, 8 języków, Stripe payments.",
-    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "AWS EC2"],
-    link: "https://smart-edu.ai",
-    year: "2024–2025",
-    highlight: true,
-    stats: [{ label: "Użytkowników", value: "2000+" }, { label: "Prac wygenerowanych", value: "10k+" }],
-  },
-  {
-    title: "MaturaPolski.pl",
-    cat: "saas",
-    catLabel: "SaaS / EdTech",
-    description: "Platforma do nauki przed maturą z polskiego. AI ocena wypracowań z web research, adaptywny dobór zadań, spaced repetition, baza wiedzy (lektury, epoki), arkusze maturalne, freemium/premium, leaderboard.",
-    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet", "Stripe", "BullMQ", "WebSockets"],
-    link: "https://maturapolski.pl",
-    year: "2024–2025",
-    highlight: true,
-  },
-  {
-    title: "Interpunkcja.com.pl",
-    cat: "saas",
-    catLabel: "SaaS / AI Tools",
-    description: "Korektor polskiej interpunkcji, ortografii, pisowni, gramatyki i stylistyki. Claude Sonnet zwraca JSON z pozycjami błędów i wyjaśnieniami. Google OAuth, freemium, Lifetime 299 zł.",
-    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet", "Stripe", "Recharts"],
-    link: "https://interpunkcja.com.pl",
-    year: "2025",
-    highlight: true,
-  },
-  {
-    title: "Copywriting24.pl",
-    cat: "saas",
-    catLabel: "SaaS / AI Tools",
-    description: "Darmowy generator treści SEO bez rejestracji. 3 generacje/dzień (fingerprint + IP), SSE streaming, 3 długości, frazy kluczowe. Claude Haiku 4.5 — najtańszy model.",
-    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Haiku 4.5", "Docker"],
-    link: "https://copywriting24.pl",
-    year: "2025",
-  },
-  // === E-commerce ===
-  {
     title: "Silniki-Elektryczne.com.pl",
+    image: "/projects/stojan.jpg",
     cat: "ecommerce",
     catLabel: "E-commerce",
     description: "Sklep e-commerce silników (migracja z WooCommerce, +40% sprzedaży). 2000+ produktów, bidirectional Allegro sync, Stripe (card/P24/BLIK + COD), custom analytics, Google Merchant Feed, SES mailing.",
@@ -89,7 +59,52 @@ const projects = [
     stats: [{ label: "Wzrost sprzedaży", value: "+40%" }, { label: "Produktów", value: "2000+" }],
   },
   {
+    title: "MaturaPolski.pl",
+    image: "/projects/maturapolski.jpg",
+    cat: "saas",
+    catLabel: "SaaS / EdTech",
+    description: "Platforma do nauki przed maturą z polskiego. AI ocena wypracowań z web research, adaptywny dobór zadań, spaced repetition, baza wiedzy (lektury, epoki), arkusze maturalne, freemium/premium, leaderboard.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet", "Stripe", "BullMQ", "WebSockets"],
+    link: "https://maturapolski.pl",
+    year: "2024–2025",
+    highlight: true,
+    stats: [{ label: "Pytań w bazie", value: "2000+" }, { label: "Lektur", value: "15+" }],
+  },
+  {
+    title: "Interpunkcja.com.pl",
+    image: "/projects/interpunkcja.jpg",
+    cat: "saas",
+    catLabel: "SaaS / AI Tools",
+    description: "Korektor polskiej interpunkcji, ortografii, pisowni, gramatyki i stylistyki. Claude Sonnet zwraca JSON z pozycjami błędów i wyjaśnieniami. Google OAuth, freemium, Lifetime 299 zł.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet", "Stripe", "Recharts"],
+    link: "https://interpunkcja.com.pl",
+    year: "2025",
+    highlight: true,
+    stats: [{ label: "Kategorii błędów", value: "5" }, { label: "Plan Lifetime", value: "299 zł" }],
+  },
+  {
+    title: "Copywriting24.pl",
+    image: "/projects/copywriting24.jpg",
+    cat: "saas",
+    catLabel: "SaaS / AI Tools",
+    description: "Darmowy generator treści SEO bez rejestracji. 3 generacje/dzień (fingerprint + IP), SSE streaming, 3 długości, frazy kluczowe. Claude Haiku 4.5 — najtańszy model.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Claude Haiku 4.5", "Docker"],
+    link: "https://copywriting24.pl",
+    year: "2025",
+  },
+  {
+    title: "Smart-Edu.AI",
+    image: "/projects/smartedu.jpg",
+    cat: "saas",
+    catLabel: "SaaS / EdTech",
+    description: "Platforma AI do generowania prac dyplomowych i naukowych. 120 stron w 20 minut. Multi-agent writing pipeline, web research, 8 języków, Stripe payments.",
+    technologies: ["React 18", "Fastify", "Prisma", "PostgreSQL", "Anthropic Claude", "Stripe", "Vite", "AWS EC2"],
+    link: "https://smart-edu.ai",
+    year: "2024–2025",
+  },
+  {
     title: "Silnik-Elektryczny.pl",
+    image: "/projects/silnik-elektryczny.jpg",
     cat: "ecommerce",
     catLabel: "SEO / E-commerce",
     description: "Statyczna satelita SEO dla silników używanych. CodeBuild auto-rebuild po zamówieniu/zmianie stocku via webhook + EventBridge cron co 30 min. Lambda proxy filtruje produkty z API głównego sklepu.",
@@ -99,6 +114,7 @@ const projects = [
   },
   {
     title: "Silniki-Trojfazowe.pl",
+    image: "/projects/silniki-trojfazowe.jpg",
     cat: "ecommerce",
     catLabel: "SEO / E-commerce",
     description: "Druga satelita SEO — wyłącznie silniki trójfazowe. Identyczna architektura: Astro SSG + Lambda proxy + CodeBuild pipeline + auto-rebuild. Google Consent Mode v2.",
@@ -106,21 +122,22 @@ const projects = [
     link: "https://silniki-trojfazowe.pl",
     year: "2025",
   },
-  // === Publishing ===
   {
     title: "Zeszyty ćwiczeń (11 publikacji)",
+    image: "/projects/zeszyty.jpg",
     cat: "publishing",
     catLabel: "Publishing / EdTech",
     description: "11 zeszytów ćwiczeń dla szkół policealnych (technik masażysta, opiekun medyczny, terapeuta zajęciowy). Treści merytoryczne + skład LaTeX/Quarto. Custom classes, TikZ diagrams, print-ready PDF.",
     technologies: ["Quarto", "LaTeX", "XeLaTeX", "Python", "TikZ", "BibTeX", "tcolorbox"],
     link: "/uslugi/publikacje-latex",
     year: "2025",
-    highlight: true,
-    stats: [{ label: "Publikacji", value: "11" }, { label: "Stron składu", value: "1500+" }],
     internal: true,
+    highlight: false,
+    stats: [{ label: "Publikacji", value: "11" }, { label: "Stron składu", value: "1500+" }],
   },
   {
     title: "Copywriting 360° (ebook)",
+    image: "/projects/ebook.jpg",
     cat: "publishing",
     catLabel: "Publishing",
     description: "Autorski ebook — 16 rozdziałów, 250+ stron. Psychologia perswazji, nagłówki, storytelling, SEO, e-commerce, B2B, AI. Skład Quarto/LaTeX z custom environments. Sprzedaż Stripe Lambda.",
@@ -128,18 +145,19 @@ const projects = [
     link: "https://ebookcopywriting.pl",
     year: "2025–2026",
   },
-  // === Agencje ===
   {
     title: "Sklad-Tekstu.pl",
+    image: "/projects/sklad-tekstu.jpg",
     cat: "agency",
     catLabel: "Agencja / LaTeX",
-    description: "Agencja od składu tekstu LaTeX. 9 usług, portfolio z interaktywnym PDF viewerem, galeria showcase z lightboxem, blog Content Collections, formularz Lambda + S3 presign. Design typograficzny.",
+    description: "Agencja od składu tekstu LaTeX. 9 usług, portfolio z interaktywnym PDF viewerem, galeria showcase z lightboxem, blog Content Collections, formularz Lambda + S3 presign.",
     technologies: ["Astro", "Content Collections", "AWS Lambda", "AWS S3/CloudFront", "AWS SES"],
     link: "https://sklad-tekstu.pl",
     year: "2024–2025",
   },
   {
     title: "Agencja-Copywriterska.pl",
+    image: "/projects/agencja-copywriterska.jpg",
     cat: "agency",
     catLabel: "Agencja / Copywriting",
     description: "Agencja copywriterska. 9 usług (copywriting, ebooki, LaTeX, naming, opisy), blog Content Collections, testimoniale, Schema.org Organization/WebSite.",
@@ -149,6 +167,7 @@ const projects = [
   },
   {
     title: "eCopywriting.pl",
+    image: "/projects/ecopywriting.jpg",
     cat: "agency",
     catLabel: "Agencja / Strona firmowa",
     description: "Strona agencji copywriterskiej. Portfolio usług content marketingowych, blog firmowy, formularz kontaktowy AWS SES.",
@@ -156,9 +175,9 @@ const projects = [
     link: "https://www.ecopywriting.pl",
     year: "2024–2025",
   },
-  // === Content / Blogi ===
   {
     title: "CopywritingSEO.pl",
+    image: "/projects/copywritingseo.jpg",
     cat: "content",
     catLabel: "Blog / SEO Content",
     description: "Blog o SEO copywritingu z architekturą pillar-cluster. Lambda kontakt z załącznikami (S3 presign), GDPR cookies, Google Consent Mode v2.",
@@ -167,7 +186,8 @@ const projects = [
     year: "2024–2025",
   },
   {
-    title: "ZostańCopywriterem.pl",
+    title: "ZostanCopywriterem.pl",
+    image: "/projects/zostancopywriterem.jpg",
     cat: "content",
     catLabel: "Blog / Content",
     description: "Blog edukacyjny o profesji copywritera. Pillar-cluster architecture, Content Collections.",
@@ -177,6 +197,7 @@ const projects = [
   },
   {
     title: "1copywriting.pl",
+    image: "/projects/1copywriting.jpg",
     cat: "content",
     catLabel: "Blog / Content",
     description: "Blog o copywritingu z systemem newslettera. Lambda newsletter backend, panel admina subskrypcji.",
@@ -186,6 +207,7 @@ const projects = [
   },
   {
     title: "Copywriting-Blog.pl",
+    image: "/projects/copywriting-blog.jpg",
     cat: "content",
     catLabel: "Blog / Content",
     description: "Blog tematyczny o copywritingu i content marketingu. Standard Astro SSG + AWS CDN.",
@@ -195,6 +217,7 @@ const projects = [
   },
   {
     title: "iCopywriter.pl",
+    image: "/projects/icopywriter.jpg",
     cat: "content",
     catLabel: "Blog / Content",
     description: "Portal o copywritingu z artykułami i poradnikami. Część ekosystemu stron contentowych.",
@@ -202,9 +225,9 @@ const projects = [
     link: "https://icopywriter.pl",
     year: "2024–2025",
   },
-  // === Client websites ===
   {
     title: "TorWeb.pl",
+    image: "/projects/torweb.jpg",
     cat: "client",
     catLabel: "Agencja interaktywna",
     description: "Strona własnej agencji webowej. 12 realizacji, 6 podstron usługowych, dark/light mode, GDPR, GA4 + GTM.",
@@ -214,6 +237,7 @@ const projects = [
   },
   {
     title: "Nadamel.pl",
+    image: "/projects/nadamel.jpg",
     cat: "client",
     catLabel: "Strona firmowa",
     description: "Firma stolarska — rozkrój i oklejanie płyt. 8 podstron usługowych, Lighthouse 98+.",
@@ -223,6 +247,7 @@ const projects = [
   },
   {
     title: "UniaTorun.pl",
+    image: "/projects/uniatorun.jpg",
     cat: "client",
     catLabel: "Sport / Strona firmowa",
     description: "Akademia piłkarska. 17 stron, custom video player, formularze zapisów, GDPR + Consent Mode v2.",
@@ -232,6 +257,7 @@ const projects = [
   },
   {
     title: "GrandKuchnie.pl",
+    image: "/projects/grandkuchnie.jpg",
     cat: "client",
     catLabel: "Strona firmowa",
     description: "Producent kuchni na wymiar. Portfolio z CMS, galeria z lightbox, Google Analytics + Ads.",
@@ -241,6 +267,7 @@ const projects = [
   },
   {
     title: "ArtKuchnie.pl",
+    image: "/projects/artkuchnie.jpg",
     cat: "client",
     catLabel: "Strona firmowa",
     description: "Kuchnie na wymiar. Galeria realizacji, optymalizacja SEO, Page Speed 80-90.",
@@ -250,6 +277,7 @@ const projects = [
   },
   {
     title: "Mekra.pl",
+    image: "/projects/mekra.jpg",
     cat: "client",
     catLabel: "Strona firmowa",
     description: "Producent frontów ramiakowych. Rozbudowane podstrony, formularz kontaktowy Lambda + S3 presign.",
@@ -259,6 +287,7 @@ const projects = [
   },
   {
     title: "By-Interior.pl",
+    image: "/projects/by-interior.jpg",
     cat: "client",
     catLabel: "Portfolio / Design",
     description: "Studio projektowania wnętrz. Portfolio, zespół, opinie. Serverless Lambda backend.",
@@ -268,6 +297,7 @@ const projects = [
   },
   {
     title: "Project-Design.pl",
+    image: "/projects/project-design.jpg",
     cat: "client",
     catLabel: "Portfolio / Design",
     description: "Biuro projektowe wnętrz z Torunia. Cloudinary, filtrowanie projektów, Lighthouse 98+.",
@@ -277,6 +307,7 @@ const projects = [
   },
   {
     title: "Meble-Bydgoszcz.pl",
+    image: "/projects/meble-bydgoszcz.jpg",
     cat: "client",
     catLabel: "Strona firmowa",
     description: "Meble na wymiar. Dynamiczne opinie Google Places API przez serverless Lambda, blog, GitHub Actions deploy.",
@@ -284,27 +315,19 @@ const projects = [
     link: "https://meble-bydgoszcz.pl",
     year: "2024–2025",
   },
-  // === EdTech portals ===
   {
     title: "Praca-Magisterska.pl",
+    image: "/projects/praca-magisterska.jpg",
     cat: "edtech",
     catLabel: "Content / EdTech",
     description: "30+ poradników o pisaniu prac magisterskich. 2000+ tematów z 20+ kierunków, sekcja metodologii (12 artykułów), e-booki Stripe/Lambda, integracja Smart-Edu.AI.",
     technologies: ["Astro", "Tailwind CSS", "AWS Lambda", "Stripe", "AWS S3/CloudFront"],
     link: "https://praca-magisterska.pl",
     year: "2025",
-  },
-  {
-    title: "Prace-Magisterskie.pl",
-    cat: "edtech",
-    catLabel: "Content / EdTech",
-    description: "Portal z bazą wiedzy o pisaniu prac dyplomowych. Autorskie treści, SSG, AWS CDN.",
-    technologies: ["Astro 4", "TypeScript", "Tailwind CSS", "AWS S3/CloudFront"],
-    link: "https://prace-magisterskie.pl",
-    year: "2025",
-  },
+  },  
   {
     title: "MagisterkaOnline.com.pl",
+    image: "/projects/magisterkaonline.jpg",
     cat: "edtech",
     catLabel: "Content / EdTech",
     description: "30+ poradników o pisaniu pracy magisterskiej. Rozbudowana sekcja metodologii (16 artykułów).",
@@ -314,6 +337,7 @@ const projects = [
   },
   {
     title: "Licencjackie.pl",
+    image: "/projects/licencjackie.jpg",
     cat: "edtech",
     catLabel: "Content / EdTech",
     description: "Portal o pracach licencjackich. Poradniki, tematy prac, formatowanie i cytowania.",
@@ -323,14 +347,13 @@ const projects = [
   },
 ];
 
-const displayProjects = projects.filter(p => !p.skip);
+const highlighted = projects.filter(p => p.highlight && p.stats);
 ---
 
 <Base title="Projekty — Portfolio | Karol Leszczyński" description="31 zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.">
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
   <main>
-    <!-- Hero -->
     <section class="hero" style="min-height: 50vh;">
       <div class="hero-bg"><div class="hero-grid"></div></div>
       <div class="container">
@@ -338,7 +361,7 @@ const displayProjects = projects.filter(p => !p.skip);
           <Breadcrumbs items={[{ label: "Projekty" }]} />
           <h1 class="animate-in animate-delay-1">Moje <span class="text-gradient">projekty</span></h1>
           <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
-            31 zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX. Każdy projekt to działający produkt z mierzalnymi wynikami.
+            31 zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); font-size: var(--f-size-sm);">
             <span>⚡ 5 platform SaaS z AI</span>
@@ -350,65 +373,67 @@ const displayProjects = projects.filter(p => !p.skip);
       </div>
     </section>
 
-    <!-- Wyróżnione projekty -->
+    <!-- Flagowe -->
     <section class="section" style="background: var(--c-bg-alt);">
       <div class="container">
         <div class="section-header">
           <h2>Flagowe <span class="text-gradient">realizacje</span></h2>
           <p>Projekty z największym impactem biznesowym</p>
         </div>
-        <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(450px, 1fr)); gap: var(--s-xl); max-width: 1000px; margin: 0 auto;">
-          {displayProjects.filter(p => p.highlight && p.stats).map(project => (
-            <div class="skill-group" style="padding: var(--s-xl);">
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-md);">
-                <div>
-                  <h3 style="font-size: var(--f-size-2xl);">{project.title}</h3>
-                  <span class="text-primary" style="font-size: var(--f-size-sm);">{project.catLabel}</span>
+        <div class="featured-grid">
+          {highlighted.map(project => (
+            <div class="featured-card">
+              {project.image && (
+                <div class="featured-card-img">
+                  <img src={project.image} alt={project.title} loading="lazy" width="500" height="280" />
                 </div>
-                <span class="text-muted" style="font-size: var(--f-size-sm);">{project.year}</span>
-              </div>
-              <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-lg);">{project.description}</p>
-              {project.stats && (
-                <div style="display: flex; gap: var(--s-lg); margin-bottom: var(--s-lg);">
-                  {project.stats.map(s => (
-                    <div>
-                      <div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{s.value}</div>
-                      <div class="text-muted" style="font-size: var(--f-size-xs);">{s.label}</div>
-                    </div>
+              )}
+              <div class="featured-card-body">
+                <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-sm);">
+                  <div>
+                    <h3 style="font-size: var(--f-size-xl);">{project.title}</h3>
+                    <span class="text-primary" style="font-size: var(--f-size-xs);">{project.catLabel}</span>
+                  </div>
+                  <span class="text-muted" style="font-size: var(--f-size-xs);">{project.year}</span>
+                </div>
+                <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md); line-height: 1.6;">{project.description}</p>
+                {project.stats && (
+                  <div style="display: flex; gap: var(--s-xl); margin-bottom: var(--s-md);">
+                    {project.stats.map(s => (
+                      <div>
+                        <div style="font-size: var(--f-size-2xl); font-weight: 800; color: var(--c-primary);">{s.value}</div>
+                        <div class="text-muted" style="font-size: var(--f-size-xs);">{s.label}</div>
+                      </div>
+                    ))}
+                  </div>
+                )}
+                <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s-md);">
+                  {project.technologies.slice(0, 5).map(t => (
+                    <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{t}</span>
                   ))}
+                  {project.technologies.length > 5 && <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-bg-alt); border-radius: 999px;" class="text-muted">+{project.technologies.length - 5}</span>}
                 </div>
-              )}
-              <div style="display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: var(--s-md);">
-                {project.technologies.slice(0, 5).map(t => (
-                  <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{t}</span>
-                ))}
-                {project.technologies.length > 5 && <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-bg-alt); border-radius: 999px;" class="text-muted">+{project.technologies.length - 5}</span>}
-              </div>
-              {project.link !== "#" && (
                 <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link">
-                  {project.internal ? "Zobacz usługę" : "Odwiedź stronę"} <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+                  {project.internal ? "Zobacz usługę" : "Odwiedź stronę"} →
                 </a>
-              )}
+              </div>
             </div>
           ))}
         </div>
       </div>
     </section>
 
-    <!-- Wszystkie projekty z filtrami CSS -->
+    <!-- Wszystkie -->
     <section class="section">
       <div class="container">
         <div class="section-header">
           <h2>Wszystkie <span class="text-gradient">realizacje</span></h2>
-          <p>31 projektów w 7 kategoriach</p>
+          <p>31 projektów w 8 kategoriach</p>
         </div>
 
-        <!-- CSS-only filter: radios + labels + grid must be siblings -->
         <div class="portfolio-wrapper">
           {categories.map((cat, i) => (
-            <Fragment>
-              <input type="radio" name="cat-filter" id={`filter-${cat.id}`} class="portfolio-radio" checked={i === 0} />
-            </Fragment>
+            <input type="radio" name="cat-filter" id={`filter-${cat.id}`} class="portfolio-radio" checked={i === 0} />
           ))}
           <div class="portfolio-filters">
             {categories.map(cat => (
@@ -417,28 +442,33 @@ const displayProjects = projects.filter(p => !p.skip);
           </div>
 
           <div class="portfolio-grid">
-          {displayProjects.map(project => (
-            <div class={`portfolio-card`} data-cat={project.cat}>
-              <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-sm);">
-                <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{project.catLabel}</span>
-                <span class="text-muted" style="font-size: var(--f-size-xs);">{project.year}</span>
+            {projects.map(project => (
+              <div class="portfolio-card" data-cat={project.cat}>
+                {project.image && (
+                  <div class="portfolio-card-img">
+                    <img src={project.image} alt={project.title} loading="lazy" width="400" height="225" />
+                  </div>
+                )}
+                <div class="portfolio-card-body">
+                  <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: var(--s-sm);">
+                    <span style="font-size: var(--f-size-xs); padding: 2px 10px; background: var(--c-primary-soft); border-radius: 999px; color: var(--c-primary);">{project.catLabel}</span>
+                    <span class="text-muted" style="font-size: var(--f-size-xs);">{project.year}</span>
+                  </div>
+                  <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{project.title}</h3>
+                  <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md); line-height: 1.5;">{project.description}</p>
+                  <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s-md);">
+                    {project.technologies.slice(0, 4).map(t => (
+                      <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius); border: 1px solid var(--c-border);">{t}</span>
+                    ))}
+                    {project.technologies.length > 4 && <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius);" class="text-muted">+{project.technologies.length - 4}</span>}
+                  </div>
+                  <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link" style="font-size: var(--f-size-sm);">
+                    {project.internal ? "Szczegóły" : "Odwiedź"} →
+                  </a>
+                </div>
               </div>
-              <h3 style="font-size: var(--f-size-lg); margin-bottom: var(--s-xs);">{project.title}</h3>
-              <p class="text-muted" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md); line-height: 1.5;">{project.description}</p>
-              <div style="display: flex; flex-wrap: wrap; gap: 4px; margin-bottom: var(--s-md);">
-                {project.technologies.slice(0, 4).map(t => (
-                  <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius); border: 1px solid var(--c-border);">{t}</span>
-                ))}
-                {project.technologies.length > 4 && <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius);" class="text-muted">+{project.technologies.length - 4}</span>}
-              </div>
-              {project.link && project.link !== "#" && (
-                <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link" style="font-size: var(--f-size-sm);">
-                  {project.internal ? "Szczegóły" : "Odwiedź"} →
-                </a>
-              )}
-            </div>
-          ))}
-        </div>
+            ))}
+          </div>
         </div>
       </div>
     </section>
@@ -463,60 +493,48 @@ const displayProjects = projects.filter(p => !p.skip);
     </section>
   </main>
 
-  <!-- CSS-only portfolio filter -->
   <style>
-    .portfolio-filters {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      justify-content: center;
-      margin-bottom: var(--s-2xl);
-    }
-    .portfolio-radio { display: none; }
-    .portfolio-filter-label {
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      padding: 8px 20px;
-      border-radius: 999px;
-      font-size: var(--f-size-sm);
-      font-weight: 500;
-      cursor: pointer;
-      background: var(--c-bg-card);
-      border: 1px solid var(--c-border);
-      transition: var(--transition);
-    }
-    .portfolio-filter-label:hover { border-color: var(--c-border-hover); }
-    .portfolio-radio:checked + .portfolio-filter-label {
-      background: var(--c-primary);
-      color: #fff;
-      border-color: var(--c-primary);
-    }
-    .portfolio-filter-count {
-      font-size: 10px;
-      opacity: 0.7;
-    }
-
-    .portfolio-grid {
+    .featured-grid {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-      gap: var(--s-lg);
-      max-width: 1100px;
+      grid-template-columns: repeat(auto-fill, minmax(440px, 1fr));
+      gap: var(--s-xl);
+      max-width: 1000px;
       margin: 0 auto;
     }
-    .portfolio-card {
+    @media (max-width: 520px) { .featured-grid { grid-template-columns: 1fr; } }
+
+    .featured-card {
       background: var(--c-bg-card);
       border: 1px solid var(--c-border);
       border-radius: var(--radius-lg);
-      padding: var(--s-lg);
+      overflow: hidden;
       transition: var(--transition);
     }
-    .portfolio-card:hover {
-      border-color: var(--c-border-hover);
-      transform: translateY(-2px);
-    }
+    .featured-card:hover { border-color: var(--c-border-hover); transform: translateY(-2px); }
+    .featured-card-img { aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); }
+    .featured-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .featured-card:hover .featured-card-img img { transform: scale(1.03); }
+    .featured-card-body { padding: var(--s-lg); }
 
-    /* CSS-only filter logic */
+    .portfolio-filters { display: flex; flex-wrap: wrap; gap: 8px; justify-content: center; margin-bottom: var(--s-2xl); }
+    .portfolio-radio { display: none; }
+    .portfolio-filter-label {
+      display: inline-flex; align-items: center; gap: 6px;
+      padding: 8px 20px; border-radius: 999px; font-size: var(--f-size-sm); font-weight: 500;
+      cursor: pointer; background: var(--c-bg-card); border: 1px solid var(--c-border); transition: var(--transition);
+    }
+    .portfolio-filter-label:hover { border-color: var(--c-border-hover); }
+    .portfolio-radio:checked + .portfolio-filter-label { background: var(--c-primary); color: #fff; border-color: var(--c-primary); }
+    .portfolio-filter-count { font-size: 10px; opacity: 0.7; }
+
+    .portfolio-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(320px, 1fr)); gap: var(--s-lg); max-width: 1100px; margin: 0 auto; }
+    .portfolio-card { background: var(--c-bg-card); border: 1px solid var(--c-border); border-radius: var(--radius-lg); overflow: hidden; transition: var(--transition); }
+    .portfolio-card:hover { border-color: var(--c-border-hover); transform: translateY(-2px); }
+    .portfolio-card-img { aspect-ratio: 16/9; overflow: hidden; background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft)); }
+    .portfolio-card-img img { width: 100%; height: 100%; object-fit: cover; transition: transform 0.3s; }
+    .portfolio-card:hover .portfolio-card-img img { transform: scale(1.03); }
+    .portfolio-card-body { padding: var(--s-lg); }
+
     #filter-all:checked ~ .portfolio-grid .portfolio-card { display: block; }
     #filter-saas:checked ~ .portfolio-grid .portfolio-card { display: none; }
     #filter-saas:checked ~ .portfolio-grid .portfolio-card[data-cat="saas"] { display: block; }
@@ -524,17 +542,15 @@ const displayProjects = projects.filter(p => !p.skip);
     #filter-ecommerce:checked ~ .portfolio-grid .portfolio-card[data-cat="ecommerce"] { display: block; }
     #filter-publishing:checked ~ .portfolio-grid .portfolio-card { display: none; }
     #filter-publishing:checked ~ .portfolio-grid .portfolio-card[data-cat="publishing"] { display: block; }
+    #filter-agency:checked ~ .portfolio-grid .portfolio-card { display: none; }
+    #filter-agency:checked ~ .portfolio-grid .portfolio-card[data-cat="agency"] { display: block; }
     #filter-content:checked ~ .portfolio-grid .portfolio-card { display: none; }
     #filter-content:checked ~ .portfolio-grid .portfolio-card[data-cat="content"] { display: block; }
     #filter-client:checked ~ .portfolio-grid .portfolio-card { display: none; }
     #filter-client:checked ~ .portfolio-grid .portfolio-card[data-cat="client"] { display: block; }
     #filter-edtech:checked ~ .portfolio-grid .portfolio-card { display: none; }
     #filter-edtech:checked ~ .portfolio-grid .portfolio-card[data-cat="edtech"] { display: block; }
-    #filter-agency:checked ~ .portfolio-grid .portfolio-card { display: none; }
-    #filter-agency:checked ~ .portfolio-grid .portfolio-card[data-cat="agency"] { display: block; }
 
-    @media (max-width: 768px) {
-      .portfolio-grid { grid-template-columns: 1fr; }
-    }
+    @media (max-width: 768px) { .portfolio-grid { grid-template-columns: 1fr; } }
   </style>
 </Base>
