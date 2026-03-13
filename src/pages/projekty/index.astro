@@ -6,19 +6,19 @@ const structuredData = {
   "@context": "https://schema.org",
   "@type": "CollectionPage",
   "name": "Portfolio — Projekty Karol Leszczyński",
-  "description": "31 zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX.",
+  "description": "Kilkaset zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX.",
   "author": { "@type": "Person", "name": "Karol Leszczyński" },
 };
 
 const categories = [
-  { id: "all", label: "Wszystkie", count: 31 },
+  { id: "all", label: "Wszystkie", count: 30 },
   { id: "saas", label: "SaaS / AI", count: 5 },
   { id: "ecommerce", label: "E-commerce", count: 3 },
   { id: "publishing", label: "Publikacje", count: 2 },
   { id: "agency", label: "Agencje", count: 3 },
   { id: "content", label: "Content / Blogi", count: 5 },
   { id: "client", label: "Strony klientów", count: 9 },
-  { id: "edtech", label: "EdTech", count: 4 },
+  { id: "edtech", label: "EdTech", count: 3 },
 ];
 
 const projects: Array<{
@@ -350,7 +350,7 @@ const projects: Array<{
 const highlighted = projects.filter(p => p.highlight && p.stats);
 ---
 
-<Base title="Projekty — Portfolio | Karol Leszczyński" description="31 zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.">
+<Base title="Projekty — Portfolio | Karol Leszczyński" description="Kilkaset zrealizowanych projektów: platformy SaaS z AI, sklepy e-commerce, strony firmowe, publikacje LaTeX. React, Astro, Node.js, AWS.">
   <script type="application/ld+json" set:html={JSON.stringify(structuredData)} />
 
   <main>
@@ -361,13 +361,13 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
           <Breadcrumbs items={[{ label: "Projekty" }]} />
           <h1 class="animate-in animate-delay-1">Moje <span class="text-gradient">projekty</span></h1>
           <p class="text-muted animate-in animate-delay-2" style="font-size: var(--f-size-lg); margin: var(--s-lg) 0 var(--s-xl);">
-            31 zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX.
+            Kilkadziesiąt zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); font-size: var(--f-size-sm);">
-            <span>⚡ 5 platform SaaS z AI</span>
-            <span>🛒 3 sklepy e-commerce</span>
-            <span>🌐 9 stron klientów</span>
-            <span>📚 11 publikacji LaTeX</span>
+            <span>⚡ +5 platform SaaS z AI</span>
+            <span>🛒 +3 sklepy e-commerce</span>
+            <span>🌐 +15 stron klientów</span>
+            <span>📚 +20 publikacji LaTeX</span>
           </div>
         </div>
       </div>
@@ -427,8 +427,8 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
     <section class="section">
       <div class="container">
         <div class="section-header">
-          <h2>Wszystkie <span class="text-gradient">realizacje</span></h2>
-          <p>31 projektów w 8 kategoriach</p>
+          <h2>Najważniejsze <span class="text-gradient">realizacje</span></h2>
+          <p>30 projektów w 8 kategoriach</p>
         </div>
 
         <div class="portfolio-wrapper">
@@ -478,7 +478,7 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
       <div class="container" style="max-width: 700px; text-align: center;">
         <h2>Masz pomysł na <span class="text-gradient">kolejny projekt</span>?</h2>
         <p class="text-muted" style="font-size: var(--f-size-lg); margin: var(--s-md) 0 var(--s-xl);">
-          Każdy z tych 31 projektów zaczął się od rozmowy. Opowiedz mi o swoim pomyśle — <strong>pierwsza konsultacja gratis</strong>.
+          Każdy z tych projektów zaczął się od rozmowy. Opowiedz mi o swoim pomyśle — <strong>pierwsza konsultacja gratis</strong>.
         </p>
         <div style="display: flex; flex-wrap: wrap; gap: var(--s-md); justify-content: center; margin-bottom: var(--s-xl);">
           <a href="/kontakt" class="btn btn-primary">Porozmawiajmy o Twoim projekcie →</a>
