@@ -1,0 +1,461 @@
+---
+import Base from './Base.astro';
+import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import type { CollectionEntry } from 'astro:content';
+
+interface Props {
+  post: CollectionEntry<'blog'>;
+}
+
+const { post } = Astro.props;
+const { title, description, pubDate, updatedDate, heroImage, heroImageAlt, category, tags, author } = post.data;
+
+const formattedDate = pubDate.toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' });
+const formattedUpdated = updatedDate?.toLocaleDateString('pl-PL', { year: 'numeric', month: 'long', day: 'numeric' });
+const isoDate = pubDate.toISOString();
+const isoUpdated = updatedDate?.toISOString();
+
+// Reading time estimate
+const wordCount = post.body?.split(/\s+/).length ?? 0;
+const readingTime = post.data.readingTime ?? Math.max(1, Math.ceil(wordCount / 200));
+
+const canonicalURL = new URL(Astro.url.pathname, Astro.site).href;
+
+const articleSchema = {
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": title,
+  "description": description,
+  "datePublished": isoDate,
+  ...(isoUpdated && { "dateModified": isoUpdated }),
+  "author": {
+    "@type": "Person",
+    "name": author,
+    "url": Astro.site?.href ?? "https://karol-leszczynski.pl"
+  },
+  "publisher": {
+    "@type": "Person",
+    "name": "Karol Leszczyński"
+  },
+  ...(heroImage && { "image": new URL(heroImage, Astro.site).href }),
+  "mainEntityOfPage": canonicalURL,
+  "wordCount": wordCount,
+};
+
+const breadcrumbSchema = {
+  "@context": "https://schema.org",
+  "@type": "BreadcrumbList",
+  "itemListElement": [
+    { "@type": "ListItem", "position": 1, "name": "Strona główna", "item": Astro.site?.href },
+    { "@type": "ListItem", "position": 2, "name": "Blog", "item": new URL("/blog", Astro.site).href },
+    { "@type": "ListItem", "position": 3, "name": title, "item": canonicalURL },
+  ]
+};
+---
+
+<Base
+  title={`${title} | Karol Leszczyński`}
+  description={description}
+  ogType="article"
+  ogImage={heroImage}
+  articleDate={pubDate}
+  articleModified={updatedDate}
+>
+  <script type="application/ld+json" set:html={JSON.stringify(articleSchema)} />
+  <script type="application/ld+json" set:html={JSON.stringify(breadcrumbSchema)} />
+
+  <!-- Reading progress bar -->
+  <div class="reading-progress" id="reading-progress" aria-hidden="true"></div>
+
+  <article class="blog-article">
+    <div class="container">
+
+      <!-- Breadcrumbs -->
+      <Breadcrumbs items={[
+        { label: "Blog", href: "/blog" },
+        { label: title },
+      ]} />
+
+      <!-- Article header -->
+      <header class="article-header">
+        <div class="article-meta-top">
+          <a href={`/blog?kategoria=${encodeURIComponent(category)}`} class="article-category">{category}</a>
+          <span class="article-reading-time">{readingTime} min czytania</span>
+        </div>
+
+        <h1 class="article-title">{title}</h1>
+
+        <p class="article-description">{description}</p>
+
+        <div class="article-meta-bottom">
+          <div class="article-author">
+            <div class="article-author-avatar">{author.charAt(0)}</div>
+            <div>
+              <span class="article-author-name">{author}</span>
+              <time datetime={isoDate} class="article-date">{formattedDate}</time>
+              {formattedUpdated && (
+                <span class="article-updated">
+                  (zaktualizowano: <time datetime={isoUpdated!}>{formattedUpdated}</time>)
+                </span>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {heroImage && (
+          <div class="article-hero-image">
+            <img src={heroImage} alt={heroImageAlt || title} loading="eager" width="1200" height="630" />
+          </div>
+        )}
+      </header>
+
+      <!-- Article body -->
+      <div class="article-content prose">
+        <slot />
+      </div>
+
+      <!-- Tags -->
+      {tags.length > 0 && (
+        <footer class="article-footer">
+          <div class="article-tags">
+            {tags.map(tag => (
+              <span class="article-tag">#{tag}</span>
+            ))}
+          </div>
+        </footer>
+      )}
+
+    </div>
+  </article>
+
+  <!-- Reading progress script -->
+  <script is:inline>
+  (function() {
+    var bar = document.getElementById('reading-progress');
+    if (!bar) return;
+    function update() {
+      var st = window.scrollY;
+      var h = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.width = h > 0 ? (st / h * 100) + '%' : '0%';
+    }
+    window.addEventListener('scroll', update, { passive: true });
+    update();
+  })();
+  </script>
+</Base>
+
+<style>
+  /* Reading progress */
+  .reading-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0;
+    background: linear-gradient(90deg, var(--c-primary), var(--c-accent));
+    z-index: 9999;
+    transition: width 0.1s linear;
+  }
+
+  /* Article layout */
+  .blog-article {
+    padding-top: 100px;
+    padding-bottom: var(--s-4xl);
+  }
+
+  .blog-article .container {
+    max-width: 800px;
+  }
+
+  /* Header */
+  .article-header {
+    margin-bottom: var(--s-3xl);
+  }
+
+  .article-meta-top {
+    display: flex;
+    align-items: center;
+    gap: var(--s-md);
+    margin-bottom: var(--s-lg);
+  }
+
+  .article-category {
+    font-size: var(--f-size-xs);
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    padding: 4px 14px;
+    background: var(--c-primary-soft);
+    color: var(--c-primary);
+    border-radius: var(--radius-full);
+    transition: var(--transition);
+  }
+
+  .article-category:hover {
+    background: var(--c-primary);
+    color: #fff;
+  }
+
+  .article-reading-time {
+    font-size: var(--f-size-xs);
+    color: var(--c-text-muted);
+    font-family: var(--f-mono);
+  }
+
+  .article-title {
+    font-size: var(--f-size-4xl);
+    font-weight: 800;
+    line-height: 1.15;
+    margin-bottom: var(--s-lg);
+  }
+
+  .article-description {
+    font-size: var(--f-size-lg);
+    color: var(--c-text-muted);
+    line-height: 1.7;
+    margin-bottom: var(--s-xl);
+  }
+
+  /* Author */
+  .article-meta-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--s-xl);
+    padding-bottom: var(--s-xl);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .article-author {
+    display: flex;
+    align-items: center;
+    gap: var(--s-md);
+  }
+
+  .article-author-avatar {
+    width: 44px;
+    height: 44px;
+    border-radius: 50%;
+    background: linear-gradient(135deg, var(--c-primary), var(--c-accent));
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 700;
+    font-size: var(--f-size-lg);
+    color: #fff;
+    flex-shrink: 0;
+  }
+
+  .article-author-name {
+    display: block;
+    font-weight: 600;
+    font-size: var(--f-size-sm);
+  }
+
+  .article-date {
+    display: block;
+    font-size: var(--f-size-xs);
+    color: var(--c-text-muted);
+  }
+
+  .article-updated {
+    font-size: var(--f-size-xs);
+    color: var(--c-text-muted);
+  }
+
+  /* Hero image */
+  .article-hero-image {
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    border: 1px solid var(--c-border);
+    margin-bottom: var(--s-xl);
+  }
+
+  .article-hero-image img {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  /* ═══ PROSE ═══ */
+  .prose {
+    font-size: var(--f-size-base);
+    line-height: 1.85;
+    color: var(--c-text);
+  }
+
+  .prose :global(h2) {
+    font-size: var(--f-size-2xl);
+    font-weight: 700;
+    margin-top: var(--s-3xl);
+    margin-bottom: var(--s-lg);
+    padding-bottom: var(--s-sm);
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  .prose :global(h3) {
+    font-size: var(--f-size-xl);
+    font-weight: 700;
+    margin-top: var(--s-2xl);
+    margin-bottom: var(--s-md);
+  }
+
+  .prose :global(h4) {
+    font-size: var(--f-size-lg);
+    font-weight: 600;
+    margin-top: var(--s-xl);
+    margin-bottom: var(--s-sm);
+  }
+
+  .prose :global(p) {
+    margin-bottom: var(--s-lg);
+  }
+
+  .prose :global(a) {
+    color: var(--c-primary);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    transition: var(--transition);
+  }
+
+  .prose :global(a:hover) {
+    color: var(--c-accent);
+  }
+
+  .prose :global(strong) {
+    font-weight: 700;
+    color: var(--c-text);
+  }
+
+  .prose :global(ul),
+  .prose :global(ol) {
+    margin-bottom: var(--s-lg);
+    padding-left: var(--s-xl);
+  }
+
+  .prose :global(ul) { list-style: disc; }
+  .prose :global(ol) { list-style: decimal; }
+
+  .prose :global(li) {
+    margin-bottom: var(--s-sm);
+  }
+
+  .prose :global(li::marker) {
+    color: var(--c-primary);
+  }
+
+  .prose :global(blockquote) {
+    border-left: 3px solid var(--c-primary);
+    padding: var(--s-md) var(--s-lg);
+    margin: var(--s-xl) 0;
+    background: var(--c-primary-soft);
+    border-radius: 0 var(--radius) var(--radius) 0;
+    font-style: italic;
+    color: var(--c-text-muted);
+  }
+
+  .prose :global(blockquote p:last-child) {
+    margin-bottom: 0;
+  }
+
+  .prose :global(code) {
+    font-family: var(--f-mono);
+    font-size: 0.875em;
+    padding: 2px 6px;
+    background: var(--c-code-bg);
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    color: var(--c-accent);
+  }
+
+  .prose :global(pre) {
+    background: var(--c-code-bg);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius);
+    padding: var(--s-lg);
+    overflow-x: auto;
+    margin: var(--s-xl) 0;
+    font-size: var(--f-size-sm);
+    line-height: 1.6;
+  }
+
+  .prose :global(pre code) {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--c-text);
+    font-size: inherit;
+  }
+
+  .prose :global(hr) {
+    border: none;
+    border-top: 1px solid var(--c-border);
+    margin: var(--s-3xl) 0;
+  }
+
+  .prose :global(img) {
+    border-radius: var(--radius);
+    border: 1px solid var(--c-border);
+    margin: var(--s-xl) 0;
+  }
+
+  .prose :global(table) {
+    width: 100%;
+    border-collapse: collapse;
+    margin: var(--s-xl) 0;
+    font-size: var(--f-size-sm);
+  }
+
+  .prose :global(th) {
+    text-align: left;
+    padding: var(--s-sm) var(--s-md);
+    background: var(--c-primary-soft);
+    border: 1px solid var(--c-border);
+    font-weight: 600;
+    color: var(--c-primary);
+  }
+
+  .prose :global(td) {
+    padding: var(--s-sm) var(--s-md);
+    border: 1px solid var(--c-border);
+  }
+
+  .prose :global(tr:nth-child(even) td) {
+    background: var(--c-bg-alt);
+  }
+
+  /* Footer / tags */
+  .article-footer {
+    margin-top: var(--s-3xl);
+    padding-top: var(--s-xl);
+    border-top: 1px solid var(--c-border);
+  }
+
+  .article-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: var(--s-sm);
+  }
+
+  .article-tag {
+    font-size: var(--f-size-xs);
+    font-family: var(--f-mono);
+    padding: 4px 12px;
+    background: var(--c-bg-alt);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-full);
+    color: var(--c-text-muted);
+    transition: var(--transition);
+  }
+
+  .article-tag:hover {
+    color: var(--c-primary);
+    border-color: var(--c-primary);
+  }
+
+  @media (max-width: 768px) {
+    .blog-article { padding-top: 80px; }
+    .article-title { font-size: var(--f-size-2xl); }
+    .article-description { font-size: var(--f-size-base); }
+  }
+</style>

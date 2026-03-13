@@ -1,0 +1,195 @@
+---
+import { getCollection } from 'astro:content';
+
+const posts = (await getCollection('blog'))
+  .filter(post => !post.data.draft)
+  .sort((a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf())
+  .slice(0, 3);
+
+function estimateReadingTime(body: string | undefined, readingTime?: number): number {
+  if (readingTime) return readingTime;
+  if (!body) return 1;
+  return Math.max(1, Math.ceil(body.split(/\s+/).length / 200));
+}
+---
+
+{posts.length > 0 && (
+  <section class="section" id="blog">
+    <div class="container">
+      <div class="section-header">
+        <h2>Ostatnie <span class="text-gradient">wpisy</span></h2>
+        <p>Web development, Astro, AWS, SEO — z perspektywy praktyka</p>
+      </div>
+
+      <div class="latest-posts-grid">
+        {posts.map((post, i) => {
+          const formattedDate = post.data.pubDate.toLocaleDateString('pl-PL', {
+            year: 'numeric', month: 'short', day: 'numeric'
+          });
+          const rt = estimateReadingTime(post.body, post.data.readingTime);
+          return (
+            <a href={`/blog/${post.slug}`} class={`latest-post-card animate-in animate-delay-${i + 1}`}>
+              {post.data.heroImage ? (
+                <div class="latest-post-image">
+                  <img src={post.data.heroImage} alt={post.data.heroImageAlt || post.data.title} loading="lazy" width="400" height="225" />
+                </div>
+              ) : (
+                <div class="latest-post-image latest-post-image--placeholder">
+                  <span class="font-mono" style="font-size: var(--f-size-2xl); opacity: 0.12;">&lt;/&gt;</span>
+                </div>
+              )}
+              <div class="latest-post-body">
+                <div class="latest-post-meta">
+                  <span class="latest-post-cat">{post.data.category}</span>
+                  <span class="latest-post-time">{rt} min</span>
+                </div>
+                <h3 class="latest-post-title">{post.data.title}</h3>
+                <p class="latest-post-desc">{post.data.description}</p>
+                <div class="latest-post-bottom">
+                  <time datetime={post.data.pubDate.toISOString()}>{formattedDate}</time>
+                  <span class="latest-post-arrow">→</span>
+                </div>
+              </div>
+            </a>
+          );
+        })}
+      </div>
+
+      <div style="text-align: center; margin-top: var(--s-2xl);">
+        <a href="/blog" class="btn btn-outline">
+          Wszystkie artykuły
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
+)}
+
+<style>
+  .latest-posts-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: var(--s-xl);
+  }
+
+  .latest-post-card {
+    display: flex;
+    flex-direction: column;
+    background: var(--c-bg-card);
+    border: 1px solid var(--c-border);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+    transition: var(--transition);
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .latest-post-card:hover {
+    border-color: var(--c-border-hover);
+    transform: translateY(-4px);
+    box-shadow: var(--c-shadow);
+  }
+
+  .latest-post-image {
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    background: linear-gradient(135deg, var(--c-primary-soft), var(--c-accent-soft));
+  }
+
+  .latest-post-image img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.3s ease;
+  }
+
+  .latest-post-card:hover .latest-post-image img {
+    transform: scale(1.04);
+  }
+
+  .latest-post-image--placeholder {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .latest-post-body {
+    padding: var(--s-lg);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+  }
+
+  .latest-post-meta {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: var(--s-sm);
+  }
+
+  .latest-post-cat {
+    font-size: var(--f-size-xs);
+    font-weight: 600;
+    color: var(--c-primary);
+  }
+
+  .latest-post-time {
+    font-size: var(--f-size-xs);
+    color: var(--c-text-muted);
+    font-family: var(--f-mono);
+  }
+
+  .latest-post-title {
+    font-size: var(--f-size-lg);
+    font-weight: 700;
+    line-height: 1.3;
+    margin-bottom: var(--s-sm);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+  }
+
+  .latest-post-desc {
+    font-size: var(--f-size-sm);
+    color: var(--c-text-muted);
+    line-height: 1.5;
+    margin-bottom: var(--s-md);
+    display: -webkit-box;
+    -webkit-line-clamp: 2;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    flex: 1;
+  }
+
+  .latest-post-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding-top: var(--s-sm);
+    border-top: 1px solid var(--c-border);
+    font-size: var(--f-size-xs);
+    font-family: var(--f-mono);
+    color: var(--c-text-muted);
+  }
+
+  .latest-post-arrow {
+    font-size: var(--f-size-lg);
+    color: var(--c-primary);
+    transition: var(--transition);
+  }
+
+  .latest-post-card:hover .latest-post-arrow {
+    transform: translateX(4px);
+  }
+
+  @media (max-width: 1024px) {
+    .latest-posts-grid { grid-template-columns: 1fr 1fr; }
+    .latest-post-card:nth-child(3) { grid-column: 1 / -1; }
+  }
+
+  @media (max-width: 640px) {
+    .latest-posts-grid { grid-template-columns: 1fr; }
+    .latest-post-card:nth-child(3) { grid-column: auto; }
+  }
+</style>
