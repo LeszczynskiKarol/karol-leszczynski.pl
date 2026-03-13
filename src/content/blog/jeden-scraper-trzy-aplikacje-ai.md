@@ -196,6 +196,4 @@ Timeouty muszą być różne dla różnych klientów. MaturaPolski potrzebuje sz
 
 Cztery ChromeDrivery to wystarczająco dużo dla mojej skali, ale nie dla peak load. Kiedy Smart-Edu generuje pracę magisterską (45 URL-i) jednocześnie z zamówieniem na Smart-Copy (15 URL-i), 60 requestów trafia do scrapera z czterema ChromeDriverami. Selenium obsługuje je sekwencyjnie, co wydłuża czas pipeline'u. Rozwiązanie: zwiększenie puli lub kolejkowanie requestów z priorytetami.
 
-Elastic Beanstalk to overkill dla tego serwisu. Mógłbym uruchomić tego samego Gunicorna na zwykłym EC2 za mniejszy koszt i z prostszą konfiguracją. EB dodaje warstwę abstrakcji (environment, platform, health monitoring), której nie potrzebuję — i tak zarządzam infrastrukturą ręcznie. Ale EB ma jedną zaletę: automatyczny restart po crashu bez PM2. Dla serwisu z czterema instancjami Chrome, które potrafią wyciekać pamięć — to wartość.
-
 Google Custom Search API ma limit 100 darmowych zapytań dziennie. Przy trzech aplikacjach, z których każda generuje 1–3 zapytania per request, łatwo przekroczyć limit. Powyżej 100 zapytań Google nalicza $5 za 1000. W mojej skali to $5–10/miesiąc — akceptowalne, ale warto monitorować.

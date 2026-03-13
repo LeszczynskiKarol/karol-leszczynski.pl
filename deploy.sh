@@ -42,47 +42,64 @@ echo ""
 
 # ─── 2. Sync to S3 (naked domain bucket) ───
 echo ">>> 2. Sync → s3://$BUCKET_NAKED"
+
+# Assets — long cache
 aws s3 sync "$DIST_DIR" "s3://$BUCKET_NAKED" \
   --delete \
   --region "$REGION" \
   --cache-control "public, max-age=31536000, immutable" \
   --exclude "*.html" \
   --exclude "robots.txt" \
-  --exclude "sitemap*.xml"
+  --exclude "*.xml"
 
-# HTML files — short cache (revalidate on deploy)
+# HTML + robots.txt — short cache, text/html
 aws s3 sync "$DIST_DIR" "s3://$BUCKET_NAKED" \
-  --delete \
   --region "$REGION" \
   --cache-control "public, max-age=0, must-revalidate" \
   --exclude "*" \
   --include "*.html" \
   --include "robots.txt" \
-  --include "sitemap*.xml" \
   --content-type "text/html"
+
+# XML (sitemaps) — short cache, application/xml
+aws s3 sync "$DIST_DIR" "s3://$BUCKET_NAKED" \
+  --region "$REGION" \
+  --cache-control "public, max-age=3600" \
+  --exclude "*" \
+  --include "*.xml" \
+  --content-type "application/xml"
 
 echo "    ✅ Naked domain bucket zsynchronizowany"
 echo ""
 
 # ─── 3. Sync to S3 (www bucket) ───
 echo ">>> 3. Sync → s3://$BUCKET_WWW"
+
+# Assets — long cache
 aws s3 sync "$DIST_DIR" "s3://$BUCKET_WWW" \
   --delete \
   --region "$REGION" \
   --cache-control "public, max-age=31536000, immutable" \
   --exclude "*.html" \
   --exclude "robots.txt" \
-  --exclude "sitemap*.xml"
+  --exclude "*.xml"
 
+# HTML + robots.txt
 aws s3 sync "$DIST_DIR" "s3://$BUCKET_WWW" \
-  --delete \
   --region "$REGION" \
   --cache-control "public, max-age=0, must-revalidate" \
   --exclude "*" \
   --include "*.html" \
   --include "robots.txt" \
-  --include "sitemap*.xml" \
   --content-type "text/html"
+
+# XML (sitemaps)
+aws s3 sync "$DIST_DIR" "s3://$BUCKET_WWW" \
+  --region "$REGION" \
+  --cache-control "public, max-age=3600" \
+  --exclude "*" \
+  --include "*.xml" \
+  --content-type "application/xml"
 
 echo "    ✅ WWW bucket zsynchronizowany"
 echo ""
