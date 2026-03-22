@@ -89,10 +89,10 @@ const projects = [
   },
   {
     id: 9,
-    title: "Zeszyty ćwiczeń (11 publikacji)",
+    title: "Podręczniki i zeszyty ćwiczeń (+20 publikacji)",
     image: "/projects/zeszyty.jpg",
     category: "Publishing / EdTech",
-    description: "11 zeszytów ćwiczeń dla szkół policealnych (technik masażysta, opiekun medyczny, terapeuta zajęciowy i in.). Treści merytoryczne + profesjonalny skład LaTeX/Quarto. Custom LaTeX classes, TikZ diagrams, print-ready PDF (CMYK, spady, crop marks).",
+    description: "+20 podręczników i zeszytów ćwiczeń dla szkół policealnych (technik masażysta, opiekun medyczny, terapeuta zajęciowy i in.). Treści merytoryczne + profesjonalny skład LaTeX/Quarto. Custom LaTeX classes, TikZ diagrams, print-ready PDF (CMYK, spady, crop marks).",
     technologies: ["Quarto", "LaTeX", "XeLaTeX", "Python", "TikZ", "BibTeX", "tcolorbox"],
     link: "/uslugi/publikacje-latex",
     year: "2025",
@@ -151,7 +151,7 @@ const timeline = [
   { year: '2021', title: 'Full-Stack Development', desc: 'JavaScript, React, Node.js, bazy danych, cloud' },
   { year: '2023', title: 'Full-Stack Developer', desc: 'Pierwsze projekty SaaS, e-commerce od zera' },
   { year: '2024', title: 'AI & SaaS', desc: 'Integracje Anthropic/OpenAI, platformy SaaS, automatyzacja' },
-  { year: '2025', title: 'Autor & wydawca', desc: '11 publikacji LaTeX/Quarto, e-book o copywritingu' },
+  { year: '2025', title: 'Autor & wydawca', desc: '+20 publikacji LaTeX/Quarto, e-book o copywritingu' },
 ];
 ---
 
@@ -162,54 +162,63 @@ const timeline = [
 
   <!-- ===== HERO ===== -->
   <section class="hero">
-    <div class="hero-bg">
-      <div class="hero-grid"></div>
-    </div>
-    <div class="hero-anno">Toruń, Polska · est. 2009</div>
+    <div class="hero-bg"><div class="hero-grid"></div></div>
 
-    <div>
-      <div class="hero-overline animate-in">Full-Stack Developer · Toruń</div>
-
-      <h1 class="hero-name animate-in animate-delay-1">
-        Karol
-        <span class="serif">Leszczyński</span>
-      </h1>
-
-      <p class="hero-tagline animate-in animate-delay-2">
-        <strong>Piszę</strong>, <strong>koduję</strong>, <strong>wydaję</strong>.
-        Od 15 lat w digital — od copywritingu przez SEO po full-stack
-        development i&nbsp;AI.
-      </p>
-
-      <div class="hero-meta animate-in animate-delay-3">
-        <div class="hero-meta-item">
-          <span class="hero-meta-value">15+</span>
-          <span class="hero-meta-label">Lat w digital</span>
+    <div class="hero-layout">
+      <!-- Left column — stacked, tight -->
+      <div class="hero-left">
+        <div class="hero-sig animate-in">
+          <span class="hero-sig-line"></span>
+          Karol Leszczyński
         </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-value">30+</span>
-          <span class="hero-meta-label">Projektów</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-value">11</span>
-          <span class="hero-meta-label">Publikacji</span>
-        </div>
-        <div class="hero-meta-item">
-          <span class="hero-meta-value">5</span>
-          <span class="hero-meta-label">Platform SaaS</span>
+
+        <h1 class="hero-h1 animate-in animate-delay-1">
+          <span class="hero-h1-small">Masz pomysł na produkt, sklep,</span>
+          <span class="hero-h1-small">usługę online? Zbuduję ją dla Ciebie od projektu <em>do wdrożenia.</em></span>
+        </h1>
+
+      <div class="hero-ctas animate-in animate-delay-3">
+          <a href="/kontakt" class="btn btn-primary">
+            Opowiedz o projekcie
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+          </a>
+          <a href="#projekty" class="btn btn-outline">Realizacje</a>
         </div>
       </div>
 
-      <div class="hero-actions animate-in animate-delay-4">
-        <a href="#projekty" class="btn btn-primary">
-          Zobacz projekty
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6 9 12 15 18 9"/></svg>
-        </a>
-        <a href="/kontakt" class="btn btn-outline">Kontakt</a>
+      <!-- Right column — what you get -->
+      <div class="hero-right animate-in animate-delay-2">
+        <p class="hero-story">
+          Strona, która sprzedaje. Sklep, który obsługuje się sam.
+          Aplikacja SaaS, która zarabia, kiedy Ty śpisz. Projektuję
+          i&nbsp;programuję rozwiązania cyfrowe od&nbsp;zera do&nbsp;produkcji.
+        </p>
+
+        <div class="hero-facts">
+          <div class="hero-fact">
+            <span class="hero-fact-num">30+</span>
+            <span class="hero-fact-label">projektów</span>
+          </div>
+          <div class="hero-fact">
+            <span class="hero-fact-num">5</span>
+            <span class="hero-fact-label">platform SaaS</span>
+          </div>
+          <div class="hero-fact">
+            <span class="hero-fact-num">20+</span>
+            <span class="hero-fact-label">publikacji</span>
+          </div>
+        </div>
+
+        <div class="hero-stack">
+          React · Astro · Node.js · Fastify · PostgreSQL · AWS · Claude AI
+        </div>
       </div>
     </div>
 
-    <div class="hero-scroll animate-in animate-delay-5">przewiń</div>
+    <div class="hero-bottom">
+      <div class="hero-scroll animate-in animate-delay-5">przewiń</div>
+      <div class="hero-anno animate-in animate-delay-5">Toruń, Polska · est. 2009</div>
+    </div>
   </section>
 
 
@@ -240,7 +249,7 @@ const timeline = [
         </p>
 
         <p>
-          Jestem autorem <strong>11 publikacji edukacyjnych</strong> przeznaczonych dla słuchaczy szkół
+          Jestem autorem <strong>ponad 20 publikacji edukacyjnych</strong> przeznaczonych dla słuchaczy szkół
           policealnych przygotowujących się do egzaminów zawodowych na takich kierunkach jak m.in.
           technik masażysta, opiekun medyczny, terapeuta zajęciowy. Zeszyty ćwiczeń zostały stworzone
           w LaTeX/Quarto — wszystkie gotowe do profesjonalnego druku. Napisałem także autorski e-book
