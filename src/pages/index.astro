@@ -6,6 +6,17 @@ import LatestPosts  from '@/components/LatestPosts.astro';
 const projects = [
   // === SaaS / AI ===
   {
+    id: 0,
+    title: "Matury-Online.pl",
+    image: "/projects/matury-online.jpg",
+    category: "SaaS / EdTech",
+    description: "Platforma do przygotowania do matury 2026. 11 przedmiotów, 9000+ pytań, AI ocena wypracowań, generowanie ćwiczeń słuchania (PL/DE/EN) na żywo, tryb egzaminu live, spaced repetition. Autonomiczny pipeline newsów maturalnych (6 kroków: Google Custom Search → scraping → analiza AI → semantic dedup Claude Haiku). Google News Publisher, schema.org NewsArticle, dynamiczny cron-job harmonogram pod EEAT.",
+    technologies: ["Astro 5", "React", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet 4.6", "Claude Haiku 4.5", "Stripe", "Google Custom Search API", "AWS EC2", "node-cron"],
+    link: "https://www.matury-online.pl",
+    year: "2025–2026",
+    featured: true,
+  },
+  {
     id: 1,
     title: "Smart-Copy.AI",
     image: "/projects/smart-copy.jpg",
@@ -300,48 +311,58 @@ const timeline = [
     <div class="page">
     <div class="chapter">Rozdział II — Projekty</div>
 
-    <!-- Featured projects — top picks with images -->
+<!-- Featured projects — top picks with images -->
     <div class="featured-grid">
-      {featured.map(project => (
-        <a
-          href={project.link}
-          target="_blank"
-          rel="noopener noreferrer"
-          class="featured-card"
-        >
-          <div class="featured-card-img">
-            {project.image && (
-              <img src={project.image} alt={project.title} loading="lazy" width="600" height="375" />
-            )}
-          </div>
-          <div class="featured-card-body">
-            <div class="featured-card-cat">{project.category}</div>
-            <h3 class="featured-card-title">{project.title}</h3>
-            <p class="featured-card-desc">{project.description}</p>
-            <div class="featured-card-tech">
-              {project.technologies.slice(0, 6).join(' · ')}
+      {featured.map(project => {
+        const ownDomains = ["matury-online.pl", "smart-copy.ai", "maturapolski.pl", "interpunkcja.com.pl", "copywriting24.pl", "smart-edu.ai", "silnik-elektryczny.pl", "silniki-trojfazowe.pl", "silniki-elektryczne.com.pl", "ebookcopywriting.pl", "sklad-tekstu.pl", "agencja-copywriterska.pl", "ecopywriting.pl", "copywritingseo.pl", "zostancopywriterem.pl", "1copywriting.pl", "copywriting-blog.pl", "icopywriter.pl", "torweb.pl", "praca-magisterska.pl", "magisterkaonline.com.pl", "licencjackie.pl"];
+        const isOwn = ownDomains.some(d => project.link.includes(d));
+        const relValue = isOwn ? "me noopener noreferrer" : "noopener noreferrer";
+        return (
+          
+           <a href={project.link}
+            target="_blank"
+            rel={relValue}
+            class="featured-card"
+          >
+            <div class="featured-card-img">
+              {project.image && (
+                <img src={project.image} alt={project.title} loading="lazy" width="600" height="375" />
+              )}
             </div>
-          </div>
-        </a>
-      ))}
+            <div class="featured-card-body">
+              <div class="featured-card-cat">{project.category}</div>
+              <h3 class="featured-card-title">{project.title}</h3>
+              <p class="featured-card-desc">{project.description}</p>
+              <div class="featured-card-tech">
+                {project.technologies.slice(0, 6).join(' · ')}
+              </div>
+            </div>
+          </a>
+        );
+      })}
     </div>
 
-    <!-- Project Index — table of contents -->
+  <!-- Project Index — table of contents -->
     <div class="project-index">
-      {indexed.map(project => (
-        <div class="project-index-item">
-          <span class="pi-num"></span>
-          {project.link !== '#' && project.link.startsWith('http') ? (
-            <a href={project.link} target="_blank" rel="noopener noreferrer" class="pi-title">
-              {project.title}
-            </a>
-          ) : (
-            <span class="pi-title">{project.title}</span>
-          )}
-          <span class="pi-cat">{project.category}</span>
-          <span class="pi-year">{project.year}</span>
-        </div>
-      ))}
+      {indexed.map(project => {
+        const ownDomains = ["matury-online.pl", "smart-copy.ai", "maturapolski.pl", "interpunkcja.com.pl", "copywriting24.pl", "smart-edu.ai", "silnik-elektryczny.pl", "silniki-trojfazowe.pl", "silniki-elektryczne.com.pl", "ebookcopywriting.pl", "sklad-tekstu.pl", "agencja-copywriterska.pl", "ecopywriting.pl", "copywritingseo.pl", "zostancopywriterem.pl", "1copywriting.pl", "copywriting-blog.pl", "icopywriter.pl", "torweb.pl", "praca-magisterska.pl", "magisterkaonline.com.pl", "licencjackie.pl"];
+        const isOwn = ownDomains.some(d => project.link.includes(d));
+        const relValue = isOwn ? "me noopener noreferrer" : "noopener noreferrer";
+        return (
+          <div class="project-index-item">
+            <span class="pi-num"></span>
+            {project.link !== '#' && project.link.startsWith('http') ? (
+              <a href={project.link} target="_blank" rel={relValue} class="pi-title">
+                {project.title}
+              </a>
+            ) : (
+              <span class="pi-title">{project.title}</span>
+            )}
+            <span class="pi-cat">{project.category}</span>
+            <span class="pi-year">{project.year}</span>
+          </div>
+        );
+      })}
     </div>
 
     <div style="margin-top: var(--s-xl);">

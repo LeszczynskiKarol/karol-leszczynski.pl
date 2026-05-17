@@ -12,8 +12,8 @@ const structuredData = {
 };
 
 const categories = [
-  { id: "all", label: "Wszystkie", count: 30 },
-  { id: "saas", label: "SaaS / AI", count: 5 },
+  { id: "all", label: "Wszystkie", count: 31 },
+  { id: "saas", label: "SaaS / AI", count: 6 },
   { id: "ecommerce", label: "E-commerce", count: 3 },
   { id: "publishing", label: "Publikacje", count: 2 },
   { id: "agency", label: "Agencje", count: 3 },
@@ -35,7 +35,19 @@ const projects: Array<{
   highlight?: boolean;
   stats?: Array<{ label: string; value: string }>;
 }> = [
-  {
+{
+    title: "Matury-Online.pl",
+    image: "/projects/matury-online.jpg",
+    cat: "saas",
+    catLabel: "SaaS / EdTech",
+    description: "Platforma do przygotowania do matury 2026. 11 przedmiotów, 9000+ pytań, AI ocena wypracowań, generowanie ćwiczeń słuchania na żywo (PL/DE/EN), tryb egzaminu live, spaced repetition. Autonomiczny pipeline newsów maturalnych (6 kroków: Google Custom Search → scraping → analiza AI → semantic dedup Claude Haiku). Google News Publisher integration, schema.org NewsArticle.",
+    technologies: ["Astro 5", "React", "Fastify", "Prisma", "PostgreSQL", "Claude Sonnet 4.6", "Claude Haiku 4.5", "Stripe", "Google Custom Search", "AWS EC2"],
+    link: "https://www.matury-online.pl",
+    year: "2025–2026",
+    highlight: true,
+    stats: [{ label: "Pytań w bazie", value: "9000+" }, { label: "Przedmiotów", value: "11" }],
+  },  
+{
     title: "Smart-Copy.AI",
     image: "/projects/smart-copy.jpg",
     cat: "saas",
@@ -365,7 +377,7 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
             Kilkadziesiąt zrealizowanych projektów — od platform SaaS z AI, przez sklepy e-commerce, po profesjonalne publikacje w LaTeX.
           </p>
           <div style="display: flex; flex-wrap: wrap; gap: var(--s-lg); font-size: var(--f-size-sm);">
-            <span>⚡ +5 platform SaaS z AI</span>
+            <span>⚡ +6 platform SaaS z AI</span>
             <span>🛒 +3 sklepy e-commerce</span>
             <span>🌐 +15 stron klientów</span>
             <span>📚 +20 publikacji LaTeX</span>
@@ -381,7 +393,7 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
       <div class="container">
         <div class="section-header">
           <h2>Ostatnie <span class="text-gradient">realizacje</span></h2>
-          <p>30 projektów w 8 kategoriach</p>
+          <p>31 projektów w 8 kategoriach</p>
         </div>
 
         <div class="portfolio-wrapper">
@@ -415,9 +427,16 @@ const highlighted = projects.filter(p => p.highlight && p.stats);
                     ))}
                     {project.technologies.length > 4 && <span style="font-size: 10px; padding: 1px 8px; background: var(--c-bg-alt); border-radius: var(--radius);" class="text-muted">+{project.technologies.length - 4}</span>}
                   </div>
-                  <a href={project.link} target={project.internal ? undefined : "_blank"} rel={project.internal ? undefined : "noopener noreferrer"} class="project-card-link" style="font-size: var(--f-size-sm);">
-                    {project.internal ? "Szczegóły" : "Odwiedź"} →
-                  </a>
+                  {(() => {
+                    const ownDomains = ["matury-online.pl", "smart-copy.ai", "maturapolski.pl", "interpunkcja.com.pl", "copywriting24.pl", "smart-edu.ai", "silnik-elektryczny.pl", "silniki-trojfazowe.pl", "silniki-elektryczne.com.pl", "ebookcopywriting.pl", "sklad-tekstu.pl", "agencja-copywriterska.pl", "ecopywriting.pl", "copywritingseo.pl", "zostancopywriterem.pl", "1copywriting.pl", "copywriting-blog.pl", "icopywriter.pl", "torweb.pl", "praca-magisterska.pl", "magisterkaonline.com.pl", "licencjackie.pl"];
+                    const isOwn = ownDomains.some(d => project.link.includes(d));
+                    const relValue = project.internal ? undefined : (isOwn ? "me noopener noreferrer" : "noopener noreferrer");
+                    return (
+                      <a href={project.link} target={project.internal ? undefined : "_blank"} rel={relValue} class="project-card-link" style="font-size: var(--f-size-sm);">
+                        {project.internal ? "Szczegóły" : "Odwiedź"} →
+                      </a>
+                    );
+                  })()}
                 </div>
               </div>
             ))}
