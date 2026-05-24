@@ -1,0 +1,47 @@
+---
+// Drop-in replacement for <img> when a sibling .webp exists in /public.
+// For /projects/foo.jpg it emits <picture><source srcset="/projects/foo.webp">…
+interface Props {
+  src: string;
+  alt: string;
+  width?: number;
+  height?: number;
+  loading?: "lazy" | "eager";
+  fetchpriority?: "high" | "low" | "auto";
+  decoding?: "async" | "sync" | "auto";
+  class?: string;
+}
+
+const { src, alt, width, height, loading = "lazy", fetchpriority, decoding = "async", class: className } = Astro.props;
+
+// Only swap for local raster paths
+const isRaster = /\.(jpe?g|png)$/i.test(src);
+const webpSrc = isRaster ? src.replace(/\.(jpe?g|png)$/i, ".webp") : null;
+---
+
+{webpSrc ? (
+  <picture>
+    <source type="image/webp" srcset={webpSrc} />
+    <img
+      src={src}
+      alt={alt}
+      width={width}
+      height={height}
+      loading={loading}
+      fetchpriority={fetchpriority}
+      decoding={decoding}
+      class={className}
+    />
+  </picture>
+) : (
+  <img
+    src={src}
+    alt={alt}
+    width={width}
+    height={height}
+    loading={loading}
+    fetchpriority={fetchpriority}
+    decoding={decoding}
+    class={className}
+  />
+)}

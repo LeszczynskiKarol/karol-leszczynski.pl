@@ -1,6 +1,7 @@
 ---
 import Base from '@/layouts/Base.astro';
 import LatestPosts  from '@/components/LatestPosts.astro';
+import Picture from '@/components/Picture.astro';
 
 // ===== DATA =====
 const projects = [
@@ -400,7 +401,7 @@ const timeline = [
           >
             <div class="featured-card-img">
               {project.image && (
-                <img src={project.image} alt={project.title} loading="lazy" width="600" height="375" />
+                <Picture src={project.image} alt={project.title} loading="lazy" width={600} height={375} />
               )}
             </div>
             <div class="featured-card-body">

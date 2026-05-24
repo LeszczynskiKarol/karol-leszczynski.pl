@@ -1,6 +1,7 @@
 ---
 import Base from './Base.astro';
 import Breadcrumbs from '@/components/Breadcrumbs.astro';
+import Picture from '@/components/Picture.astro';
 import type { CollectionEntry } from 'astro:content';
 
 interface Props {
@@ -104,7 +105,7 @@ const breadcrumbSchema = {
 
         {heroImage && (
           <div class="article-hero-image">
-            <img src={heroImage} alt={heroImageAlt || title} loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" />
+            <Picture src={heroImage} alt={heroImageAlt || title} loading="eager" fetchpriority="high" decoding="async" width={1200} height={630} />
           </div>
         )}
       </header>
