@@ -171,6 +171,80 @@ const timeline = [
   description="Tworzę strony internetowe, sklepy e-commerce i platformy SaaS z AI. 15 lat w digital, kilkaset zrealizowanych projektów. React, Astro, Node.js, AWS. Toruń i zdalnie."
 >
 
+  <!-- LocalBusiness JSON-LD (ProfessionalService subtype) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ProfessionalService",
+    "@id": "https://www.karol-leszczynski.pl/#business",
+    "name": "Karol Leszczyński — Web Development & AI",
+    "image": "https://www.karol-leszczynski.pl/og-default.jpg",
+    "url": "https://www.karol-leszczynski.pl/",
+    "telephone": "+48509370772",
+    "email": "kontakt@karol-leszczynski.pl",
+    "priceRange": "1990-9990 PLN",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Toruń",
+      "addressRegion": "Kujawsko-Pomorskie",
+      "addressCountry": "PL"
+    },
+    "geo": { "@type": "GeoCoordinates", "latitude": 53.0138, "longitude": 18.5984 },
+    "areaServed": [
+      { "@type": "City", "name": "Toruń" },
+      { "@type": "City", "name": "Bydgoszcz" },
+      { "@type": "AdministrativeArea", "name": "Kujawsko-Pomorskie" },
+      { "@type": "Country", "name": "Polska" }
+    ],
+    "openingHoursSpecification": [{
+      "@type": "OpeningHoursSpecification",
+      "dayOfWeek": ["Monday","Tuesday","Wednesday","Thursday","Friday"],
+      "opens": "09:00",
+      "closes": "18:00"
+    }],
+    "founder": { "@type": "Person", "name": "Karol Leszczyński" },
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Usługi web development",
+      "itemListElement": [
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Strony internetowe" }, "priceCurrency": "PLN", "price": "1990" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Sklepy internetowe" }, "priceCurrency": "PLN", "price": "4990" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Platformy SaaS z AI" }, "priceCurrency": "PLN", "price": "9990" },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Integracje AI" } },
+        { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Publikacje LaTeX / Quarto" } }
+      ]
+    }
+  })} />
+
+  <!-- Own portfolio as ItemList (replaces sameAs spam) -->
+  <script type="application/ld+json" set:html={JSON.stringify({
+    "@context": "https://schema.org",
+    "@type": "ItemList",
+    "name": "Portfolio projektów Karola Leszczyńskiego",
+    "itemListElement": [
+      { "@type": "ListItem", "position": 1, "url": "https://www.matury-online.pl" },
+      { "@type": "ListItem", "position": 2, "url": "https://www.smart-copy.ai" },
+      { "@type": "ListItem", "position": 3, "url": "https://www.silniki-elektryczne.com.pl" },
+      { "@type": "ListItem", "position": 4, "url": "https://www.maturapolski.pl" },
+      { "@type": "ListItem", "position": 5, "url": "https://www.interpunkcja.com.pl" },
+      { "@type": "ListItem", "position": 6, "url": "https://copywriting24.pl" },
+      { "@type": "ListItem", "position": 7, "url": "https://www.smart-edu.ai" },
+      { "@type": "ListItem", "position": 8, "url": "https://silnik-elektryczny.pl" },
+      { "@type": "ListItem", "position": 9, "url": "https://silniki-trojfazowe.pl" },
+      { "@type": "ListItem", "position": 10, "url": "https://ebookcopywriting.pl" },
+      { "@type": "ListItem", "position": 11, "url": "https://sklad-tekstu.pl" },
+      { "@type": "ListItem", "position": 12, "url": "https://agencja-copywriterska.pl" },
+      { "@type": "ListItem", "position": 13, "url": "https://www.ecopywriting.pl" },
+      { "@type": "ListItem", "position": 14, "url": "https://copywritingseo.pl" },
+      { "@type": "ListItem", "position": 15, "url": "https://www.zostancopywriterem.pl" },
+      { "@type": "ListItem", "position": 16, "url": "https://1copywriting.pl" },
+      { "@type": "ListItem", "position": 17, "url": "https://icopywriter.pl" },
+      { "@type": "ListItem", "position": 18, "url": "https://torweb.pl" },
+      { "@type": "ListItem", "position": 19, "url": "https://praca-magisterska.pl" },
+      { "@type": "ListItem", "position": 20, "url": "https://magisterkaonline.com.pl" },
+      { "@type": "ListItem", "position": 21, "url": "https://licencjackie.pl" }
+    ]
+  })} />
+
   <!-- ===== HERO ===== -->
   <section class="hero">
     <div class="hero-bg"><div class="hero-grid"></div></div>

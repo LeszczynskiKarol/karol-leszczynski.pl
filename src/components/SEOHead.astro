@@ -39,8 +39,15 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
 
-<!-- Favicon -->
+<!-- Favicon + theme -->
 <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<meta name="theme-color" content="#0f172a" media="(prefers-color-scheme: dark)" />
+<meta name="theme-color" content="#ffffff" media="(prefers-color-scheme: light)" />
+<meta name="author" content="Karol Leszczyński" />
+
+<!-- RSS feed discovery -->
+<link rel="alternate" type="application/rss+xml" title="Blog Karol Leszczyński" href="/rss.xml" />
 
 <!-- Open Graph -->
 <meta property="og:type" content={ogType} />
@@ -90,26 +97,7 @@ const ogImageUrl = ogImage.startsWith('http') ? ogImage : `${siteUrl}${ogImage}`
       "LaTeX / Quarto Publishing"
     ],
     "sameAs": [
-      "https://github.com/LeszczynskiKarol",
-      "https://www.matury-online.pl",
-      "https://www.ecopywriting.pl",
-      "https://www.zostancopywriterem.pl",
-      "https://www.copywritingseo.pl",
-      "https://www.smart-copy.ai",
-      "https://www.smart-edu.ai",
-      "https://www.maturapolski.pl",
-      "https://www.interpunkcja.com.pl",
-      "https://www.torweb.pl",
-      "https://www.silniki-elektryczne.com.pl",
-      "https://silnik-elektryczny.pl",
-      "https://silniki-trojfazowe.pl",
-      "https://ebookcopywriting.pl",
-      "https://icopywriter.pl",
-      "https://sklad-tekstu.pl",
-      "https://praca-magisterska.pl",
-      "https://prace-magisterskie.pl",
-      "https://licencjackie.pl",
-      "https://magisterkaonline.com.pl"
+      "https://github.com/LeszczynskiKarol"
     ],
     "offers": {
       "@type": "Offer",

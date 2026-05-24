@@ -104,7 +104,7 @@ const breadcrumbSchema = {
 
         {heroImage && (
           <div class="article-hero-image">
-            <img src={heroImage} alt={heroImageAlt || title} loading="eager" width="1200" height="630" />
+            <img src={heroImage} alt={heroImageAlt || title} loading="eager" fetchpriority="high" decoding="async" width="1200" height="630" />
           </div>
         )}
       </header>
