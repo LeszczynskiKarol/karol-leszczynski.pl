@@ -28,11 +28,6 @@ git add .
 git commit -m "git push from local"
 git push origin main
 
-if [ $? -ne 0 ]; then
-  echo "❌ Git push failed!"
-  exit 1
-fi
-
 
 # ─── 1. Build ───
 echo ">>> 1. Building Astro..."
