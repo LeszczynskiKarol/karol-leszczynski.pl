@@ -205,6 +205,45 @@ const faqs = [
           </div>
         </div>
       </div>
+
+      <!-- Case Study 3 - Matury-Online.pl -->
+      <div class="cta-section" style="margin-top: var(--s-2xl);">
+        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-2xl); align-items: center;">
+          <div>
+            <p style="display: inline-flex; align-items: center; gap: 6px; padding: 4px 14px; background: var(--c-primary-soft); border-radius: 999px; font-size: var(--f-size-xs); font-weight: 600; color: var(--c-primary); margin-bottom: var(--s-md);">🏆 Case Study #3</p>
+            <h3 style="font-size: var(--f-size-3xl); margin-bottom: var(--s-md);">Matury-Online.pl</h3>
+            <p class="text-muted" style="font-size: var(--f-size-lg); margin-bottom: var(--s-lg);">
+              Platforma do nauki do <strong>matury z języka polskiego</strong> z bazą zadań CKE, symulacją egzaminu i ocenianiem wypracowań przez <strong>Claude AI</strong> według oficjalnych kryteriów CKE. Hybryda statycznego Astro SSG i dynamicznego backendu Node + Postgres.
+            </p>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Wyzwanie:</h4>
+              <p class="text-muted">Zbudowanie skalowalnej platformy edukacyjnej z bazą arkuszy CKE 2002–2026, oceniającej wypracowania maturalne spójnie według czterech kryteriów: treści, kompozycji, języka i ortografii.</p>
+            </div>
+            <div style="margin-bottom: var(--s-lg);">
+              <h4 style="font-weight: 600; margin-bottom: var(--s-xs);">Rozwiązanie:</h4>
+              {[
+                "Pipeline AI: cztery deterministyczne wywołania Claude per wypracowanie, każde z few-shot examples CKE",
+                "Hybrydowa architektura: Astro SSG dla SEO + Node dla user state",
+                "Symulacja egzaminu na żywo z instant feedback",
+                "Druga domena maturapolski.pl jako gateway SEO ze statycznym contentem"
+              ].map(item => (
+                <div style="display: flex; align-items: flex-start; gap: 8px; margin-bottom: 6px; font-size: var(--f-size-sm);"><span style="color: var(--c-accent);">✓</span><span>{item}</span></div>
+              ))}
+            </div>
+            <a href="https://www.matury-online.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">Zobacz platformę maturalną <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+            &nbsp;&nbsp;
+            <a href="https://maturapolski.pl" target="_blank" rel="noopener noreferrer" class="project-card-link">maturapolski.pl (gateway SEO) <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg></a>
+          </div>
+          <div style="display: grid; grid-template-columns: 1fr 1fr; gap: var(--s-md);">
+            {[{v:"2002–2026",l:"Archiwum arkuszy CKE"},{v:"4",l:"Kryteria CKE w ocenie AI"},{v:"~20s",l:"Ocena wypracowania"},{v:"100%",l:"Static SEO + dynamic core"}].map(s => (
+              <div class="skill-group" style="text-align: center; padding: var(--s-lg);">
+                <div style="font-size: var(--f-size-3xl); font-weight: 800; color: var(--c-primary); margin-bottom: var(--s-xs);">{s.v}</div>
+                <div class="text-muted" style="font-size: var(--f-size-sm);">{s.l}</div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
     </div>
   </section>
 
