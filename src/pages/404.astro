@@ -1,0 +1,26 @@
+---
+import Base from '@/layouts/Base.astro';
+---
+
+<Base
+  title="404 — strona nie znaleziona | Karol Leszczyński"
+  description="Strona, której szukasz, nie istnieje lub została przeniesiona."
+  noindex={true}
+>
+  <section class="section" style="min-height: 70vh; display: flex; align-items: center;">
+    <div class="container" style="text-align: center; max-width: 640px;">
+      <p class="text-primary font-mono" style="font-size: var(--f-size-sm); margin-bottom: var(--s-md);">404 · Not Found</p>
+      <h1 style="font-size: var(--f-size-4xl); font-weight: 800; margin-bottom: var(--s-lg);">Tej strony tu nie ma.</h1>
+      <p class="text-muted" style="font-size: var(--f-size-lg); margin-bottom: var(--s-xl);">
+        Adres mógł zostać zmieniony, usunięty albo wpisany z literówką. Wróć na stronę główną
+        albo zajrzyj na blog.
+      </p>
+      <div style="display: flex; flex-wrap: wrap; gap: var(--s-md); justify-content: center;">
+        <a href="/" class="btn btn-primary">Strona główna</a>
+        <a href="/blog" class="btn btn-outline">Blog</a>
+        <a href="/projekty" class="btn btn-outline">Projekty</a>
+        <a href="/kontakt" class="btn btn-outline">Kontakt</a>
+      </div>
+    </div>
+  </section>
+</Base>
